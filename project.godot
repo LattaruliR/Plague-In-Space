@@ -13,6 +13,7 @@ config_version=5
 config/name="Plague In Space"
 config/description="You are stranded with a deadlu virus on your ship."
 config/version="0.0.1"
+run/main_scene="uid://dwacwutc6jiw1"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/stretch_mode=0
@@ -26,6 +27,7 @@ Global="*uid://3n2nfntgw4el"
 
 [display]
 
+window/size/mode=4
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://cfwaqg3f85ken"

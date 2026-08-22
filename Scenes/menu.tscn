@@ -1,3 +1,275 @@
 [gd_scene format=3 uid="uid://dwacwutc6jiw1"]
 
+[ext_resource type="Texture2D" uid="uid://ibrcsum6wmgf" path="res://Sprites/Menu/BlackBG.png" id="1_1rerr"]
+[ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="1_158mb"]
+[ext_resource type="Script" uid="uid://dlkeqhm1g8v05" path="res://Scenes/MenuManager.gd" id="1_rfqti"]
+[ext_resource type="Texture2D" uid="uid://cjc4uo708o667" path="res://Sprites/Menu/SpaceshipMenu1.png" id="2_6swd7"]
+[ext_resource type="Texture2D" uid="uid://djx2n2yst2cms" path="res://Sprites/Icons/PISicon.png" id="2_xhh6f"]
+[ext_resource type="Texture2D" uid="uid://cemq0usw31ur1" path="res://Sprites/Menu/SpaceshipMenu2.png" id="3_7qvly"]
+[ext_resource type="Script" uid="uid://cmmdtf8fsg0u2" path="res://Scripts/camera_movement.gd" id="3_cayip"]
+[ext_resource type="Texture2D" uid="uid://biaibi3dapvqd" path="res://Sprites/Menu/PISLogo.png" id="4_wwsa2"]
+[ext_resource type="Texture2D" uid="uid://c2nseh561nli8" path="res://Sprites/Menu/SmallStar2.png" id="5_wbdvm"]
+[ext_resource type="Texture2D" uid="uid://dxwecrg3d7liv" path="res://Sprites/Menu/SmallStar1.png" id="6_q3rjx"]
+[ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="10_7qvly"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_q3rjx"]
+frames = 6
+frame_0/texture = ExtResource("2_6swd7")
+frame_1/texture = ExtResource("3_7qvly")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("2_6swd7")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("3_7qvly")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("2_6swd7")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("3_7qvly")
+frame_5/duration = 1.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_3yx06"]
+frames = 2
+frame_0/texture = ExtResource("6_q3rjx")
+frame_1/texture = ExtResource("5_wbdvm")
+frame_1/duration = 1.0
+
+[sub_resource type="Gradient" id="Gradient_q3rjx"]
+offsets = PackedFloat32Array(0, 0.33251232, 0.682266, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_wbdvm"]
+frames = 2
+frame_0/texture = ExtResource("6_q3rjx")
+frame_0/duration = 0.4
+frame_1/texture = ExtResource("5_wbdvm")
+frame_1/duration = 0.6
+
+[sub_resource type="Gradient" id="Gradient_7qvly"]
+offsets = PackedFloat32Array(0.317734, 1)
+
+[sub_resource type="Animation" id="Animation_7qvly"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scanlines:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 2000, 1000)]
+}
+
+[sub_resource type="Animation" id="Animation_6swd7"]
+resource_name = "scanlines"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scanlines:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 2000, 1000), Rect2(0, 1, 2000, 1000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qvly"]
+_data = {
+&"RESET": SubResource("Animation_7qvly"),
+&"scanlines": SubResource("Animation_6swd7")
+}
+
 [node name="Menu" type="Node2D" unique_id=115826374]
+script = ExtResource("1_rfqti")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=671761450]
+limit_left = -580
+limit_top = -331
+limit_right = 585
+limit_bottom = 327
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 1.06
+
+[node name="MouseTooltip" type="Label" parent="Camera2D" unique_id=1856550917]
+z_index = 5
+offset_left = 34.0
+offset_top = 44.0
+offset_right = 216.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("10_7qvly")
+text = "TOOLTIP"
+
+[node name="BackgroundParallax" type="Parallax2D" parent="." unique_id=25091203]
+
+[node name="Background" type="Sprite2D" parent="BackgroundParallax" unique_id=1451727130]
+z_index = -5
+texture = ExtResource("1_1rerr")
+
+[node name="Spaceship" type="Parallax2D" parent="." unique_id=2134111700]
+scroll_scale = Vector2(1.49, 1.49)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spaceship" unique_id=1162299231]
+z_index = 2
+texture_filter = 1
+position = Vector2(-2, 19)
+texture = SubResource("AnimatedTexture_q3rjx")
+
+[node name="PlayButton" type="Button" parent="Spaceship/Sprite2D" unique_id=1570351542]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -20.0
+offset_right = -205.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="DeathParallax" type="Parallax2D" parent="." unique_id=776334825]
+scroll_scale = Vector2(0.43, 0.43)
+scroll_offset = Vector2(-125, 62)
+
+[node name="DeathSkull" type="Sprite2D" parent="DeathParallax" unique_id=824538369]
+modulate = Color(0.3953672, 0.39536718, 0.39536715, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(265, 18.999996)
+scale = Vector2(6, 6)
+texture = ExtResource("2_xhh6f")
+region_enabled = true
+region_rect = Rect2(2.1300583, 2.0949335, 59.7212, 59.75647)
+
+[node name="QuitButton" type="Button" parent="DeathParallax/DeathSkull" unique_id=1235311567]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.333333
+offset_top = -8.333332
+offset_right = -46.0
+offset_bottom = -49.000004
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="CameraMovement" type="Node2D" parent="." unique_id=764460735]
+script = ExtResource("3_cayip")
+
+[node name="TitleParallax" type="Parallax2D" parent="." unique_id=318918185]
+
+[node name="Title" type="Sprite2D" parent="TitleParallax" unique_id=490560897]
+position = Vector2(-3, -277)
+texture = ExtResource("4_wwsa2")
+
+[node name="Credits" type="Label" parent="TitleParallax" unique_id=1476896588]
+offset_left = -90.0
+offset_top = 271.0
+offset_right = 92.0
+offset_bottom = 304.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("10_7qvly")
+text = "Made by TorradaRica
+araknideo and voxus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stars" type="Parallax2D" parent="." unique_id=160579157]
+scroll_scale = Vector2(0.19, 0.19)
+
+[node name="FrontLayerStars" type="CPUParticles2D" parent="Stars" unique_id=1443457899]
+z_index = 1
+texture_filter = 1
+amount = 30
+texture = SubResource("AnimatedTexture_3yx06")
+lifetime = 0.09999999999999999
+preprocess = 2.45
+speed_scale = 0.01
+explosiveness = 0.15
+randomness = 0.82
+lifetime_randomness = 0.72
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(600, 350)
+color = Color(0.10524041, 0.10524041, 0.1052404, 1)
+color_ramp = SubResource("Gradient_q3rjx")
+anim_speed_min = 41.73
+anim_speed_max = 116.9
+anim_offset_min = 0.18
+anim_offset_max = 0.733
+
+[node name="Stars2" type="Parallax2D" parent="." unique_id=2127574974]
+scroll_scale = Vector2(0.08, 0.08)
+
+[node name="FrontLayerStars" type="CPUParticles2D" parent="Stars2" unique_id=2012558521]
+z_index = 1
+texture_filter = 1
+amount = 30
+texture = SubResource("AnimatedTexture_wbdvm")
+lifetime = 0.09999999999999999
+preprocess = 2.45
+speed_scale = 0.01
+explosiveness = 0.15
+randomness = 0.82
+lifetime_randomness = 0.72
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(600, 350)
+color = Color(0.31431612, 0.31431612, 0.3143161, 1)
+color_ramp = SubResource("Gradient_q3rjx")
+anim_speed_min = 41.73
+anim_speed_max = 116.9
+anim_offset_min = 0.18
+anim_offset_max = 0.733
+
+[node name="Stars3" type="Parallax2D" parent="." unique_id=2005187548]
+scroll_scale = Vector2(0.155, 0.155)
+repeat_size = Vector2(1000, 600)
+autoscroll = Vector2(60.76, 34.015)
+repeat_times = 5
+
+[node name="FrontLayerStars" type="CPUParticles2D" parent="Stars3" unique_id=2076143774]
+z_index = 1
+texture_filter = 1
+amount = 30
+texture = SubResource("AnimatedTexture_wbdvm")
+lifetime = 0.09999999999999999
+preprocess = 2.45
+speed_scale = 0.01
+explosiveness = 0.15
+randomness = 0.82
+lifetime_randomness = 0.72
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(600, 350)
+color_ramp = SubResource("Gradient_q3rjx")
+color_initial_ramp = SubResource("Gradient_7qvly")
+anim_speed_min = 41.73
+anim_speed_max = 116.9
+anim_offset_min = 0.18
+anim_offset_max = 0.733
+
+[node name="Scanlines" type="Sprite2D" parent="." unique_id=1446618836]
+z_index = 99
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(289, 160)
+texture = ExtResource("1_158mb")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 1000)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=175968903]
+libraries/ = SubResource("AnimationLibrary_7qvly")
+autoplay = &"scanlines"
+speed_scale = 2.0
+
+[connection signal="mouse_entered" from="Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="mouse_exited" from="Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_exited"]
+[connection signal="mouse_entered" from="DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="mouse_exited" from="DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_mouse_exited"]
+[connection signal="pressed" from="DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_pressed"]
