@@ -20,6 +20,10 @@ boot_splash/use_filter=false
 boot_splash/image="uid://djx2n2yst2cms"
 config/icon="uid://djx2n2yst2cms"
 
+[autoload]
+
+Global="*uid://3n2nfntgw4el"
+
 [display]
 
 window/stretch/mode="canvas_items"
