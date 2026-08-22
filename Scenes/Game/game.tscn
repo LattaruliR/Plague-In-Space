@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://57g5tiswwq6o" path="res://Sprites/Game/SpaceshipMap.png" id="1_mv0hc"]
 [ext_resource type="Texture2D" uid="uid://ibrcsum6wmgf" path="res://Sprites/Menu/BlackBG.png" id="1_qxfds"]
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="2_qikps"]
-[ext_resource type="Script" uid="uid://cyqebuc8bfcra" path="res://Scenes/Game/plague_movement.gd" id="4_ciybh"]
+[ext_resource type="Script" uid="uid://cyqebuc8bfcra" path="res://Scripts/plague_movement.gd" id="4_ciybh"]
 [ext_resource type="Texture2D" uid="uid://djx2n2yst2cms" path="res://Sprites/Icons/PISicon.png" id="4_i1e5p"]
 
 [node name="Game" type="Node2D" unique_id=1249205629]
