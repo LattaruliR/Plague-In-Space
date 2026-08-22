@@ -23,11 +23,21 @@ func _process(delta: float) -> void:
 
 
 func _on_exit_button_pressed() -> void:
+	$"../Selecting".play()
 	hide()
 
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
+	$"../Selecting".play()
 	if toggled_on == false:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+
+
+func _on_sfx_slider_value_changed(value: float) -> void:
+	$"../BarTone".play()
+
+
+func _on_volume_slider_value_changed(value: float) -> void:
+	$"../BarTone".play()

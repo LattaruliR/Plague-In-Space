@@ -18,7 +18,11 @@ func _on_play_button_mouse_exited() -> void:
 
 
 func _on_quit_button_mouse_entered() -> void:
-	textTip = "Quit?"
+	var easterEgg = randi_range(1, 20)
+	if (easterEgg == 20):
+		textTip = "Die?"
+	else:
+		textTip = "Quit?"
 
 func _on_quit_button_mouse_exited() -> void:
 	textTip = " "
@@ -35,4 +39,5 @@ func _on_options_button_mouse_exited() -> void:
 
 
 func _on_options_button_pressed() -> void:
+	$Selecting.play()
 	$OptionsUI.show()

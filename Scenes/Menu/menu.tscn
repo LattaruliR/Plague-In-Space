@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dgd7b8m4p5ln8" path="res://Sprites/Menu/NineSliceMenu.png" id="14_3fcxt"]
 [ext_resource type="Script" uid="uid://dvvend5fngf1x" path="res://Scenes/Menu/options_manager.gd" id="14_u2ioa"]
 [ext_resource type="AudioStream" uid="uid://0kjjx8de2ghd" path="res://SOUNDS/MenuThemeSong.mp3" id="16_wxa3f"]
+[ext_resource type="AudioStream" uid="uid://rcoe7u0qb5d6" path="res://SOUNDS/selecting.wav" id="17_0401g"]
+[ext_resource type="AudioStream" uid="uid://v1coedd33f1w" path="res://SOUNDS/barTone2.wav" id="18_lnqkc"]
 
 [sub_resource type="Animation" id="Animation_7qvly"]
 length = 0.001
@@ -95,6 +97,16 @@ speed_scale = 0.8
 frame_0/texture = ExtResource("12_hgg7c")
 frame_1/texture = ExtResource("13_3fcxt")
 frame_1/duration = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wv7rd"]
+random_pitch = 1.2324963
+streams_count = 1
+stream_0/stream = ExtResource("17_0401g")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lnqkc"]
+random_pitch = 1.1789479
+streams_count = 1
+stream_0/stream = ExtResource("18_lnqkc")
 
 [node name="Menu" type="Node2D" unique_id=115826374]
 script = ExtResource("1_rfqti")
@@ -303,6 +315,7 @@ grow_vertical = 2
 flat = true
 
 [node name="OptionsUI" type="Control" parent="." unique_id=1928797231]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -476,6 +489,16 @@ flat = true
 stream = ExtResource("16_wxa3f")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
+
+[node name="Selecting" type="AudioStreamPlayer" parent="." unique_id=677225521]
+stream = SubResource("AudioStreamRandomizer_wv7rd")
+bus = &"SFX"
+
+[node name="BarTone" type="AudioStreamPlayer" parent="." unique_id=1719156338]
+stream = SubResource("AudioStreamRandomizer_lnqkc")
+volume_db = -5.29
+bus = &"SFX"
 
 [connection signal="mouse_entered" from="Parallaxes/Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="mouse_exited" from="Parallaxes/Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_exited"]
@@ -485,5 +508,7 @@ bus = &"Music"
 [connection signal="mouse_entered" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_mouse_entered"]
 [connection signal="mouse_exited" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_mouse_exited"]
 [connection signal="pressed" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="value_changed" from="OptionsUI/BasePanel/HBoxContainer/SFX/SfxSlider" to="OptionsUI" method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="OptionsUI/BasePanel/HBoxContainer/MUSIC/VolumeSlider" to="OptionsUI" method="_on_volume_slider_value_changed"]
 [connection signal="toggled" from="OptionsUI/BasePanel/HBoxContainer/FULLSCREEN/CheckButton" to="OptionsUI" method="_on_check_button_toggled"]
 [connection signal="pressed" from="OptionsUI/BasePanel/ExitButton" to="OptionsUI" method="_on_exit_button_pressed"]
