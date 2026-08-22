@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://ddffdurkhl7jr"]
+
+[ext_resource type="Texture2D" uid="uid://57g5tiswwq6o" path="res://Sprites/Game/SpaceshipMap.png" id="1_mv0hc"]
+[ext_resource type="Texture2D" uid="uid://ibrcsum6wmgf" path="res://Sprites/Menu/BlackBG.png" id="1_qxfds"]
+[ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="2_qikps"]
+[ext_resource type="Script" uid="uid://cyqebuc8bfcra" path="res://Scenes/Game/plague_movement.gd" id="4_ciybh"]
+[ext_resource type="Texture2D" uid="uid://djx2n2yst2cms" path="res://Sprites/Icons/PISicon.png" id="4_i1e5p"]
+
+[node name="Game" type="Node2D" unique_id=1249205629]
+
+[node name="OfficeRoom" type="Node2D" parent="." unique_id=1355706927]
+position = Vector2(-706, 778)
+
+[node name="Background" type="Sprite2D" parent="OfficeRoom" unique_id=1779785895]
+texture = ExtResource("1_qxfds")
+
+[node name="Roomnum" type="Label" parent="OfficeRoom" unique_id=2066087971]
+offset_left = -579.0
+offset_top = -417.0
+offset_right = -117.0
+offset_bottom = -354.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 70
+text = "office room"
+
+[node name="CommsRoom" type="Node2D" parent="." unique_id=114717402]
+position = Vector2(671, 779)
+
+[node name="Background" type="Sprite2D" parent="CommsRoom" unique_id=418918689]
+texture = ExtResource("1_qxfds")
+
+[node name="Roomnum" type="Label" parent="CommsRoom" unique_id=351385601]
+offset_left = -579.0
+offset_top = -417.0
+offset_right = -117.0
+offset_bottom = -354.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 70
+text = "COMMUNICATION ROOM"
+
+[node name="Map" type="Node2D" parent="." unique_id=768314028]
+
+[node name="MapSprite" type="Sprite2D" parent="Map" unique_id=1077596127]
+texture_filter = 1
+texture = ExtResource("1_mv0hc")
+
+[node name="1" type="Marker2D" parent="Map" unique_id=10407991]
+position = Vector2(-86, -61)
+gizmo_extents = 25.0
+
+[node name="2" type="Marker2D" parent="Map" unique_id=1894755004]
+position = Vector2(0, -59)
+gizmo_extents = 25.0
+
+[node name="3" type="Marker2D" parent="Map" unique_id=578397426]
+position = Vector2(87, -61)
+gizmo_extents = 25.0
+
+[node name="4" type="Marker2D" parent="Map" unique_id=1696334949]
+position = Vector2(-61, 12)
+gizmo_extents = 25.0
+
+[node name="5" type="Marker2D" parent="Map" unique_id=937216639]
+position = Vector2(56, 14)
+gizmo_extents = 25.0
+
+[node name="6" type="Marker2D" parent="Map" unique_id=548009091]
+position = Vector2(0, 82)
+gizmo_extents = 25.0
+
+[node name="Plague" type="Node2D" parent="Map" unique_id=1194051043 node_paths=PackedStringArray("pos_positions")]
+script = ExtResource("4_ciybh")
+pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
+
+[node name="PlaguePlaceholder" type="Sprite2D" parent="Map/Plague" unique_id=1029311834]
+texture = ExtResource("4_i1e5p")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1056856796]

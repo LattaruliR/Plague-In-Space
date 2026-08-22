@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ibrcsum6wmgf" path="res://Sprites/Menu/BlackBG.png" id="1_1rerr"]
 [ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="1_158mb"]
-[ext_resource type="Script" uid="uid://dlkeqhm1g8v05" path="res://Scenes/MenuManager.gd" id="1_rfqti"]
+[ext_resource type="Script" uid="uid://dlkeqhm1g8v05" path="res://Scenes/Menu/MenuManager.gd" id="1_rfqti"]
 [ext_resource type="Texture2D" uid="uid://cjc4uo708o667" path="res://Sprites/Menu/SpaceshipMenu1.png" id="2_6swd7"]
 [ext_resource type="Texture2D" uid="uid://djx2n2yst2cms" path="res://Sprites/Icons/PISicon.png" id="2_xhh6f"]
 [ext_resource type="Texture2D" uid="uid://cemq0usw31ur1" path="res://Sprites/Menu/SpaceshipMenu2.png" id="3_7qvly"]

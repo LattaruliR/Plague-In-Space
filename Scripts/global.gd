@@ -30,3 +30,8 @@ var cur_pos = 0 # 0 -> Hidden
 
 var hunting := false
 # var thecnology_breached = 0
+
+# -- Menu --
+var sfx_volume = 100
+var music_volume = 100
+var fullscreen := true
