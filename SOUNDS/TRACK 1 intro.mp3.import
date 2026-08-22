@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dbcgnpxtkott6"
+path="res://.godot/imported/TRACK 1 intro.mp3-92d696d6132a1c2cba4b0fd1be36ccdd.mp3str"
+
+[deps]
+
+source_file="res://SOUNDS/TRACK 1 intro.mp3"
+dest_files=["res://.godot/imported/TRACK 1 intro.mp3-92d696d6132a1c2cba4b0fd1be36ccdd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

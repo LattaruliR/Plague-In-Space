@@ -25,3 +25,14 @@ func _on_quit_button_mouse_exited() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_options_button_mouse_entered() -> void:
+	textTip = "Options"
+
+func _on_options_button_mouse_exited() -> void:
+	textTip = " "
+
+
+func _on_options_button_pressed() -> void:
+	$OptionsUI.show()

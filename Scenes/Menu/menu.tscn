@@ -11,40 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://c2nseh561nli8" path="res://Sprites/Menu/SmallStar2.png" id="5_wbdvm"]
 [ext_resource type="Texture2D" uid="uid://dxwecrg3d7liv" path="res://Sprites/Menu/SmallStar1.png" id="6_q3rjx"]
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="10_7qvly"]
-
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_q3rjx"]
-frames = 6
-frame_0/texture = ExtResource("2_6swd7")
-frame_1/texture = ExtResource("3_7qvly")
-frame_1/duration = 1.0
-frame_2/texture = ExtResource("2_6swd7")
-frame_2/duration = 1.0
-frame_3/texture = ExtResource("3_7qvly")
-frame_3/duration = 1.0
-frame_4/texture = ExtResource("2_6swd7")
-frame_4/duration = 1.0
-frame_5/texture = ExtResource("3_7qvly")
-frame_5/duration = 1.0
-
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_3yx06"]
-frames = 2
-frame_0/texture = ExtResource("6_q3rjx")
-frame_1/texture = ExtResource("5_wbdvm")
-frame_1/duration = 1.0
-
-[sub_resource type="Gradient" id="Gradient_q3rjx"]
-offsets = PackedFloat32Array(0, 0.33251232, 0.682266, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_wbdvm"]
-frames = 2
-frame_0/texture = ExtResource("6_q3rjx")
-frame_0/duration = 0.4
-frame_1/texture = ExtResource("5_wbdvm")
-frame_1/duration = 0.6
-
-[sub_resource type="Gradient" id="Gradient_7qvly"]
-offsets = PackedFloat32Array(0.317734, 1)
+[ext_resource type="Texture2D" uid="uid://dqu6jfclrgong" path="res://Sprites/Menu/EarthSpin1.png" id="12_hgg7c"]
+[ext_resource type="Texture2D" uid="uid://dkh4th770t4q2" path="res://Sprites/Menu/EarthSpin2.png" id="13_3fcxt"]
+[ext_resource type="Texture2D" uid="uid://dgd7b8m4p5ln8" path="res://Sprites/Menu/NineSliceMenu.png" id="14_3fcxt"]
+[ext_resource type="Script" uid="uid://dvvend5fngf1x" path="res://Scenes/Menu/options_manager.gd" id="14_u2ioa"]
+[ext_resource type="AudioStream" uid="uid://0kjjx8de2ghd" path="res://SOUNDS/MenuThemeSong.mp3" id="16_wxa3f"]
 
 [sub_resource type="Animation" id="Animation_7qvly"]
 length = 0.001
@@ -84,6 +55,47 @@ _data = {
 &"scanlines": SubResource("Animation_6swd7")
 }
 
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_q3rjx"]
+frames = 6
+frame_0/texture = ExtResource("2_6swd7")
+frame_1/texture = ExtResource("3_7qvly")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("2_6swd7")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("3_7qvly")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("2_6swd7")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("3_7qvly")
+frame_5/duration = 1.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_3yx06"]
+frames = 2
+frame_0/texture = ExtResource("6_q3rjx")
+frame_1/texture = ExtResource("5_wbdvm")
+frame_1/duration = 1.0
+
+[sub_resource type="Gradient" id="Gradient_q3rjx"]
+offsets = PackedFloat32Array(0, 0.33251232, 0.682266, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_wbdvm"]
+frames = 2
+frame_0/texture = ExtResource("6_q3rjx")
+frame_0/duration = 0.4
+frame_1/texture = ExtResource("5_wbdvm")
+frame_1/duration = 0.6
+
+[sub_resource type="Gradient" id="Gradient_7qvly"]
+offsets = PackedFloat32Array(0.317734, 1)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_m6csd"]
+frames = 2
+speed_scale = 0.8
+frame_0/texture = ExtResource("12_hgg7c")
+frame_1/texture = ExtResource("13_3fcxt")
+frame_1/duration = 1.0
+
 [node name="Menu" type="Node2D" unique_id=115826374]
 script = ExtResource("1_rfqti")
 
@@ -105,154 +117,8 @@ offset_bottom = 77.0
 theme_override_fonts/font = ExtResource("10_7qvly")
 text = "TOOLTIP"
 
-[node name="BackgroundParallax" type="Parallax2D" parent="." unique_id=25091203]
-
-[node name="Background" type="Sprite2D" parent="BackgroundParallax" unique_id=1451727130]
-z_index = -5
-texture = ExtResource("1_1rerr")
-
-[node name="Spaceship" type="Parallax2D" parent="." unique_id=2134111700]
-scroll_scale = Vector2(1.49, 1.49)
-
-[node name="Sprite2D" type="Sprite2D" parent="Spaceship" unique_id=1162299231]
-z_index = 2
-texture_filter = 1
-position = Vector2(-2, 19)
-texture = SubResource("AnimatedTexture_q3rjx")
-
-[node name="PlayButton" type="Button" parent="Spaceship/Sprite2D" unique_id=1570351542]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -114.0
-offset_top = -20.0
-offset_right = -205.0
-offset_bottom = -77.0
-grow_horizontal = 2
-grow_vertical = 2
-flat = true
-
-[node name="DeathParallax" type="Parallax2D" parent="." unique_id=776334825]
-scroll_scale = Vector2(0.43, 0.43)
-scroll_offset = Vector2(-125, 62)
-
-[node name="DeathSkull" type="Sprite2D" parent="DeathParallax" unique_id=824538369]
-modulate = Color(0.3953672, 0.39536718, 0.39536715, 1)
-z_index = -1
-texture_filter = 1
-position = Vector2(265, 18.999996)
-scale = Vector2(6, 6)
-texture = ExtResource("2_xhh6f")
-region_enabled = true
-region_rect = Rect2(2.1300583, 2.0949335, 59.7212, 59.75647)
-
-[node name="QuitButton" type="Button" parent="DeathParallax/DeathSkull" unique_id=1235311567]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -14.333333
-offset_top = -8.333332
-offset_right = -46.0
-offset_bottom = -49.000004
-grow_horizontal = 2
-grow_vertical = 2
-flat = true
-
 [node name="CameraMovement" type="Node2D" parent="." unique_id=764460735]
 script = ExtResource("3_cayip")
-
-[node name="TitleParallax" type="Parallax2D" parent="." unique_id=318918185]
-
-[node name="Title" type="Sprite2D" parent="TitleParallax" unique_id=490560897]
-position = Vector2(-3, -277)
-texture = ExtResource("4_wwsa2")
-
-[node name="Credits" type="Label" parent="TitleParallax" unique_id=1476896588]
-offset_left = -90.0
-offset_top = 271.0
-offset_right = 92.0
-offset_bottom = 304.0
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("10_7qvly")
-text = "Made by TorradaRica
-araknideo and voxus"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Stars" type="Parallax2D" parent="." unique_id=160579157]
-scroll_scale = Vector2(0.19, 0.19)
-
-[node name="FrontLayerStars" type="CPUParticles2D" parent="Stars" unique_id=1443457899]
-z_index = 1
-texture_filter = 1
-amount = 30
-texture = SubResource("AnimatedTexture_3yx06")
-lifetime = 0.09999999999999999
-preprocess = 2.45
-speed_scale = 0.01
-explosiveness = 0.15
-randomness = 0.82
-lifetime_randomness = 0.72
-draw_order = 1
-emission_shape = 3
-emission_rect_extents = Vector2(600, 350)
-color = Color(0.10524041, 0.10524041, 0.1052404, 1)
-color_ramp = SubResource("Gradient_q3rjx")
-anim_speed_min = 41.73
-anim_speed_max = 116.9
-anim_offset_min = 0.18
-anim_offset_max = 0.733
-
-[node name="Stars2" type="Parallax2D" parent="." unique_id=2127574974]
-scroll_scale = Vector2(0.08, 0.08)
-
-[node name="FrontLayerStars" type="CPUParticles2D" parent="Stars2" unique_id=2012558521]
-z_index = 1
-texture_filter = 1
-amount = 30
-texture = SubResource("AnimatedTexture_wbdvm")
-lifetime = 0.09999999999999999
-preprocess = 2.45
-speed_scale = 0.01
-explosiveness = 0.15
-randomness = 0.82
-lifetime_randomness = 0.72
-draw_order = 1
-emission_shape = 3
-emission_rect_extents = Vector2(600, 350)
-color = Color(0.31431612, 0.31431612, 0.3143161, 1)
-color_ramp = SubResource("Gradient_q3rjx")
-anim_speed_min = 41.73
-anim_speed_max = 116.9
-anim_offset_min = 0.18
-anim_offset_max = 0.733
-
-[node name="Stars3" type="Parallax2D" parent="." unique_id=2005187548]
-scroll_scale = Vector2(0.155, 0.155)
-repeat_size = Vector2(1000, 600)
-autoscroll = Vector2(60.76, 34.015)
-repeat_times = 5
-
-[node name="FrontLayerStars" type="CPUParticles2D" parent="Stars3" unique_id=2076143774]
-z_index = 1
-texture_filter = 1
-amount = 30
-texture = SubResource("AnimatedTexture_wbdvm")
-lifetime = 0.09999999999999999
-preprocess = 2.45
-speed_scale = 0.01
-explosiveness = 0.15
-randomness = 0.82
-lifetime_randomness = 0.72
-draw_order = 1
-emission_shape = 3
-emission_rect_extents = Vector2(600, 350)
-color_ramp = SubResource("Gradient_q3rjx")
-color_initial_ramp = SubResource("Gradient_7qvly")
-anim_speed_min = 41.73
-anim_speed_max = 116.9
-anim_offset_min = 0.18
-anim_offset_max = 0.733
 
 [node name="Scanlines" type="Sprite2D" parent="." unique_id=1446618836]
 z_index = 99
@@ -268,8 +134,356 @@ libraries/ = SubResource("AnimationLibrary_7qvly")
 autoplay = &"scanlines"
 speed_scale = 2.0
 
-[connection signal="mouse_entered" from="Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_entered"]
-[connection signal="mouse_exited" from="Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_exited"]
-[connection signal="mouse_entered" from="DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_mouse_entered"]
-[connection signal="mouse_exited" from="DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_mouse_exited"]
-[connection signal="pressed" from="DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="Parallaxes" type="Node2D" parent="." unique_id=1746849824]
+
+[node name="BackgroundParallax" type="Parallax2D" parent="Parallaxes" unique_id=25091203]
+
+[node name="Background" type="Sprite2D" parent="Parallaxes/BackgroundParallax" unique_id=1451727130]
+z_index = -5
+texture = ExtResource("1_1rerr")
+
+[node name="Spaceship" type="Parallax2D" parent="Parallaxes" unique_id=2134111700]
+scroll_scale = Vector2(1.49, 1.49)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxes/Spaceship" unique_id=1162299231]
+z_index = 2
+texture_filter = 1
+position = Vector2(-2, 19)
+texture = SubResource("AnimatedTexture_q3rjx")
+
+[node name="PlayButton" type="Button" parent="Parallaxes/Spaceship/Sprite2D" unique_id=1570351542]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -20.0
+offset_right = -205.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="DeathParallax" type="Parallax2D" parent="Parallaxes" unique_id=776334825]
+scroll_scale = Vector2(0.43, 0.43)
+scroll_offset = Vector2(-125, 62)
+
+[node name="DeathSkull" type="Sprite2D" parent="Parallaxes/DeathParallax" unique_id=824538369]
+modulate = Color(0.3953672, 0.39536718, 0.39536715, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(265, 18.999996)
+scale = Vector2(6, 6)
+texture = ExtResource("2_xhh6f")
+region_enabled = true
+region_rect = Rect2(2.1300583, 2.0949335, 59.7212, 59.75647)
+
+[node name="QuitButton" type="Button" parent="Parallaxes/DeathParallax/DeathSkull" unique_id=1235311567]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.333333
+offset_top = -8.333332
+offset_right = -42.666664
+offset_bottom = -45.833332
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="TitleParallax" type="Parallax2D" parent="Parallaxes" unique_id=318918185]
+
+[node name="Title" type="Sprite2D" parent="Parallaxes/TitleParallax" unique_id=490560897]
+position = Vector2(-3, -277)
+texture = ExtResource("4_wwsa2")
+
+[node name="Credits" type="Label" parent="Parallaxes/TitleParallax" unique_id=1476896588]
+offset_left = -90.0
+offset_top = 271.0
+offset_right = 92.0
+offset_bottom = 304.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("10_7qvly")
+text = "Made by TorradaRica
+araknideo and voxus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stars" type="Parallax2D" parent="Parallaxes" unique_id=160579157]
+scroll_scale = Vector2(0.19, 0.19)
+
+[node name="FrontLayerStars" type="CPUParticles2D" parent="Parallaxes/Stars" unique_id=1443457899]
+z_index = 1
+texture_filter = 1
+amount = 30
+texture = SubResource("AnimatedTexture_3yx06")
+lifetime = 0.1
+preprocess = 2.45
+speed_scale = 0.01
+explosiveness = 0.15
+randomness = 0.82
+lifetime_randomness = 0.72
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(600, 350)
+color = Color(0.10524041, 0.10524041, 0.1052404, 1)
+color_ramp = SubResource("Gradient_q3rjx")
+anim_speed_min = 41.73
+anim_speed_max = 116.9
+anim_offset_min = 0.18
+anim_offset_max = 0.733
+
+[node name="Stars2" type="Parallax2D" parent="Parallaxes" unique_id=2127574974]
+scroll_scale = Vector2(0.08, 0.08)
+
+[node name="FrontLayerStars" type="CPUParticles2D" parent="Parallaxes/Stars2" unique_id=2012558521]
+z_index = 1
+texture_filter = 1
+amount = 30
+texture = SubResource("AnimatedTexture_wbdvm")
+lifetime = 0.1
+preprocess = 2.45
+speed_scale = 0.01
+explosiveness = 0.15
+randomness = 0.82
+lifetime_randomness = 0.72
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(600, 350)
+color = Color(0.31431612, 0.31431612, 0.3143161, 1)
+color_ramp = SubResource("Gradient_q3rjx")
+anim_speed_min = 41.73
+anim_speed_max = 116.9
+anim_offset_min = 0.18
+anim_offset_max = 0.733
+
+[node name="Stars3" type="Parallax2D" parent="Parallaxes" unique_id=2005187548]
+scroll_scale = Vector2(0.155, 0.155)
+repeat_size = Vector2(1000, 600)
+autoscroll = Vector2(60.76, 34.015)
+repeat_times = 5
+
+[node name="FrontLayerStars" type="CPUParticles2D" parent="Parallaxes/Stars3" unique_id=2076143774]
+z_index = 1
+texture_filter = 1
+amount = 30
+texture = SubResource("AnimatedTexture_wbdvm")
+lifetime = 0.1
+preprocess = 2.45
+speed_scale = 0.01
+explosiveness = 0.15
+randomness = 0.82
+lifetime_randomness = 0.72
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(600, 350)
+color_ramp = SubResource("Gradient_q3rjx")
+color_initial_ramp = SubResource("Gradient_7qvly")
+anim_speed_min = 41.73
+anim_speed_max = 116.9
+anim_offset_min = 0.18
+anim_offset_max = 0.733
+
+[node name="EarthParallax" type="Parallax2D" parent="Parallaxes" unique_id=1091034410]
+scroll_scale = Vector2(0.89, 0.89)
+
+[node name="Earth" type="Sprite2D" parent="Parallaxes/EarthParallax" unique_id=2078570837]
+self_modulate = Color(0.8226427, 0.8226427, 0.8226427, 1)
+position = Vector2(347, -55)
+texture = SubResource("AnimatedTexture_m6csd")
+
+[node name="OptionsButton" type="Button" parent="Parallaxes/EarthParallax/Earth" unique_id=1416107440]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="OptionsUI" type="Control" parent="." unique_id=1928797231]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_u2ioa")
+
+[node name="BasePanel" type="Panel" parent="OptionsUI" unique_id=1589146816]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.5
+offset_top = -210.0
+offset_right = 448.5
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OptionsUI/BasePanel" unique_id=1321235059]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_3fcxt")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="HBoxContainer" type="BoxContainer" parent="OptionsUI/BasePanel" unique_id=1725098795]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 24.0
+offset_right = 400.0
+offset_bottom = 376.0
+grow_horizontal = 2
+theme_override_constants/separation = 131
+alignment = 1
+vertical = true
+
+[node name="SFX" type="Label" parent="OptionsUI/BasePanel/HBoxContainer" unique_id=1329364503]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 32
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="OptionsUI/BasePanel/HBoxContainer/SFX" unique_id=587414059]
+self_modulate = Color(0.7031943, 2.1731033e-05, 0.1281414, 1)
+z_index = 2
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+rounded = true
+
+[node name="percentageLabelSfx" type="Label" parent="OptionsUI/BasePanel/HBoxContainer/SFX" unique_id=860634298]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 39.0
+offset_right = 20.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 24
+text = "50%"
+
+[node name="MUSIC" type="Label" parent="OptionsUI/BasePanel/HBoxContainer" unique_id=934158750]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 32
+text = "MUSIC"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="OptionsUI/BasePanel/HBoxContainer/MUSIC" unique_id=280965235]
+self_modulate = Color(0.7031943, 2.1731033e-05, 0.1281414, 1)
+z_index = 2
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+rounded = true
+
+[node name="percentageLabelVolume" type="Label" parent="OptionsUI/BasePanel/HBoxContainer/MUSIC" unique_id=1888376453]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 39.0
+offset_right = 20.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 24
+text = "50%"
+
+[node name="FULLSCREEN" type="Label" parent="OptionsUI/BasePanel/HBoxContainer" unique_id=1571236488]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 32
+text = "FULLSCREEN"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="OptionsUI/BasePanel/HBoxContainer/FULLSCREEN" unique_id=353862299]
+self_modulate = Color(0.8557188, 0.00020094588, 0.16501597, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = 21.0
+offset_right = 22.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+button_pressed = true
+
+[node name="ExitButton" type="Button" parent="OptionsUI/BasePanel" unique_id=36526700]
+self_modulate = Color(0.6871066, 1.634039e-05, 0.124254085, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.5
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 72.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 64
+text = "X"
+flat = true
+
+[node name="MainMenuSong" type="AudioStreamPlayer" parent="." unique_id=1531399060]
+stream = ExtResource("16_wxa3f")
+autoplay = true
+bus = &"Music"
+
+[connection signal="mouse_entered" from="Parallaxes/Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="mouse_exited" from="Parallaxes/Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_exited"]
+[connection signal="mouse_entered" from="Parallaxes/DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="mouse_exited" from="Parallaxes/DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_mouse_exited"]
+[connection signal="pressed" from="Parallaxes/DeathParallax/DeathSkull/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="mouse_entered" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_mouse_entered"]
+[connection signal="mouse_exited" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_mouse_exited"]
+[connection signal="pressed" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="toggled" from="OptionsUI/BasePanel/HBoxContainer/FULLSCREEN/CheckButton" to="OptionsUI" method="_on_check_button_toggled"]
+[connection signal="pressed" from="OptionsUI/BasePanel/ExitButton" to="OptionsUI" method="_on_exit_button_pressed"]

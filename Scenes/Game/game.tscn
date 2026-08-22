@@ -5,6 +5,8 @@
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="2_qikps"]
 [ext_resource type="Script" uid="uid://cyqebuc8bfcra" path="res://Scripts/plague_movement.gd" id="4_ciybh"]
 [ext_resource type="Texture2D" uid="uid://djx2n2yst2cms" path="res://Sprites/Icons/PISicon.png" id="4_i1e5p"]
+[ext_resource type="Texture2D" uid="uid://2bw8fanfmgqk" path="res://icon.svg" id="6_flgk0"]
+[ext_resource type="Script" uid="uid://d4d2aytd6twe1" path="res://Scenes/Game/player_movement.gd" id="6_vifcx"]
 
 [node name="Game" type="Node2D" unique_id=1249205629]
 
@@ -68,11 +70,26 @@ gizmo_extents = 25.0
 position = Vector2(0, 82)
 gizmo_extents = 25.0
 
-[node name="Plague" type="Node2D" parent="Map" unique_id=1194051043 node_paths=PackedStringArray("pos_positions")]
+[node name="Plague" type="Node2D" parent="Map" unique_id=1194051043 node_paths=PackedStringArray("pos_positions", "movetimer")]
 script = ExtResource("4_ciybh")
 pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
+movetimer = NodePath("MovechanceTimer")
+timer_time_left = 2
+ai_difficulty = 1
 
 [node name="PlaguePlaceholder" type="Sprite2D" parent="Map/Plague" unique_id=1029311834]
 texture = ExtResource("4_i1e5p")
 
+[node name="MovechanceTimer" type="Timer" parent="Map/Plague" unique_id=717435922]
+
+[node name="Player" type="Node2D" parent="Map" unique_id=750469057 node_paths=PackedStringArray("pos_positions")]
+script = ExtResource("6_vifcx")
+pos_positions = [NodePath("../5"), NodePath("../6")]
+
+[node name="PlayerPlaceholder" type="Sprite2D" parent="Map/Player" unique_id=1602402136]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("6_flgk0")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1056856796]
+
+[connection signal="timeout" from="Map/Plague/MovechanceTimer" to="Map/Plague" method="_on_movechance_timer_timeout"]

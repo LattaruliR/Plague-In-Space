@@ -28,12 +28,12 @@ buses/default_bus_layout="uid://c7sxv6qlyp4d1"
 [autoload]
 
 Global="*uid://3n2nfntgw4el"
+CoreResources="*uid://b1ysvgjsx8vo8"
 
 [display]
 
 window/size/mode=4
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://cfwaqg3f85ken"
 
 [physics]
