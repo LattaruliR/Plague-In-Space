@@ -1,8 +1,4 @@
 extends Node
-## Central audio system.
-## - Pooled AudioStreamPlayers for one-shot / overlapping SFX.
-## - A dedicated player for music with optional fade-in.
-## - Bus volume control driven by Global.sfx_volume / Global.music_volume.
 
 const SFX_POOL_SIZE := 8
 const MIN_VOLUME_DB := -80.0
@@ -29,8 +25,6 @@ func _make_player(bus: StringName) -> AudioStreamPlayer:
 	add_child(player)
 	return player
 
-
-## Plays a (possibly overlapping) sound effect using a pooled player.
 func play_sfx(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
 	if stream == null:
 		return
@@ -47,12 +41,10 @@ func _get_free_sfx_player() -> AudioStreamPlayer:
 		if not player.playing:
 			return player
 
-	# All players busy: steal the next one in a round-robin fashion.
 	_steal_index = (_steal_index + 1) % _sfx_pool.size()
 	return _sfx_pool[_steal_index]
 
 
-## Starts (or restarts, if different) looping background music.
 func play_music(stream: AudioStream, fade_in: float = 0.0) -> void:
 	if stream == null:
 		return
@@ -95,8 +87,6 @@ func set_music_volume(percent: float) -> void:
 	Global.music_volume = percent
 	apply_volumes()
 
-
-## Re-applies Global.sfx_volume / Global.music_volume to the audio buses.
 func apply_volumes() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), _percent_to_db(Global.sfx_volume))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), _percent_to_db(Global.music_volume))
