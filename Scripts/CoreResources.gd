@@ -57,6 +57,9 @@ var plague_heat_aggro: bool = false
 # Power
 var power: int = 5 # mininum: 0, max: 5
 
+func deplete_charge(charge_cost: int):
+	power -= charge_cost
+
 func reboot_system(is_heat_system: bool = false) -> void:
 	var cost = 1
 	if is_heat_system:
