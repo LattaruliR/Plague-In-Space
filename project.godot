@@ -28,6 +28,7 @@ buses/default_bus_layout="uid://c7sxv6qlyp4d1"
 [autoload]
 
 Global="*uid://3n2nfntgw4el"
+AudioManager="*res://Scripts/AudioManager.gd"
 CoreResources="*uid://b1ysvgjsx8vo8"
 DebugUI="*res://Scripts/debug_ui.gd"
 GameHUD="*res://Scripts/game_hud.gd"

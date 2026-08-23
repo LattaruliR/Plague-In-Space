@@ -1,5 +1,7 @@
 extends Node
 
+const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
+
 # Oxygen
 var oxygen: float = 100.0 # minimum: 0.0, max: 100.0
 var o_decay_step: float = 1.0 # 2 for normal, 3 for fast, 1 for slow; this gets multiplied when decreasing
@@ -41,10 +43,13 @@ func _update_oxygen_zone() -> void:
 
 		if Global.infection_step < 0:
 			Global.infection_step = 0
-			
+
 		if new_zone == 2:
 			Global.panic = true
-			
+
+		if zone_difference > 0: # got worse
+			AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.85 + 0.15 * new_zone)
+
 		current_oxygen_zone = new_zone
 
 # Heat
@@ -59,21 +64,27 @@ var power: int = 5 # mininum: 0, max: 5
 
 func deplete_charge(charge_cost: int):
 	power -= charge_cost
+	if power <= 0:
+		Global.blackout = true
+		AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.6)
 
 func reboot_system(is_heat_system: bool = false) -> void:
 	var cost = 1
 	if is_heat_system:
 		cost = heat_reboot_cost
-		
+
 	if power >= cost:
 		power -= cost
 		if is_heat_system:
 			heat = 85.0 # rebooting sets it to perfect zone
+		AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.3)
 	else:
 		print("not enough power to reboot")
-		
+		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.6)
+
 	if power <= 0:
 		Global.blackout = true
+		AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.6)
 
 func _update_heat_zone() -> void:
 	var new_zone = 1
@@ -108,7 +119,10 @@ func _update_heat_zone() -> void:
 			4: # Death
 				o_decay_step = 4.0
 				plague_heat_aggro = true
-				
+
+		if new_zone == 3 or new_zone == 4:
+			AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.85 + 0.15 * new_zone)
+
 		current_heat_zone = new_zone
 
 # Comms
