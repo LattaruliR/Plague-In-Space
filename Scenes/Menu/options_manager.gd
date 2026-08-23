@@ -6,19 +6,11 @@ extends Control
 @onready var percentage_label_sfx: Label = $BasePanel/HBoxContainer/SFX/percentageLabelSfx
 
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	sfx_slider.value = Global.sfx_volume
+	volume_slider.value = Global.music_volume
 	percentage_label_sfx.text = str(sfx_slider.value) + "%"
 	percentage_label_volume.text = str(volume_slider.value) + "%"
-	
-	Global.sfx_volume = sfx_slider.value
-	Global.music_volume = volume_slider.value
-	
-	var musicBus = AudioServer.get_bus_index("Music")
-	AudioServer.set_bus_volume_db(musicBus, Global.music_volume - 63)
-
-	var sfxBus = AudioServer.get_bus_index("SFX")
-	AudioServer.set_bus_volume_db(sfxBus, Global.sfx_volume - 63)
-	
 
 
 
@@ -36,8 +28,12 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_sfx_slider_value_changed(value: float) -> void:
+	percentage_label_sfx.text = str(value) + "%"
+	AudioManager.set_sfx_volume(value)
 	$"../BarTone".play()
 
 
 func _on_volume_slider_value_changed(value: float) -> void:
+	percentage_label_volume.text = str(value) + "%"
+	AudioManager.set_music_volume(value)
 	$"../BarTone".play()
