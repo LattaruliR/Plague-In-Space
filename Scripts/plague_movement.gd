@@ -22,7 +22,11 @@ func _process(_delta: float) -> void:
 func _on_movechance_timer_timeout() -> void:
 	var randomValue = randi_range(1, 20)
 	
-	if (randomValue <= ai_difficulty):
+	var effective_difficulty = ai_difficulty
+	if CoreResources.plague_heat_aggro:
+		effective_difficulty += 5 # Increase move chance significantly
+	
+	if (randomValue <= effective_difficulty):
 		move()
 	else:
 		return

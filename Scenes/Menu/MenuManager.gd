@@ -16,6 +16,12 @@ func _on_play_button_mouse_entered() -> void:
 func _on_play_button_mouse_exited() -> void:
 	textTip = " "
 
+func _on_play_button_pressed() -> void:
+	$Selecting.play()
+	CoreResources.reset_systems()
+	Global.reset_player_state()
+	get_tree().change_scene_to_file("res://Scenes/Game/game.tscn")
+
 
 func _on_quit_button_mouse_entered() -> void:
 	var easterEgg = randi_range(1, 20)

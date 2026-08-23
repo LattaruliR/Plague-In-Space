@@ -7,5 +7,5 @@ func _ready() -> void:
 	position = pos_positions[0].position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position = pos_positions.pick_random().position
