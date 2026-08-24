@@ -38,3 +38,11 @@ func _on_volume_slider_value_changed(value: float) -> void:
 	percentage_label_volume.text = str(value) + "%"
 	AudioManager.set_music_volume(value)
 	$"../BarTone".play()
+
+
+func _on_scan_button_toggled(toggled_on: bool) -> void:
+	$"../Selecting".play()
+	if toggled_on == false:
+		Global.scanlines = false
+	else:
+		Global.scanlines = true

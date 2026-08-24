@@ -533,7 +533,7 @@ position = Vector2(-512, 7)
 sprite_frames = SubResource("SpriteFrames_d0u6y")
 animation = &"spinning"
 autoplay = "spinning"
-frame_progress = 0.028109312
+frame_progress = 0.7710402
 speed_scale = 1.23
 
 [node name="CommsRoom" type="Node2D" parent="." unique_id=114717402]
@@ -660,7 +660,7 @@ autoplay = &"new_animation"
 [node name="InteractionHandler" type="Node2D" parent="." unique_id=397913693]
 script = ExtResource("25_pmm7v")
 
+[connection signal="mouse_entered" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_mouse_entered"]
+[connection signal="mouse_exited" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_mouse_exited"]
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
-[connection signal="pressed" from="OfficeRoom/Interactables/O2RebootBSprite/O2Reboot" to="InteractionHandler" method="_on_o_2_reboot_pressed"]
-[connection signal="pressed" from="OfficeRoom/Interactables/HRebootBSprite/HeatReboot" to="InteractionHandler" method="_on_heat_reboot_pressed"]
 [connection signal="timeout" from="Map/Plague/MovechanceTimer" to="Map/Plague" method="_on_movechance_timer_timeout"]

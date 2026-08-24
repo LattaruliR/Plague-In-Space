@@ -30,6 +30,7 @@ var hunting := false
 var sfx_volume = 100
 var music_volume = 100
 var fullscreen := true
+var scanlines := true
 
 func reset_player_state() -> void:
 	blackout = false
