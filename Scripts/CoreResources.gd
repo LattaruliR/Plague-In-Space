@@ -12,9 +12,17 @@ var danger_zone_threshold: float = 50.0
 
 var current_oxygen_zone: int = 0 # 0: Safe, 1: Dry, 2: Danger
 
+#  this is the extra bleeding of every system on top of its normal decay during blackout
+const BLACKOUT_OXYGEN_LEAK: float = 1.0 / 1.5 # extra % per second
+const BLACKOUT_HEAT_LEAK: float = 1.0 # extra % per second
+
 func _process(delta: float) -> void:
+	var leaking := Global.blackout
+
 	if oxygen > 0.0:
 		oxygen -= oxygen_decay_base_rate * o_decay_step * delta
+		if leaking:
+			oxygen -= BLACKOUT_OXYGEN_LEAK * delta
 		if oxygen <= 0.0:
 			oxygen = 0.0
 			Global.panic = true
@@ -23,6 +31,8 @@ func _process(delta: float) -> void:
 	
 	if heat > 0.0:
 		heat -= heat_decay_base_rate * delta
+		if leaking:
+			heat -= BLACKOUT_HEAT_LEAK * delta
 		if heat < 0.0:
 			heat = 0.0
 			
@@ -60,15 +70,21 @@ var heat_reboot_cost: int = 1
 var plague_heat_aggro: bool = false
 
 # Power
+const MAX_POWER: int = 5
 var power: int = 5 # mininum: 0, max: 5
 
 func deplete_charge(charge_cost: int):
 	power -= charge_cost
 	if power <= 0:
+		power = 0
 		Global.blackout = true
 		AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.6)
 
 func reboot_system(is_heat_system: bool = false) -> void:
+	if Global.blackout:
+		AudioManager.play_sfx(ALERT_SOUND, -6.0, 0.4)
+		return
+
 	var cost = 1
 	if is_heat_system:
 		cost = heat_reboot_cost
@@ -126,12 +142,105 @@ func _update_heat_zone() -> void:
 		current_heat_zone = new_zone
 
 # Comms
+const MANUAL_COUNT := 3 # how many manuals make a complete cure
+const COMMS_SEQUENCE_LENGTH := 5 # symbols in a broadcast
+const COMMS_SYMBOL_COUNT := 4 # how many distinct symbols the keypad offers
+
 var communication_combo: Array[int] = [] # Size 5
-var comms_stage = 0 # 0 - No comms uploaded, 1 - One comm uploaded, so on
+var comms_stage = 0 # 0 - no comms uploaded, 1 - one comm uploaded, so on
+
+signal manual_downloaded(stage: int)
+signal recipe_unlocked(index: int)
+signal cure_produced(count: int)
+
+func roll_communication_combo() -> Array[int]:
+	communication_combo.clear()
+	for i in COMMS_SEQUENCE_LENGTH:
+		communication_combo.append(randi() % COMMS_SYMBOL_COUNT)
+	return communication_combo
+
+func check_communication_combo(input: Array[int]) -> bool:
+	if input.size() != communication_combo.size():
+		return false
+	for i in input.size():
+		if input[i] != communication_combo[i]:
+			return false
+	return true
+
+func complete_manual_download() -> void:
+	if comms_stage >= MANUAL_COUNT:
+		return
+
+	var index: int = comms_stage
+	comms_stage += 1
+	unlocked_recipes.append(index)
+	manual_downloaded.emit(comms_stage)
+	recipe_unlocked.emit(index)
+	AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.6)
+
 # Kitchen
+# every manual carries one recipe; three dial values the player has to mix
+# the recipes are rolled once per run so a player cannot memorise them
+const KITCHEN_DIAL_MAX := 9 # dials run 0..9
+const CURE_CHARGE_COST := 1
+
 var kitchen_combo: Array[int] = [] # Size 3 (R, G, B puzzle)
 var kitchen_sum: Array[int] = [] # sum of the 3 separate numbers, [].sum method
 var num_display := 0
+
+var recipes: Array = [] # one Array[int] of 3 dial values per manual
+var unlocked_recipes: Array[int] = [] # indices into recipes the player has read
+var produced_recipes: Array[int] = [] # indices the player has already cooked
+
+func roll_recipes() -> void:
+	recipes.clear()
+	for i in MANUAL_COUNT:
+		var recipe: Array[int] = []
+		for d in 3:
+			recipe.append(randi() % (KITCHEN_DIAL_MAX + 1))
+		recipes.append(recipe)
+
+func get_recipe(index: int) -> Array:
+	if index < 0 or index >= recipes.size():
+		return []
+	return recipes[index]
+
+func get_pending_recipes() -> Array[int]:
+	var pending: Array[int] = []
+	for index in unlocked_recipes:
+		if not produced_recipes.has(index):
+			pending.append(index)
+	return pending
+
+func try_produce_cure(input: Array[int]) -> int:
+	if Global.blackout:
+		AudioManager.play_sfx(ALERT_SOUND, -6.0, 0.4)
+		return -1
+
+	if power < CURE_CHARGE_COST:
+		print("not enough power to produce")
+		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.6)
+		return -1
+
+	for index in get_pending_recipes():
+		if _matches_recipe(input, recipes[index]):
+			deplete_charge(CURE_CHARGE_COST)
+			produced_recipes.append(index)
+			Global.cure_stage += 1
+			cure_produced.emit(produced_recipes.size())
+			AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.8)
+			return index
+
+	AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.5)
+	return -1
+
+func _matches_recipe(input: Array, recipe: Array) -> bool:
+	if input.size() != recipe.size():
+		return false
+	for i in input.size():
+		if input[i] != recipe[i]:
+			return false
+	return true
 
 func reset_systems() -> void:
 	oxygen = 100.0
@@ -143,4 +252,14 @@ func reset_systems() -> void:
 	heat_reboot_cost = 1
 	plague_heat_aggro = false
 	
-	power = 5
+	power = MAX_POWER
+
+	communication_combo.clear()
+	comms_stage = 0
+
+	kitchen_combo = [0, 0, 0]
+	kitchen_sum.clear()
+	num_display = 0
+	unlocked_recipes.clear()
+	produced_recipes.clear()
+	roll_recipes()

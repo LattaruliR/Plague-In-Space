@@ -18,6 +18,10 @@
 [ext_resource type="Texture2D" uid="uid://du8hu4q16qy71" path="res://Sprites/Game/Office/Computer.png" id="10_2vowc"]
 [ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="10_7jvlm"]
 [ext_resource type="Texture2D" uid="uid://b8aoe7r220bdi" path="res://Sprites/Game/Office/Printer.png" id="14_upfqs"]
+[ext_resource type="Script" path="res://Scripts/comms_terminal.gd" id="20_cmter"]
+[ext_resource type="Script" path="res://Scripts/kitchen_terminal.gd" id="21_ktter"]
+[ext_resource type="Script" path="res://Scripts/power_switch.gd" id="22_pwrsw"]
+[ext_resource type="Script" path="res://Scripts/hide_spot.gd" id="23_hides"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -226,7 +230,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 2000, 1000)]
+"values": [Rect2(0, 0, 4600, 1400)]
 }
 
 [sub_resource type="Animation" id="Animation_6swd7"]
@@ -243,7 +247,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 0.9999987),
 "update": 0,
-"values": [Rect2(0, 0, 2000, 1000), Rect2(0, 1, 2000, 1000)]
+"values": [Rect2(0, 0, 4600, 1400), Rect2(0, 1, 4600, 1400)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7jvlm"]
@@ -376,15 +380,10 @@ position = Vector2(-14, 209)
 texture = ExtResource("5_ypmwd")
 
 [node name="Hide" type="Button" parent="OfficeRoom/Interactables/MaskHide" unique_id=2111216947]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -60.0
 offset_top = -25.0
-offset_right = -60.0
-offset_bottom = -25.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 60.0
+offset_bottom = 25.0
 flat = true
 
 [node name="O2RebootBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=1315271418]
@@ -395,15 +394,10 @@ animation = &"buttonIdle"
 autoplay = "buttonIdle"
 
 [node name="O2Reboot" type="Button" parent="OfficeRoom/Interactables/O2RebootBSprite" unique_id=664930034]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -15.5
 offset_top = -11.5
-offset_right = -15.5
-offset_bottom = -11.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 15.5
+offset_bottom = 11.5
 flat = true
 
 [node name="HRebootBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=657489224]
@@ -414,15 +408,10 @@ animation = &"buttonIdle"
 autoplay = "buttonIdle"
 
 [node name="HeatReboot" type="Button" parent="OfficeRoom/Interactables/HRebootBSprite" unique_id=658395661]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -15.5
 offset_top = -11.5
-offset_right = -15.5
-offset_bottom = -11.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 15.5
+offset_bottom = 11.5
 flat = true
 
 [node name="CRebootBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=478979382]
@@ -433,15 +422,10 @@ animation = &"buttonIdle"
 autoplay = "buttonIdle"
 
 [node name="CommsReboot" type="Button" parent="OfficeRoom/Interactables/CRebootBSprite" unique_id=1692289998]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -15.5
 offset_top = -11.5
-offset_right = -15.5
-offset_bottom = -11.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 15.5
+offset_bottom = 11.5
 flat = true
 
 [node name="RebootAllBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=1105045714]
@@ -452,16 +436,66 @@ animation = &"IdleUp"
 autoplay = "IdleUp"
 
 [node name="RebootAll" type="Button" parent="OfficeRoom/Interactables/RebootAllBSprite" unique_id=1274833468]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -21.0
 offset_top = -19.5
-offset_right = -21.0
-offset_bottom = -19.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 21.0
+offset_bottom = 19.5
 flat = true
+
+[node name="PowerSwitchSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables"]
+z_index = 5
+position = Vector2(-395, 145)
+sprite_frames = SubResource("SpriteFrames_57qmd")
+animation = &"IdleUp"
+autoplay = "IdleUp"
+
+[node name="Switch" type="Button" parent="OfficeRoom/Interactables/PowerSwitchSprite"]
+offset_left = -21.0
+offset_top = -19.5
+offset_right = 21.0
+offset_bottom = 19.5
+flat = true
+
+[node name="PowerLabel" type="Label" parent="OfficeRoom/Interactables/PowerSwitchSprite"]
+offset_left = -95.0
+offset_top = 24.0
+offset_right = 95.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 18
+text = "POWER: ON"
+horizontal_alignment = 1
+
+[node name="PowerSwitch" type="Node2D" parent="OfficeRoom/Interactables" node_paths=PackedStringArray("lever", "button", "label")]
+script = ExtResource("22_pwrsw")
+lever = NodePath("../PowerSwitchSprite")
+button = NodePath("../PowerSwitchSprite/Switch")
+label = NodePath("../PowerSwitchSprite/PowerLabel")
+
+[node name="MaskHideLeft" type="Sprite2D" parent="OfficeRoom/Interactables"]
+z_index = 5
+position = Vector2(-505, 235)
+texture = ExtResource("5_ypmwd")
+flip_h = true
+
+[node name="Hide" type="Button" parent="OfficeRoom/Interactables/MaskHideLeft"]
+offset_left = -60.0
+offset_top = -25.0
+offset_right = 60.0
+offset_bottom = 25.0
+flat = true
+
+[node name="HideSpotLeft" type="Node2D" parent="OfficeRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+script = ExtResource("23_hides")
+side = 0
+button = NodePath("../MaskHideLeft/Hide")
+sprite = NodePath("../MaskHideLeft")
+
+[node name="HideSpotRight" type="Node2D" parent="OfficeRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+script = ExtResource("23_hides")
+side = 1
+button = NodePath("../MaskHide/Hide")
+sprite = NodePath("../MaskHide")
 
 [node name="PointLight2D" type="PointLight2D" parent="OfficeRoom" unique_id=1055643177]
 position = Vector2(-103, 66)
@@ -476,6 +510,8 @@ occluder = SubResource("OccluderPolygon2D_g4v7s")
 position = Vector2(671, 779)
 
 [node name="Background" type="Sprite2D" parent="CommsRoom" unique_id=418918689]
+z_index = -8
+scale = Vector2(12.9734125, 3.5324478)
 texture = ExtResource("1_qxfds")
 
 [node name="Roomnum" type="Label" parent="CommsRoom" unique_id=351385601]
@@ -486,6 +522,70 @@ offset_bottom = -354.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 70
 text = "COMMUNICATION ROOM"
+
+[node name="Interactables" type="Node2D" parent="CommsRoom"]
+
+[node name="MaskHideLeft" type="Sprite2D" parent="CommsRoom/Interactables"]
+z_index = 5
+position = Vector2(-520, 240)
+texture = ExtResource("5_ypmwd")
+flip_h = true
+
+[node name="Hide" type="Button" parent="CommsRoom/Interactables/MaskHideLeft"]
+offset_left = -60.0
+offset_top = -25.0
+offset_right = 60.0
+offset_bottom = 25.0
+flat = true
+
+[node name="HideSpotLeft" type="Node2D" parent="CommsRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+script = ExtResource("23_hides")
+side = 0
+button = NodePath("../MaskHideLeft/Hide")
+sprite = NodePath("../MaskHideLeft")
+
+[node name="MaskHideRight" type="Sprite2D" parent="CommsRoom/Interactables"]
+z_index = 5
+position = Vector2(520, 240)
+texture = ExtResource("5_ypmwd")
+
+[node name="Hide" type="Button" parent="CommsRoom/Interactables/MaskHideRight"]
+offset_left = -60.0
+offset_top = -25.0
+offset_right = 60.0
+offset_bottom = 25.0
+flat = true
+
+[node name="HideSpotRight" type="Node2D" parent="CommsRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+script = ExtResource("23_hides")
+side = 1
+button = NodePath("../MaskHideRight/Hide")
+sprite = NodePath("../MaskHideRight")
+
+[node name="CommsTerminal" type="Node2D" parent="CommsRoom"]
+position = Vector2(0, 30)
+script = ExtResource("20_cmter")
+
+[node name="KitchenRoom" type="Node2D" parent="."]
+position = Vector2(2048, 779)
+
+[node name="Background" type="Sprite2D" parent="KitchenRoom"]
+z_index = -8
+scale = Vector2(12.9734125, 3.5324478)
+texture = ExtResource("1_qxfds")
+
+[node name="Roomnum" type="Label" parent="KitchenRoom"]
+offset_left = -579.0
+offset_top = -417.0
+offset_right = -117.0
+offset_bottom = -354.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 70
+text = "KITCHEN"
+
+[node name="KitchenTerminal" type="Node2D" parent="KitchenRoom"]
+position = Vector2(0, 40)
+script = ExtResource("21_ktter")
 
 [node name="Map" type="Node2D" parent="." unique_id=768314028]
 
@@ -564,10 +664,10 @@ text = "TOOLTIP"
 z_index = 99
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(-613, 758)
+position = Vector2(671, 779)
 texture = ExtResource("10_7jvlm")
 region_enabled = true
-region_rect = Rect2(0, 0, 2000, 1000)
+region_rect = Rect2(0, 0, 4600, 1400)
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=827620245]

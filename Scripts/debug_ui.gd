@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const ROOM_HALF_EXTENTS := Vector2(592, 339)
+
 var panel: PanelContainer
 var oxygen_label: Label
 var oxygen_bar: ProgressBar
@@ -7,6 +9,7 @@ var infection_label: Label
 var infection_bar: ProgressBar
 var panic_label: Label
 var heat_label: Label
+var systems_label: Label
 
 var debug_open := false
 
@@ -60,6 +63,9 @@ func _build_debug_panel() -> void:
 	heat_label = Label.new()
 	box.add_child(heat_label)
 
+	systems_label = Label.new()
+	box.add_child(systems_label)
+
 	var controls := Label.new()
 	controls.text = """
 controls:
@@ -69,6 +75,9 @@ controls:
 4 reset panic
 5 reboot heat (-power)
 6 refill power
+7/8/9 view office/comms/kitchen
+0 throw the power breaker
+M finish a manual download
 """
 	controls.modulate = Color(0.7, 0.7, 0.7)
 	box.add_child(controls)
@@ -105,11 +114,55 @@ func _unhandled_input(event: InputEvent) -> void:
 			Global.panic = false
 
 		KEY_5 when debug_open:
-			CoreResources.reboot_system(true) # Reboot Heat
+			CoreResources.reboot_system(true) # reboot heat
 			
 		KEY_6 when debug_open:
-			CoreResources.power = 5
-			Global.blackout = false
+			CoreResources.power = CoreResources.MAX_POWER
+			Blackout.reset()
+
+		KEY_7 when debug_open:
+			_go_to_room(Global.Room.PLAYER_ROOM)
+
+		KEY_8 when debug_open:
+			_go_to_room(Global.Room.COMMS_SYS)
+
+		KEY_9 when debug_open:
+			_go_to_room(Global.Room.KITCHEN)
+
+		KEY_0 when debug_open:
+			Blackout.toggle_switch()
+
+		KEY_M when debug_open:
+			CoreResources.complete_manual_download()
+
+
+func _room_origin(room: int) -> Vector2:
+	if room == Global.Room.COMMS_SYS:
+		return Vector2(671, 779)
+	if room == Global.Room.KITCHEN:
+		return Vector2(2048, 779)
+	return Vector2(-706, 778) # the office
+
+func _go_to_room(room: int) -> void:
+	var scene := get_tree().current_scene
+	if scene == null:
+		return
+
+	var camera := scene.get_node_or_null("Camera") as Camera2D
+	if camera == null:
+		return
+
+	var origin := _room_origin(room)
+	camera.limit_left = int(origin.x - ROOM_HALF_EXTENTS.x)
+	camera.limit_right = int(origin.x + ROOM_HALF_EXTENTS.x)
+	camera.limit_top = int(origin.y - ROOM_HALF_EXTENTS.y)
+	camera.limit_bottom = int(origin.y + ROOM_HALF_EXTENTS.y)
+	camera.position = origin
+
+	# the kitchen is not one of the rooms the player token can stand in, so the
+	# plague still treats them as being wherever they last really were.
+	if room != Global.Room.KITCHEN:
+		Global.player_room = room
 
 
 func _update_visibility() -> void:
@@ -143,8 +196,6 @@ func _update_debug_info() -> void:
 		
 	heat_label.text = "Heat: %.1f [%s]" % [CoreResources.heat, heat_zone_name]
 	
-	# If we want to show power, we can append it or create a new label.
-	# Let's just append it to heat for now to save space, or use the panel.
 	heat_label.text += "\nPower: %d/5  Blackout: %s" % [CoreResources.power, Global.blackout]
 
 
