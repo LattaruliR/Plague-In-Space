@@ -29,9 +29,11 @@ buses/default_bus_layout="uid://c7sxv6qlyp4d1"
 
 Global="*uid://3n2nfntgw4el"
 CoreResources="*uid://b1ysvgjsx8vo8"
+Blackout="*res://Scripts/blackout_manager.gd"
 DebugUI="*res://Scripts/debug_ui.gd"
 GameHUD="*res://Scripts/game_hud.gd"
 AudioManager="*res://Scripts/AudioManager.gd"
+BlackoutHUD="*res://Scripts/blackout_hud.gd"
 
 [display]
 

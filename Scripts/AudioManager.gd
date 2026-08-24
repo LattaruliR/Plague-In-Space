@@ -36,6 +36,30 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float = 
 	player.play()
 
 
+## Plays a one-shot at a world position so the mix pans it left/right.
+## Used for the blackout sound clues, where the direction is the whole point.
+func play_sfx_at(stream: AudioStream, world_position: Vector2, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
+	if stream == null:
+		return
+
+	var scene := get_tree().current_scene
+	if scene == null:
+		play_sfx(stream, volume_db, pitch_scale)
+		return
+
+	var player := AudioStreamPlayer2D.new()
+	player.bus = &"SFX"
+	player.stream = stream
+	player.volume_db = volume_db
+	player.pitch_scale = pitch_scale
+	player.max_distance = 4000.0
+	player.panning_strength = 2.0
+	player.finished.connect(player.queue_free)
+	scene.add_child(player)
+	player.global_position = world_position
+	player.play()
+
+
 func _get_free_sfx_player() -> AudioStreamPlayer:
 	for player in _sfx_pool:
 		if not player.playing:
@@ -91,7 +115,7 @@ func apply_volumes() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), _percent_to_db(Global.sfx_volume))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), _percent_to_db(Global.music_volume))
 
-
+																				
 func _percent_to_db(percent: float) -> float:
 	if percent <= 0.0:
 		return MIN_VOLUME_DB

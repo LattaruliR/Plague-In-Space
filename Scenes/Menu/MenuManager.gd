@@ -20,6 +20,7 @@ func _on_play_button_pressed() -> void:
 	$Selecting.play()
 	CoreResources.reset_systems()
 	Global.reset_player_state()
+	Blackout.reset()
 	get_tree().change_scene_to_file("res://Scenes/Game/game.tscn")
 
 
