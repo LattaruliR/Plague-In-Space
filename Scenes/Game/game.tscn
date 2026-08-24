@@ -28,6 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://dxfkvklklq211" path="res://Sprites/Icons/playerTokenDebug.png" id="21_pmm7v"]
 [ext_resource type="Script" uid="uid://pedj82l4vb41" path="res://Scripts/power_switch.gd" id="22_pwrsw"]
 [ext_resource type="Script" uid="uid://ceml0i2v3jwun" path="res://Scripts/hide_spot.gd" id="23_hides"]
+[ext_resource type="Script" path="res://Scripts/office_door.gd" id="26_odoor"]
+[ext_resource type="Script" path="res://Scripts/leave_door.gd" id="27_leave"]
 [ext_resource type="Script" uid="uid://ddkx24xwn1bpu" path="res://Scenes/Game/interaction_handler.gd" id="25_pmm7v"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
@@ -523,7 +525,7 @@ offset_left = 220.0
 offset_top = -170.0
 offset_right = 416.0
 offset_bottom = 185.0
-text = "door"
+flat = true
 
 [node name="DoorHandle" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=318253373]
 z_index = 1
@@ -540,6 +542,13 @@ offset_top = -51.5
 offset_right = 58.5
 offset_bottom = 51.5
 flat = true
+
+[node name="OfficeDoor" type="Node2D" parent="OfficeRoom/Interactables" node_paths=PackedStringArray("door_sprite", "handle_sprite", "handle_button", "leave_button")]
+script = ExtResource("26_odoor")
+door_sprite = NodePath("../../BaseElements/Door")
+handle_sprite = NodePath("../DoorHandle")
+handle_button = NodePath("../DoorHandle/DoorHandleButton")
+leave_button = NodePath("../Door")
 
 [node name="PointLight2D" type="PointLight2D" parent="OfficeRoom" unique_id=1055643177]
 position = Vector2(-103, 66)
@@ -570,6 +579,13 @@ texture = ExtResource("9_2vowc")
 z_index = 5
 position = Vector2(-100, 66)
 texture = ExtResource("10_2vowc")
+
+[node name="ComputerButton" type="Button" parent="OfficeRoom/BaseElements/Computer"]
+offset_left = -97.0
+offset_top = -80.0
+offset_right = 97.0
+offset_bottom = 80.0
+flat = true
 
 [node name="OfficeBGlayer" type="Sprite2D" parent="OfficeRoom/BaseElements" unique_id=410100373]
 texture = ExtResource("4_huoen")
@@ -645,6 +661,16 @@ side = 1
 button = NodePath("../MaskHideRight/Hide")
 sprite = NodePath("../MaskHideRight")
 
+[node name="LeaveDoor" type="Button" parent="CommsRoom/Interactables"]
+offset_left = 360.0
+offset_top = -320.0
+offset_right = 580.0
+offset_bottom = -266.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 28
+text = "LEAVE"
+script = ExtResource("27_leave")
+
 [node name="CommsTerminal" type="Node2D" parent="CommsRoom" unique_id=555035815]
 position = Vector2(0, 30)
 script = ExtResource("20_cmter")
@@ -665,6 +691,55 @@ offset_bottom = -354.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 70
 text = "KITCHEN"
+
+[node name="Interactables" type="Node2D" parent="KitchenRoom"]
+
+[node name="LeaveDoor" type="Button" parent="KitchenRoom/Interactables"]
+offset_left = 360.0
+offset_top = -320.0
+offset_right = 580.0
+offset_bottom = -266.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 28
+text = "LEAVE"
+script = ExtResource("27_leave")
+
+[node name="MaskHideLeft" type="Sprite2D" parent="KitchenRoom/Interactables"]
+z_index = 5
+position = Vector2(-520, 240)
+texture = ExtResource("5_ypmwd")
+flip_h = true
+
+[node name="Hide" type="Button" parent="KitchenRoom/Interactables/MaskHideLeft"]
+offset_left = -60.0
+offset_top = -25.0
+offset_right = 60.0
+offset_bottom = 25.0
+flat = true
+
+[node name="HideSpotLeft" type="Node2D" parent="KitchenRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+script = ExtResource("23_hides")
+side = 0
+button = NodePath("../MaskHideLeft/Hide")
+sprite = NodePath("../MaskHideLeft")
+
+[node name="MaskHideRight" type="Sprite2D" parent="KitchenRoom/Interactables"]
+z_index = 5
+position = Vector2(520, 240)
+texture = ExtResource("5_ypmwd")
+
+[node name="Hide" type="Button" parent="KitchenRoom/Interactables/MaskHideRight"]
+offset_left = -60.0
+offset_top = -25.0
+offset_right = 60.0
+offset_bottom = 25.0
+flat = true
+
+[node name="HideSpotRight" type="Node2D" parent="KitchenRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+script = ExtResource("23_hides")
+side = 1
+button = NodePath("../MaskHideRight/Hide")
+sprite = NodePath("../MaskHideRight")
 
 [node name="KitchenTerminal" type="Node2D" parent="KitchenRoom" unique_id=623439123]
 position = Vector2(0, 40)
@@ -714,7 +789,7 @@ texture = ExtResource("4_i1e5p")
 
 [node name="Player" type="Node2D" parent="Map" unique_id=750469057 node_paths=PackedStringArray("pos_positions")]
 script = ExtResource("6_vifcx")
-pos_positions = [NodePath("../5"), NodePath("../6")]
+pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
 
 [node name="PlayerPlaceholder" type="Sprite2D" parent="Map/Player" unique_id=1602402136]
 scale = Vector2(0.75, 0.75)

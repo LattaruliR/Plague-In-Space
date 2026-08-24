@@ -58,6 +58,10 @@ func _ready() -> void:
 func register_plague(plague: Node) -> void:
 	_plague = plague
 
+## The Plague node, or null before the Game scene has loaded.
+func get_plague() -> Node:
+	return _plague
+
 
 func _process(delta: float) -> void:
 	if Global.blackout != _active:
@@ -164,8 +168,6 @@ func _tick_roaming(delta: float) -> void:
 
 	if _plague_room() == Global.player_room:
 		_begin_hunt()
-	elif _plague_room() == Global.Room.COMMS_SYS:
-		threat_warning.emit(Global.Room.COMMS_SYS)
 
 
 func _tick_clues(delta: float) -> void:
@@ -186,6 +188,9 @@ func play_room_clue(room: int) -> void:
 	AudioManager.play_sfx(clue["stream"], clue["db"], clue["pitch"])
 
 func _begin_hunt() -> void:
+	if Global.door_closed and Global.player_room == Global.Room.PLAYER_ROOM:
+		return # it cannot get through the blast door
+
 	Global.hunting = true
 	hunt_side = randi() % 2
 	hunt_elapsed = 0.0

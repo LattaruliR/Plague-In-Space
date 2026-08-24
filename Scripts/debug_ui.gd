@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-const ROOM_HALF_EXTENTS := Vector2(592, 339)
-
 var panel: PanelContainer
 var oxygen_label: Label
 var oxygen_bar: ProgressBar
@@ -75,9 +73,10 @@ controls:
 4 reset panic
 5 reboot heat (-power)
 6 refill power
-7/8/9 view office/comms/kitchen
+7/8/9 go to office/comms/kitchen
 0 throw the power breaker
 M finish a manual download
+L sabotage the plague's room
 """
 	controls.modulate = Color(0.7, 0.7, 0.7)
 	box.add_child(controls)
@@ -121,13 +120,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			Blackout.reset()
 
 		KEY_7 when debug_open:
-			_go_to_room(Global.Room.PLAYER_ROOM)
+			Rooms.travel_to(Global.Room.PLAYER_ROOM)
 
 		KEY_8 when debug_open:
-			_go_to_room(Global.Room.COMMS_SYS)
+			Rooms.travel_to(Global.Room.COMMS_SYS)
 
 		KEY_9 when debug_open:
-			_go_to_room(Global.Room.KITCHEN)
+			Rooms.travel_to(Global.Room.KITCHEN)
 
 		KEY_0 when debug_open:
 			Blackout.toggle_switch()
@@ -135,34 +134,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		KEY_M when debug_open:
 			CoreResources.complete_manual_download()
 
+		KEY_L when debug_open:
+			var plague := Blackout.get_plague()
+			if plague != null:
+				CoreResources.apply_sabotage(plague.cur_position)
 
-func _room_origin(room: int) -> Vector2:
-	if room == Global.Room.COMMS_SYS:
-		return Vector2(671, 779)
-	if room == Global.Room.KITCHEN:
-		return Vector2(2048, 779)
-	return Vector2(-706, 778) # the office
-
-func _go_to_room(room: int) -> void:
-	var scene := get_tree().current_scene
-	if scene == null:
-		return
-
-	var camera := scene.get_node_or_null("Camera") as Camera2D
-	if camera == null:
-		return
-
-	var origin := _room_origin(room)
-	camera.limit_left = int(origin.x - ROOM_HALF_EXTENTS.x)
-	camera.limit_right = int(origin.x + ROOM_HALF_EXTENTS.x)
-	camera.limit_top = int(origin.y - ROOM_HALF_EXTENTS.y)
-	camera.limit_bottom = int(origin.y + ROOM_HALF_EXTENTS.y)
-	camera.position = origin
-
-	# the kitchen is not one of the rooms the player token can stand in, so the
-	# plague still treats them as being wherever they last really were.
-	if room != Global.Room.KITCHEN:
-		Global.player_room = room
 
 
 func _update_visibility() -> void:
@@ -196,7 +172,45 @@ func _update_debug_info() -> void:
 		
 	heat_label.text = "Heat: %.1f [%s]" % [CoreResources.heat, heat_zone_name]
 	
-	heat_label.text += "\nPower: %d/5  Blackout: %s" % [CoreResources.power, Global.blackout]
+	heat_label.text += "\nPower: %d/%d  Blackout: %s" % [
+		CoreResources.power, CoreResources.MAX_POWER, Global.blackout
+	]
+
+	var grid := "ONLINE"
+	if Global.blackout:
+		if Blackout.power_online:
+			grid = "READY"
+		else:
+			grid = "REBOOT %ds" % int(ceil(Blackout.reboot_remaining()))
+
+	var hide_text := "no"
+	if Global.hiding:
+		hide_text = "LEFT" if Global.hide_side == 0 else "RIGHT"
+
+	var plague := Blackout.get_plague()
+	var plague_room := "?"
+	var lure := "none"
+	if plague != null:
+		plague_room = str(Global.ROOM_NAMES.get(plague.cur_position, "?"))
+		if plague.lure_target >= 0:
+			lure = str(Global.ROOM_NAMES.get(plague.lure_target, "?"))
+
+	var sab: Array[String] = []
+	for room in CoreResources.sabotaged:
+		sab.append(str(Global.ROOM_NAMES.get(room, room)))
+
+	systems_label.text = "Grid: %s  Hunting: %s  Hiding: %s" % [grid, Global.hunting, hide_text]
+	systems_label.text += "\nYou: %s   It: %s" % [
+		Global.ROOM_NAMES.get(Global.player_room, "?"), plague_room
+	]
+	systems_label.text += "\nDoor: %s  Lures: %d  Luring to: %s" % [
+		"SHUT" if Global.door_closed else "open", Global.lure_streak, lure
+	]
+	systems_label.text += "\nSabotaged: %s" % (", ".join(sab) if not sab.is_empty() else "none")
+	systems_label.text += "\nManuals: %d/%d  Doses: %d/%d" % [
+		CoreResources.comms_stage, CoreResources.MANUAL_COUNT,
+		CoreResources.produced_recipes.size(), CoreResources.MANUAL_COUNT
+	]
 
 
 func _get_oxygen_zone_name() -> String:

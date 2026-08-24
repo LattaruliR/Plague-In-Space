@@ -5,9 +5,10 @@ extends CanvasLayer
 
 const FONT := preload("res://Fonts/home-video/HomeVideo-Regular.ttf")
 
-const GREEN := Color(0.35, 1.0, 0.35)
-const RED := Color(1.0, 0.35, 0.3)
-const DARKNESS := 0.86 # how black the blackout gets
+const GREEN := TerminalStyle.GREEN
+const AMBER := TerminalStyle.AMBER
+const RED := TerminalStyle.RED
+const DARKNESS := 0.5 # how black the blackout gets
 const FADE_SPEED := 1.6
 
 var _shade: ColorRect
@@ -67,14 +68,14 @@ func _update_labels() -> void:
 			_warning.add_theme_color_override("font_color", RED)
 	else:
 		_warning.text = _message
-		_warning.add_theme_color_override("font_color", RED)
+		_warning.add_theme_color_override("font_color", AMBER)
 
 	if Blackout.power_online:
 		_status.text = "POWER RESTORED - THROW THE SWITCH IN THE OFFICE"
 		_status.add_theme_color_override("font_color", GREEN)
 	else:
 		_status.text = "BLACKOUT - GRID REBOOTING %ds" % int(ceil(Blackout.reboot_remaining()))
-		_status.add_theme_color_override("font_color", RED)
+		_status.add_theme_color_override("font_color", AMBER)
 
 
 func _on_refused(reason: String) -> void:

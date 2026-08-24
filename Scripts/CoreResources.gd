@@ -20,7 +20,10 @@ func _process(delta: float) -> void:
 	var leaking := Global.blackout
 
 	if oxygen > 0.0:
-		oxygen -= oxygen_decay_base_rate * o_decay_step * delta
+		var o_rate := oxygen_decay_base_rate * o_decay_step
+		if is_sabotaged(Global.Room.OXYGEN_SYS):
+			o_rate *= SABOTAGE_DECAY_MULT
+		oxygen -= o_rate * delta
 		if leaking:
 			oxygen -= BLACKOUT_OXYGEN_LEAK * delta
 		if oxygen <= 0.0:
@@ -30,7 +33,10 @@ func _process(delta: float) -> void:
 	_update_oxygen_zone()
 	
 	if heat > 0.0:
-		heat -= heat_decay_base_rate * delta
+		var h_rate := heat_decay_base_rate
+		if is_sabotaged(Global.Room.HEAT_SYS):
+			h_rate *= SABOTAGE_DECAY_MULT
+		heat -= h_rate * delta
 		if leaking:
 			heat -= BLACKOUT_HEAT_LEAK * delta
 		if heat < 0.0:
@@ -242,6 +248,103 @@ func _matches_recipe(input: Array, recipe: Array) -> bool:
 			return false
 	return true
 
+
+const SABOTAGE_DECAY_MULT: float = 2.5
+
+var sabotaged := {} # Global.Room -> true
+
+## rooms that hold something worth breaking
+var sabotageable_rooms: Array[int] = []
+
+func _ready() -> void:
+	sabotageable_rooms = [
+		Global.Room.KITCHEN,
+		Global.Room.HEAT_SYS,
+		Global.Room.OXYGEN_SYS,
+		Global.Room.COMMS_SYS,
+		Global.Room.POWER_GRID,
+	]
+
+signal system_sabotaged(room: int)
+signal system_repaired(room: int)
+
+func is_sabotaged(room: int) -> bool:
+	return sabotaged.get(room, false)
+
+func any_sabotaged() -> bool:
+	return not sabotaged.is_empty()
+
+## returns true if this actually broke something new
+func apply_sabotage(room: int) -> bool:
+	if room == Global.Room.POWER_GRID:
+		if Global.blackout:
+			return false
+		Global.panic = true
+		Global.blackout = true
+		AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.3)
+		system_sabotaged.emit(room)
+		return true
+
+	if not sabotageable_rooms.has(room) or is_sabotaged(room):
+		return false
+
+	sabotaged[room] = true
+	AudioManager.play_sfx(ALERT_SOUND, -2.0, 0.45)
+	system_sabotaged.emit(room)
+	return true
+
+func repair(room: int) -> bool:
+	if not is_sabotaged(room):
+		return false
+	sabotaged.erase(room)
+	system_repaired.emit(room)
+	return true
+
+func reboot_room(room: int) -> bool:
+	if Global.blackout:
+		AudioManager.play_sfx(ALERT_SOUND, -6.0, 0.4)
+		return false
+
+	var cost := 1
+	if room == Global.Room.HEAT_SYS:
+		cost = heat_reboot_cost
+
+	if power < cost:
+		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.6)
+		return false
+
+	repair(room)
+
+	match room:
+		Global.Room.OXYGEN_SYS:
+			oxygen = 100.0
+		Global.Room.HEAT_SYS:
+			heat = 85.0 # rebooting sets it to the perfect zone
+
+	deplete_charge(cost)
+	AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.3)
+	return true
+
+func reboot_everything() -> bool:
+	if Global.blackout:
+		AudioManager.play_sfx(ALERT_SOUND, -6.0, 0.4)
+		return false
+
+	if power < REBOOT_ALL_COST:
+		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.6)
+		return false
+
+	for room in sabotageable_rooms:
+		repair(room)
+	oxygen = 100.0
+	heat = 85.0
+
+	deplete_charge(REBOOT_ALL_COST)
+	AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.5)
+	return true
+
+const REBOOT_ALL_COST := 2
+
 func reset_systems() -> void:
 	oxygen = 100.0
 	current_oxygen_zone = 0
@@ -263,3 +366,5 @@ func reset_systems() -> void:
 	unlocked_recipes.clear()
 	produced_recipes.clear()
 	roll_recipes()
+
+	sabotaged.clear()

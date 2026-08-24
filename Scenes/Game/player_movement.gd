@@ -1,5 +1,11 @@
 extends Node2D
 
+## The player's token on the ship map. It follows Global.player_room rather
+## than moving on its own, so the Plague, the cameras and the map always agree
+## on where the player actually is.
+##
+## Markers are in Global.Room order: Kitchen, Power Grid, Heat, Oxygen, Comms,
+## Player Room.
 @export var pos_positions: Array[Marker2D] = []
 
 # Called when the node enters the scene tree for the first time.
@@ -13,8 +19,4 @@ func _process(_delta: float) -> void:
 func _snap_to_room() -> void:
 	if pos_positions.is_empty():
 		return
-	position = pos_positions[_marker_index()].position
-
-func _marker_index() -> int:
-	var index := 0 if Global.player_room == Global.Room.COMMS_SYS else 1
-	return clampi(index, 0, pos_positions.size() - 1)
+	position = pos_positions[clampi(Global.player_room, 0, pos_positions.size() - 1)].position

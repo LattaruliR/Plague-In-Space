@@ -35,9 +35,6 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float = 
 	player.pitch_scale = pitch_scale
 	player.play()
 
-
-## Plays a one-shot at a world position so the mix pans it left/right.
-## Used for the blackout sound clues, where the direction is the whole point.
 func play_sfx_at(stream: AudioStream, world_position: Vector2, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
 	if stream == null:
 		return

@@ -34,6 +34,8 @@ DebugUI="*res://Scripts/debug_ui.gd"
 GameHUD="*res://Scripts/game_hud.gd"
 AudioManager="*res://Scripts/AudioManager.gd"
 BlackoutHUD="*res://Scripts/blackout_hud.gd"
+Rooms="*res://Scripts/room_navigator.gd"
+Monitor="*res://Scripts/office_computer.gd"
 
 [display]
 

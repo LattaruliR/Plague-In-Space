@@ -32,6 +32,8 @@ func _ready() -> void:
 	_build_ui()
 
 	CoreResources.recipe_unlocked.connect(_on_recipe_unlocked)
+	CoreResources.system_sabotaged.connect(func(_r): _refresh())
+	CoreResources.system_repaired.connect(func(_r): _refresh())
 	_refresh()
 
 
@@ -48,7 +50,7 @@ func _on_recipe_unlocked(_index: int) -> void:
 	_refresh()
 
 func _on_dial_changed(channel: int, step: int) -> void:
-	if Global.blackout:
+	if Global.blackout or CoreResources.is_sabotaged(Global.Room.KITCHEN):
 		return
 
 	var value: int = CoreResources.kitchen_combo[channel] + step
@@ -62,6 +64,9 @@ func _on_dial_changed(channel: int, step: int) -> void:
 func _on_produce_pressed() -> void:
 	if Global.blackout:
 		_flash("NO POWER")
+		return
+	if CoreResources.is_sabotaged(Global.Room.KITCHEN):
+		_flash("BENCH SABOTAGED")
 		return
 
 	if CoreResources.get_pending_recipes().is_empty():
@@ -87,7 +92,7 @@ func _flash(text: String) -> void:
 
 func _refresh() -> void:
 	var combo := CoreResources.kitchen_combo
-	var offline := Global.blackout
+	var offline: bool = Global.blackout or CoreResources.is_sabotaged(Global.Room.KITCHEN)
 
 	for channel in _dial_labels.size():
 		_dial_labels[channel].text = str(combo[channel])
@@ -112,6 +117,8 @@ func _refresh() -> void:
 
 	if _message != "":
 		_status_label.text = _message
+	elif CoreResources.is_sabotaged(Global.Room.KITCHEN):
+		_status_label.text = "BENCH SABOTAGED - REBOOT FROM THE OFFICE"
 	elif offline:
 		_status_label.text = "NO POWER - CONSOLE OFFLINE"
 	else:

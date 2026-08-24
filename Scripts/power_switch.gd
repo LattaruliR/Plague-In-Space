@@ -3,8 +3,8 @@ extends Node2D
 ## the breaker in the office
 
 const FONT := preload("res://Fonts/home-video/HomeVideo-Regular.ttf")
-const GREEN := Color(0.35, 1.0, 0.35)
-const RED := Color(1.0, 0.35, 0.3)
+const GREEN := TerminalStyle.GREEN
+const AMBER := TerminalStyle.AMBER
 
 @export var lever: AnimatedSprite2D
 @export var button: Button
@@ -55,7 +55,7 @@ func _refresh() -> void:
 
 	if _message != "":
 		label.text = _message
-		label.add_theme_color_override("font_color", RED)
+		label.add_theme_color_override("font_color", AMBER)
 		return
 
 	if Global.blackout:
@@ -64,7 +64,7 @@ func _refresh() -> void:
 			label.add_theme_color_override("font_color", GREEN)
 		else:
 			label.text = "REBOOTING %ds" % int(ceil(Blackout.reboot_remaining()))
-			label.add_theme_color_override("font_color", RED)
+			label.add_theme_color_override("font_color", AMBER)
 	else:
 		label.text = "POWER: ON"
 		label.add_theme_color_override("font_color", GREEN)

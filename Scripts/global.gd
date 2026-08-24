@@ -27,6 +27,14 @@ var player_room: int = Room.PLAYER_ROOM
 var hiding := false
 var hide_side: int = -1 # -1 not hidden, 0 left spot, 1 right spot
 
+# the office blast door. shut it and nothing gets in, but the air goes stale
+var door_closed := false
+
+# lures played since the Plague last laid eyes on the player. the longer the
+# player goes unseen while pulling it around the ship, the bolder it gets about
+# sabotaging something on the way
+var lure_streak := 0
+
 @warning_ignore("unused_signal") # emitted by blackout_manager.gd
 signal player_caught
 
@@ -54,6 +62,11 @@ var music_volume = 100
 var fullscreen := true
 var scanlines := true
 
+## the plague has eyes on the player: it stops trusting the lures
+func saw_player() -> void:
+	lure_streak = 0
+
+
 func reset_player_state() -> void:
 	blackout = false
 	panic = false
@@ -64,3 +77,5 @@ func reset_player_state() -> void:
 	hiding = false
 	hide_side = -1
 	hunting = false
+	door_closed = false
+	lure_streak = 0

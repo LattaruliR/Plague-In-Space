@@ -9,6 +9,7 @@ var textTip = " "
 @onready var reboot_all: Button = $"../OfficeRoom/Interactables/RebootAllBSprite/RebootAll"
 @onready var door: Button = $"../OfficeRoom/Interactables/Door"
 @onready var door_handle_button: Button = $"../OfficeRoom/Interactables/DoorHandle/DoorHandleButton"
+@onready var computer_button: Button = $"../OfficeRoom/BaseElements/Computer/ComputerButton"
 
 const BAR_TONE = preload("uid://cmabygqmehtnw")
 
@@ -24,18 +25,24 @@ func _ready() -> void:
 	comms_reboot: "Reboot Communications",
 	reboot_all: "Reboot all",
 	door: "Leave",
-	door_handle_button: "Switch"
+	door_handle_button: "Switch",
+	computer_button: "Cameras / Oxygen / Heat"
 	}
 	
 	for button in hover_tips:
 		button.mouse_entered.connect(_on_button_hover.bind(hover_tips[button]))
 		button.mouse_exited.connect(_on_button_unhover)
 
+	# These two are wired up in the scene; the other panel buttons are not, so
+	# hook them here rather than leaving them dead.
+	comms_reboot.pressed.connect(_on_comms_reboot_pressed)
+	reboot_all.pressed.connect(_on_reboot_all_pressed)
+	computer_button.pressed.connect(Monitor.toggle)
+
 
 func _process(_delta: float) -> void:
 	mouse_tooltip.text = textTip
-	print()
-	
+
 
 
 func _on_button_hover(tip: String):
@@ -46,13 +53,24 @@ func _on_button_unhover():
 
 # --- OFFICE INTERACTIONS ---
 
+# The hide spots handle their own state; see hide_spot.gd.
 func _on_hide_pressed() -> void:
-	pass # Replace with function body.
+	pass
 
 
+# The reboot panel is also how a Security Breach gets undone: each button
+# clears the sabotage on its room and tops the system back up for a charge.
 func _on_o_2_reboot_pressed() -> void:
-	pass # Replace with function body.
+	CoreResources.reboot_room(Global.Room.OXYGEN_SYS)
 
 
 func _on_heat_reboot_pressed() -> void:
-	pass # Replace with function body.
+	CoreResources.reboot_room(Global.Room.HEAT_SYS)
+
+
+func _on_comms_reboot_pressed() -> void:
+	CoreResources.reboot_room(Global.Room.COMMS_SYS)
+
+
+func _on_reboot_all_pressed() -> void:
+	CoreResources.reboot_everything()

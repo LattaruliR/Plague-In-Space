@@ -37,7 +37,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Global.blackout:
+	# No power, or the Plague tore the rack apart: either way it is dead.
+	if Global.blackout or CoreResources.is_sabotaged(Global.Room.COMMS_SYS):
 		if state != State.OFFLINE:
 			_abort_for_blackout()
 		return
@@ -183,7 +184,10 @@ func _refresh_state() -> void:
 		State.COMPLETE:
 			_status_label.text = "ALL MANUALS RECEIVED - CHECK THE KITCHEN"
 		State.OFFLINE:
-			_status_label.text = "NO POWER - TERMINAL OFFLINE"
+			if CoreResources.is_sabotaged(Global.Room.COMMS_SYS):
+				_status_label.text = "ARRAY SABOTAGED - REBOOT COMMS IN THE OFFICE"
+			else:
+				_status_label.text = "NO POWER - TERMINAL OFFLINE"
 
 	if state == State.OFFLINE:
 		_root.modulate = Color(0.4, 0.4, 0.4)
