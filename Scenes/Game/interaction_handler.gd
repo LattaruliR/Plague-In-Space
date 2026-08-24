@@ -13,10 +13,6 @@ var textTip = " "
 
 const BAR_TONE = preload("uid://cmabygqmehtnw")
 
-
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var hover_tips := {
 	hidemask: "hide",
@@ -33,8 +29,6 @@ func _ready() -> void:
 		button.mouse_entered.connect(_on_button_hover.bind(hover_tips[button]))
 		button.mouse_exited.connect(_on_button_unhover)
 
-	# These two are wired up in the scene; the other panel buttons are not, so
-	# hook them here rather than leaving them dead.
 	comms_reboot.pressed.connect(_on_comms_reboot_pressed)
 	reboot_all.pressed.connect(_on_reboot_all_pressed)
 	computer_button.pressed.connect(Monitor.toggle)
@@ -51,15 +45,9 @@ func _on_button_hover(tip: String):
 func _on_button_unhover():
 	textTip = ""
 
-# --- OFFICE INTERACTIONS ---
-
-# The hide spots handle their own state; see hide_spot.gd.
 func _on_hide_pressed() -> void:
 	pass
 
-
-# The reboot panel is also how a Security Breach gets undone: each button
-# clears the sabotage on its room and tops the system back up for a charge.
 func _on_o_2_reboot_pressed() -> void:
 	CoreResources.reboot_room(Global.Room.OXYGEN_SYS)
 

@@ -1,11 +1,5 @@
 extends Node2D
 
-## The player's token on the ship map. It follows Global.player_room rather
-## than moving on its own, so the Plague, the cameras and the map always agree
-## on where the player actually is.
-##
-## Markers are in Global.Room order: Kitchen, Power Grid, Heat, Oxygen, Comms,
-## Player Room.
 @export var pos_positions: Array[Marker2D] = []
 
 # Called when the node enters the scene tree for the first time.
