@@ -27,6 +27,7 @@ var player_room: int = Room.PLAYER_ROOM
 var hiding := false
 var hide_side: int = -1 # -1 not hidden, 0 left spot, 1 right spot
 
+@warning_ignore("unused_signal") # emitted by blackout_manager.gd
 signal player_caught
 
 var infection_value: float = 0.0 # max: 100, min: 0

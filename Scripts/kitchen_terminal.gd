@@ -96,8 +96,8 @@ func _refresh() -> void:
 	CoreResources.kitchen_sum = [CoreResources.num_display]
 	_sum_label.text = "SUM: %02d" % CoreResources.num_display
 
-	var scale := float(CoreResources.KITCHEN_DIAL_MAX)
-	_swatch.color = Color(combo[0] / scale, combo[1] / scale, combo[2] / scale)
+	var dial_max := float(CoreResources.KITCHEN_DIAL_MAX)
+	_swatch.color = Color(combo[0] / dial_max, combo[1] / dial_max, combo[2] / dial_max)
 
 	for index in _recipe_labels.size():
 		_recipe_labels[index].text = _recipe_text(index)
