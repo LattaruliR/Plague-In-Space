@@ -78,7 +78,7 @@ frame_1/texture = ExtResource("5_wbdvm")
 frame_1/duration = 1.0
 
 [sub_resource type="Gradient" id="Gradient_q3rjx"]
-offsets = PackedFloat32Array(0, 0.33251232, 0.682266, 1)
+offsets = PackedFloat32Array(0, 0.33251232, 0.7690678, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_wbdvm"]
@@ -129,8 +129,9 @@ offset_bottom = 77.0
 theme_override_fonts/font = ExtResource("10_7qvly")
 text = "TOOLTIP"
 
-[node name="CameraMovement" type="Node2D" parent="." unique_id=764460735]
+[node name="CameraMovement" type="Node2D" parent="." unique_id=764460735 node_paths=PackedStringArray("camera_2d")]
 script = ExtResource("3_cayip")
+camera_2d = NodePath("../Camera2D")
 
 [node name="Scanlines" type="Sprite2D" parent="." unique_id=1446618836]
 z_index = 99
@@ -260,7 +261,7 @@ lifetime_randomness = 0.72
 draw_order = 1
 emission_shape = 3
 emission_rect_extents = Vector2(600, 350)
-color = Color(0.31431612, 0.31431612, 0.3143161, 1)
+color = Color(0.98234254, 0.9823423, 0.9823424, 1)
 color_ramp = SubResource("Gradient_q3rjx")
 anim_speed_min = 41.73
 anim_speed_max = 116.9

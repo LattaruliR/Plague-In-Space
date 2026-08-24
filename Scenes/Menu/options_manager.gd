@@ -31,6 +31,7 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 	percentage_label_sfx.text = str(value) + "%"
 	AudioManager.set_sfx_volume(value)
 	$"../BarTone".play()
+	
 
 
 func _on_volume_slider_value_changed(value: float) -> void:

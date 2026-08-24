@@ -4,9 +4,305 @@
 [ext_resource type="Texture2D" uid="uid://ibrcsum6wmgf" path="res://Sprites/Menu/BlackBG.png" id="1_qxfds"]
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="2_qikps"]
 [ext_resource type="Script" uid="uid://cyqebuc8bfcra" path="res://Scripts/plague_movement.gd" id="4_ciybh"]
+[ext_resource type="Texture2D" uid="uid://c0fvc47kdl6fy" path="res://Sprites/Game/Office/OfficeBackground.png" id="4_huoen"]
 [ext_resource type="Texture2D" uid="uid://djx2n2yst2cms" path="res://Sprites/Icons/PISicon.png" id="4_i1e5p"]
+[ext_resource type="Texture2D" uid="uid://dxwecrg3d7liv" path="res://Sprites/Menu/SmallStar1.png" id="4_qtymf"]
+[ext_resource type="Texture2D" uid="uid://0btc27msp4aw" path="res://Sprites/Game/Office/MaskHideProp.png" id="5_ypmwd"]
+[ext_resource type="Texture2D" uid="uid://b4p1bhq6r1ged" path="res://Sprites/Game/Office/ButtonPressSheet.png" id="6_56qi8"]
 [ext_resource type="Texture2D" uid="uid://2bw8fanfmgqk" path="res://icon.svg" id="6_flgk0"]
+[ext_resource type="Texture2D" uid="uid://3mdyn5k5xhpv" path="res://Sprites/Game/Office/DoorSpritesheet.png" id="6_oejk7"]
 [ext_resource type="Script" uid="uid://d4d2aytd6twe1" path="res://Scenes/Game/player_movement.gd" id="6_vifcx"]
+[ext_resource type="Texture2D" uid="uid://duutt3mxjrdr3" path="res://Sprites/Game/Office/BigRebootPress.png" id="7_yox4t"]
+[ext_resource type="Script" uid="uid://cmmdtf8fsg0u2" path="res://Scripts/camera_movement.gd" id="8_xfil1"]
+[ext_resource type="Texture2D" uid="uid://dhfo5v4jbgntk" path="res://Sprites/Game/Office/ControlStation.png" id="9_2vowc"]
+[ext_resource type="Texture2D" uid="uid://du8hu4q16qy71" path="res://Sprites/Game/Office/Computer.png" id="10_2vowc"]
+[ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="10_7jvlm"]
+[ext_resource type="Texture2D" uid="uid://b8aoe7r220bdi" path="res://Sprites/Game/Office/Printer.png" id="14_upfqs"]
+
+[sub_resource type="Gradient" id="Gradient_g4v7s"]
+offsets = PackedFloat32Array(0, 0.53601694, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upfqs"]
+atlas = ExtResource("6_oejk7")
+region = Rect2(0, 0, 209, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e3kh"]
+atlas = ExtResource("6_oejk7")
+region = Rect2(209, 0, 209, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56qi8"]
+atlas = ExtResource("6_oejk7")
+region = Rect2(418, 0, 209, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vowc"]
+atlas = ExtResource("6_oejk7")
+region = Rect2(627, 0, 209, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yox4t"]
+atlas = ExtResource("6_oejk7")
+region = Rect2(836, 0, 209, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lemb1"]
+atlas = ExtResource("6_oejk7")
+region = Rect2(1045, 0, 209, 388)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upfqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e3kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56qi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vowc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yox4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lemb1")
+}],
+"loop": 0,
+"name": &"closing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lemb1")
+}],
+"loop": 0,
+"name": &"idleClosed",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"idleOpen",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lemb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yox4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vowc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56qi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e3kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upfqs")
+}],
+"loop": 0,
+"name": &"opening",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6ftd"]
+atlas = ExtResource("6_56qi8")
+region = Rect2(0, 0, 31, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxex1"]
+atlas = ExtResource("6_56qi8")
+region = Rect2(62, 0, 31, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pa3qg"]
+atlas = ExtResource("6_56qi8")
+region = Rect2(31, 0, 31, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6ftd")
+}],
+"loop": 1,
+"name": &"buttonIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxex1")
+}],
+"loop": 1,
+"name": &"buttonPressedIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6ftd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pa3qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxex1")
+}],
+"loop": 0,
+"name": &"pressing",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lc0x"]
+atlas = ExtResource("7_yox4t")
+region = Rect2(84, 0, 42, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ti5a"]
+atlas = ExtResource("7_yox4t")
+region = Rect2(0, 0, 42, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmm7v"]
+atlas = ExtResource("7_yox4t")
+region = Rect2(42, 0, 42, 39)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_57qmd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lc0x")
+}],
+"loop": 0,
+"name": &"IdleDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ti5a")
+}],
+"loop": 0,
+"name": &"IdleUp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ti5a")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pmm7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lc0x")
+}],
+"loop": 0,
+"name": &"Pressing",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_lemb1"]
+offsets = PackedFloat32Array(0, 0.42444444, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.7355555, 0.7355555, 0.7355555, 0.7355555, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_lemb1")
+width = 257
+height = 172
+fill = 1
+fill_from = Vector2(0.50341296, 0.5068259)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g4v7s"]
+polygon = PackedVector2Array(-222, 90, -220, 105, -224, 107, -225, 89)
+
+[sub_resource type="Animation" id="Animation_7qvly"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scanlines:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 2000, 1000)]
+}
+
+[sub_resource type="Animation" id="Animation_6swd7"]
+resource_name = "scanlines"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scanlines:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.9999987),
+"update": 0,
+"values": [Rect2(0, 0, 2000, 1000), Rect2(0, 1, 2000, 1000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jvlm"]
+_data = {
+&"RESET": SubResource("Animation_7qvly"),
+&"scanlines": SubResource("Animation_6swd7")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g4v7s"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_yox4t"]
+offsets = PackedFloat32Array(0, 0.17555556, 0.43333334, 1)
+colors = PackedColorArray(0, 0, 0, 0.42352942, 0.5483871, 0.5483871, 0.5483871, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a6ftd"]
+gradient = SubResource("Gradient_yox4t")
+width = 1168
+height = 680
+fill = 2
+fill_from = Vector2(0.74590164, 0.8588236)
+fill_to = Vector2(1, 0.025342336)
+
+[sub_resource type="Animation" id="Animation_yox4t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lemb1"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9192522, 0.9192523, 0.9192521, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6ftd"]
+_data = {
+&"RESET": SubResource("Animation_yox4t"),
+&"new_animation": SubResource("Animation_lemb1")
+}
 
 [node name="Game" type="Node2D" unique_id=1249205629]
 
@@ -14,7 +310,10 @@
 position = Vector2(-706, 778)
 
 [node name="Background" type="Sprite2D" parent="OfficeRoom" unique_id=1779785895]
+z_index = -8
+scale = Vector2(12.9734125, 3.5324478)
 texture = ExtResource("1_qxfds")
+metadata/_edit_lock_ = true
 
 [node name="Roomnum" type="Label" parent="OfficeRoom" unique_id=2066087971]
 offset_left = -579.0
@@ -24,6 +323,154 @@ offset_bottom = -354.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 70
 text = "office room"
+
+[node name="Dust" type="Parallax2D" parent="OfficeRoom" unique_id=686415069]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="OfficeRoom/Dust" unique_id=948428823]
+amount = 20
+texture = ExtResource("4_qtymf")
+lifetime = 3.05
+preprocess = 2.51
+explosiveness = 0.54
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(700, 300)
+spread = 180.0
+gravity = Vector2(0, 1.55)
+initial_velocity_min = 8.6
+initial_velocity_max = 8.65
+linear_accel_min = 3.0
+linear_accel_max = 3.0
+color_ramp = SubResource("Gradient_g4v7s")
+
+[node name="Door" type="AnimatedSprite2D" parent="OfficeRoom" unique_id=1311813295]
+position = Vector2(318, 8)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"idleOpen"
+autoplay = "idleOpen"
+speed_scale = 1.68
+
+[node name="Printer" type="Sprite2D" parent="OfficeRoom" unique_id=439685610]
+z_index = 5
+position = Vector2(83, 123)
+texture = ExtResource("14_upfqs")
+
+[node name="ControlStation" type="Sprite2D" parent="OfficeRoom" unique_id=1064663764]
+z_index = 5
+position = Vector2(-153, -15)
+texture = ExtResource("9_2vowc")
+
+[node name="Computer" type="Sprite2D" parent="OfficeRoom" unique_id=1684925556]
+z_index = 5
+position = Vector2(-100, 66)
+texture = ExtResource("10_2vowc")
+
+[node name="OfficeBGlayer" type="Sprite2D" parent="OfficeRoom" unique_id=410100373]
+texture = ExtResource("4_huoen")
+
+[node name="Interactables" type="Node2D" parent="OfficeRoom" unique_id=1395046004]
+
+[node name="MaskHide" type="Sprite2D" parent="OfficeRoom/Interactables" unique_id=1632513780]
+z_index = 5
+position = Vector2(-14, 209)
+texture = ExtResource("5_ypmwd")
+
+[node name="Hide" type="Button" parent="OfficeRoom/Interactables/MaskHide" unique_id=2111216947]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -25.0
+offset_right = -60.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="O2RebootBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=1315271418]
+z_index = 5
+position = Vector2(-336, 98)
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"buttonIdle"
+autoplay = "buttonIdle"
+
+[node name="O2Reboot" type="Button" parent="OfficeRoom/Interactables/O2RebootBSprite" unique_id=664930034]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.5
+offset_top = -11.5
+offset_right = -15.5
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="HRebootBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=657489224]
+z_index = 5
+position = Vector2(-286, 98)
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"buttonIdle"
+autoplay = "buttonIdle"
+
+[node name="HeatReboot" type="Button" parent="OfficeRoom/Interactables/HRebootBSprite" unique_id=658395661]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.5
+offset_top = -11.5
+offset_right = -15.5
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="CRebootBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=478979382]
+z_index = 5
+position = Vector2(-234, 98)
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"buttonIdle"
+autoplay = "buttonIdle"
+
+[node name="CommsReboot" type="Button" parent="OfficeRoom/Interactables/CRebootBSprite" unique_id=1692289998]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.5
+offset_top = -11.5
+offset_right = -15.5
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="RebootAllBSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=1105045714]
+z_index = 5
+position = Vector2(-280, 40)
+sprite_frames = SubResource("SpriteFrames_57qmd")
+animation = &"IdleUp"
+autoplay = "IdleUp"
+
+[node name="RebootAll" type="Button" parent="OfficeRoom/Interactables/RebootAllBSprite" unique_id=1274833468]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -19.5
+offset_right = -21.0
+offset_bottom = -19.5
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="PointLight2D" type="PointLight2D" parent="OfficeRoom" unique_id=1055643177]
+position = Vector2(-103, 66)
+energy = 0.9
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_g4v7s")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="OfficeRoom" unique_id=1438791930]
+occluder = SubResource("OccluderPolygon2D_g4v7s")
 
 [node name="CommsRoom" type="Node2D" parent="." unique_id=114717402]
 position = Vector2(671, 779)
@@ -90,6 +537,52 @@ pos_positions = [NodePath("../5"), NodePath("../6")]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("6_flgk0")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1056856796]
+[node name="CameraMovement" type="Node2D" parent="." unique_id=1623921742 node_paths=PackedStringArray("camera_2d")]
+script = ExtResource("8_xfil1")
+camera_2d = NodePath("../Camera")
+
+[node name="Camera" type="Camera2D" parent="." unique_id=362172172]
+position = Vector2(-706, 778)
+limit_left = -1298
+limit_top = 439
+limit_right = -115
+limit_bottom = 1114
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 2.5
+
+[node name="MouseTooltip" type="Label" parent="Camera" unique_id=1565734702]
+z_index = 5
+offset_left = 34.0
+offset_top = 44.0
+offset_right = 216.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("2_qikps")
+text = "TOOLTIP"
+
+[node name="Scanlines" type="Sprite2D" parent="." unique_id=711067060]
+z_index = 99
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-613, 758)
+texture = ExtResource("10_7jvlm")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 1000)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=827620245]
+libraries/ = SubResource("AnimationLibrary_7jvlm")
+autoplay = &"scanlines"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=732468144]
+z_index = 4
+material = SubResource("CanvasItemMaterial_g4v7s")
+position = Vector2(-731, 783.49994)
+scale = Vector2(1.0702055, 1.0691174)
+texture = SubResource("GradientTexture2D_a6ftd")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=1087550848]
+libraries/ = SubResource("AnimationLibrary_a6ftd")
+autoplay = &"new_animation"
 
 [connection signal="timeout" from="Map/Plague/MovechanceTimer" to="Map/Plague" method="_on_movechance_timer_timeout"]

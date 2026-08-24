@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var camera_2d: Camera2D = $"../Camera2D"
+@export var camera_2d: Camera2D
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

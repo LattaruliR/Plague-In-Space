@@ -96,7 +96,7 @@ func _process(_delta: float) -> void:
 		visible = false
 		return
 	else:
-		visible = true
+		visible = false
 		
 	# should hide if in menu; for now just always show if coreresources exists
 	if not CoreResources or not Global:
