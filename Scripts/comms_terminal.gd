@@ -1,4 +1,5 @@
 extends Node2D
+class_name  Comms_Terminal
 
 const PRESS_SOUND := preload("res://SOUNDS/selecting.wav")
 const BROADCAST_SOUND := preload("res://SOUNDS/barTone2.wav")

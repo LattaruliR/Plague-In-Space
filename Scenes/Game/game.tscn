@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="2_qikps"]
 [ext_resource type="Script" uid="uid://cyqebuc8bfcra" path="res://Scripts/plague_movement.gd" id="4_ciybh"]
 [ext_resource type="Texture2D" uid="uid://c0fvc47kdl6fy" path="res://Sprites/Game/Office/OfficeBackground.png" id="4_huoen"]
-[ext_resource type="Texture2D" uid="uid://djx2n2yst2cms" path="res://Sprites/Icons/PISicon.png" id="4_i1e5p"]
 [ext_resource type="Texture2D" uid="uid://dxwecrg3d7liv" path="res://Sprites/Menu/SmallStar1.png" id="4_qtymf"]
 [ext_resource type="Texture2D" uid="uid://0btc27msp4aw" path="res://Sprites/Game/Office/MaskHideProp.png" id="5_ypmwd"]
 [ext_resource type="Texture2D" uid="uid://b4p1bhq6r1ged" path="res://Sprites/Game/Office/ButtonPressSheet.png" id="6_56qi8"]
@@ -19,18 +18,26 @@
 [ext_resource type="Texture2D" uid="uid://du8hu4q16qy71" path="res://Sprites/Game/Office/Computer.png" id="10_2vowc"]
 [ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="10_7jvlm"]
 [ext_resource type="Texture2D" uid="uid://bk4hv13n1wvwt" path="res://Sprites/Game/Office/FanSpinningDeco.png" id="12_a6ftd"]
+[ext_resource type="Texture2D" uid="uid://c8n5qybmblvhq" path="res://Sprites/Game/Office/empty.png" id="13_6k7u1"]
 [ext_resource type="Texture2D" uid="uid://br8nalqwcwy00" path="res://Sprites/Game/Comms/CommunicationsLeftBackground.png" id="14_2lc0x"]
 [ext_resource type="Texture2D" uid="uid://b8aoe7r220bdi" path="res://Sprites/Game/Office/Printer.png" id="14_upfqs"]
 [ext_resource type="Texture2D" uid="uid://g5cw3ntyky1c" path="res://Sprites/Game/Comms/CommunicationsLeftBaseElements.png" id="15_4ti5a"]
+[ext_resource type="Texture2D" uid="uid://bgno3daeue8wh" path="res://Sprites/Game/Office/ComputerOptionHUD.png" id="19_diago"]
 [ext_resource type="Script" uid="uid://dbodhsg7duwfc" path="res://Scripts/check_scanlines.gd" id="19_lemb1"]
+[ext_resource type="Script" uid="uid://nu65n6etrn1x" path="res://Scenes/Game/information_feed.gd" id="20_56h2t"]
 [ext_resource type="Script" uid="uid://wu7aag2iqx5x" path="res://Scripts/comms_terminal.gd" id="20_cmter"]
+[ext_resource type="FontFile" uid="uid://cqhdwfqbp38m3" path="res://Fonts/home-video/HomeVideo-Bold.ttf" id="20_fl2fe"]
 [ext_resource type="Script" uid="uid://yl1c43bebyqa" path="res://Scripts/kitchen_terminal.gd" id="21_ktter"]
 [ext_resource type="Texture2D" uid="uid://dxfkvklklq211" path="res://Sprites/Icons/playerTokenDebug.png" id="21_pmm7v"]
+[ext_resource type="Texture2D" uid="uid://dnw0r6hrjshac" path="res://Sprites/Game/BrainInfectionStages.png" id="22_lcvqc"]
 [ext_resource type="Script" uid="uid://pedj82l4vb41" path="res://Scripts/power_switch.gd" id="22_pwrsw"]
 [ext_resource type="Script" uid="uid://ceml0i2v3jwun" path="res://Scripts/hide_spot.gd" id="23_hides"]
-[ext_resource type="Script" path="res://Scripts/office_door.gd" id="26_odoor"]
-[ext_resource type="Script" path="res://Scripts/leave_door.gd" id="27_leave"]
+[ext_resource type="Texture2D" uid="uid://cvo6j581mu4p2" path="res://Sprites/Game/PanicOverlayShet.png" id="23_p6run"]
+[ext_resource type="FontFile" uid="uid://ckxwo1esfu618" path="res://Fonts/home-video/HomeVideo-Regular.otf" id="24_jebrn"]
 [ext_resource type="Script" uid="uid://ddkx24xwn1bpu" path="res://Scenes/Game/interaction_handler.gd" id="25_pmm7v"]
+[ext_resource type="Script" uid="uid://cbot80qesiu5f" path="res://Scripts/office_door.gd" id="26_odoor"]
+[ext_resource type="Script" uid="uid://b3wsjpgw816d5" path="res://Scripts/leave_door.gd" id="27_leave"]
+[ext_resource type="Texture2D" uid="uid://dljb7beowr4cs" path="res://Sprites/Game/Office/Warning.png" id="29_jebrn"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -238,7 +245,10 @@ animations = [{
 "name": &"idleClosed",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_6k7u1")
+}],
 "loop": 0,
 "name": &"idleOpen",
 "speed": 5.0
@@ -261,6 +271,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_upfqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6k7u1")
 }],
 "loop": 0,
 "name": &"opening",
@@ -302,6 +315,162 @@ animations = [{
 "name": &"spinning",
 "speed": 5.0
 }]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.15686275, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0, 0.05490196, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+bg_color = Color(0.4, 0, 0.05490196, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6run"]
+atlas = ExtResource("22_lcvqc")
+region = Rect2(0, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jebrn"]
+atlas = ExtResource("22_lcvqc")
+region = Rect2(130, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjf7v"]
+atlas = ExtResource("22_lcvqc")
+region = Rect2(260, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th41f"]
+atlas = ExtResource("22_lcvqc")
+region = Rect2(390, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpnbm"]
+atlas = ExtResource("22_lcvqc")
+region = Rect2(520, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxv8i"]
+atlas = ExtResource("22_lcvqc")
+region = Rect2(650, 0, 130, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcnqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6run")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jebrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjf7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th41f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpnbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxv8i")
+}],
+"loop": 0,
+"name": &"brainStages",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26aa6"]
+atlas = ExtResource("23_p6run")
+region = Rect2(0, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gqoa"]
+atlas = ExtResource("23_p6run")
+region = Rect2(130, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7icik"]
+atlas = ExtResource("23_p6run")
+region = Rect2(260, 0, 130, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lcvqc"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26aa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gqoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7icik")
+}],
+"loop": 1,
+"name": &"panic",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_p6run"]
+colors = PackedColorArray(0.58972603, 2.23808e-06, 0.13158423, 1, 0.5882353, 0, 0.13333334, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jebrn"]
+gradient = SubResource("Gradient_p6run")
+
+[sub_resource type="Gradient" id="Gradient_qjf7v"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_th41f"]
+gradient = SubResource("Gradient_qjf7v")
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_d0u6y"]
+frames = 2
+speed_scale = 3.5
+frame_0/texture = SubResource("GradientTexture2D_jebrn")
+frame_1/texture = SubResource("GradientTexture2D_th41f")
+frame_1/duration = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gngh"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.4, 0, 0.05490196, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6run"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.230117, 5.3244645e-07, 0.018480103, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jebrn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.61273444, 3.8865583e-06, 0.10516121, 1)
+
+[sub_resource type="Gradient" id="Gradient_jebrn"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qjf7v"]
+gradient = SubResource("Gradient_jebrn")
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_jebrn"]
+frames = 2
+frame_0/texture = ExtResource("29_jebrn")
+frame_0/duration = 0.9
+frame_1/texture = SubResource("GradientTexture2D_qjf7v")
+frame_1/duration = 0.2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g4v7s"]
 blend_mode = 3
@@ -468,7 +637,7 @@ flat = true
 
 [node name="PowerSwitchSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=569954301]
 z_index = 5
-position = Vector2(-395, 145)
+position = Vector2(-373, -51)
 sprite_frames = SubResource("SpriteFrames_57qmd")
 animation = &"IdleUp"
 autoplay = "IdleUp"
@@ -543,7 +712,7 @@ offset_right = 58.5
 offset_bottom = 51.5
 flat = true
 
-[node name="OfficeDoor" type="Node2D" parent="OfficeRoom/Interactables" node_paths=PackedStringArray("door_sprite", "handle_sprite", "handle_button", "leave_button")]
+[node name="OfficeDoor" type="Node2D" parent="OfficeRoom/Interactables" unique_id=918108543 node_paths=PackedStringArray("door_sprite", "handle_sprite", "handle_button", "leave_button")]
 script = ExtResource("26_odoor")
 door_sprite = NodePath("../../BaseElements/Door")
 handle_sprite = NodePath("../DoorHandle")
@@ -561,7 +730,7 @@ texture = SubResource("GradientTexture2D_g4v7s")
 [node name="Door" type="AnimatedSprite2D" parent="OfficeRoom/BaseElements" unique_id=1311813295]
 position = Vector2(318, 8)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"idleOpen"
+animation = &"opening"
 autoplay = "idleOpen"
 speed_scale = 1.68
 
@@ -580,7 +749,7 @@ z_index = 5
 position = Vector2(-100, 66)
 texture = ExtResource("10_2vowc")
 
-[node name="ComputerButton" type="Button" parent="OfficeRoom/BaseElements/Computer"]
+[node name="ComputerButton" type="Button" parent="OfficeRoom/BaseElements/Computer" unique_id=1027680121]
 offset_left = -97.0
 offset_top = -80.0
 offset_right = 97.0
@@ -598,6 +767,839 @@ autoplay = "spinning"
 frame_progress = 0.028109312
 speed_scale = 1.23
 
+[node name="ButtonSpread" type="Control" parent="OfficeRoom" unique_id=1575171991]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -175.0
+offset_top = 6.0
+offset_right = -29.0
+offset_bottom = 101.0
+
+[node name="ComputerBase" type="Panel" parent="OfficeRoom/ButtonSpread" unique_id=1387435187]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OfficeRoom/ButtonSpread/ComputerBase" unique_id=1953178103]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cameras" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer" unique_id=445776797]
+layout_mode = 2
+texture = ExtResource("19_diago")
+region_rect = Rect2(2, 5, 125, 12)
+patch_margin_left = 16
+patch_margin_bottom = 25
+
+[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer/Cameras" unique_id=1425244557]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+text = " CAMERAS"
+vertical_alignment = 1
+
+[node name="Resources" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer" unique_id=384433005]
+layout_mode = 2
+texture = ExtResource("19_diago")
+region_rect = Rect2(2, 5, 125, 12)
+patch_margin_left = 16
+patch_margin_bottom = 25
+
+[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer/Resources" unique_id=1464345592]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+text = " RESOURCES"
+vertical_alignment = 1
+
+[node name="Research" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer" unique_id=639884275]
+layout_mode = 2
+texture = ExtResource("19_diago")
+region_rect = Rect2(2, 5, 125, 12)
+patch_margin_left = 16
+patch_margin_bottom = 25
+
+[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer/Research" unique_id=1089101040]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+text = " RESEARCH"
+vertical_alignment = 1
+
+[node name="InformationFeed" type="Control" parent="OfficeRoom" unique_id=1700604748]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -317.0
+offset_top = -158.0
+offset_right = 86.0
+offset_bottom = -41.0
+script = ExtResource("20_56h2t")
+
+[node name="BasePanel" type="Panel" parent="OfficeRoom/InformationFeed" unique_id=1322925602]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resources" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=1718452706]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OxLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=1597431750]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -129.5
+offset_top = 12.0
+offset_right = -71.5
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "OXYGEN"
+
+[node name="HeatLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=420378720]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.5
+offset_top = 65.0
+offset_right = -72.5
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "HEAT"
+horizontal_alignment = 1
+
+[node name="OxygenBar" type="ProgressBar" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=1893469849]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 32.0
+offset_right = 178.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d0u6y")
+value = 50.0
+
+[node name="HeatBar" type="ProgressBar" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=378771477]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 85.0
+offset_right = 178.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d0u6y")
+value = 50.0
+
+[node name="OxStatus" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=1801606789]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_top = 38.0
+offset_right = 179.5
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "DANGER ZONE "
+
+[node name="HeatStatus" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=831463209]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_top = 92.0
+offset_right = 179.5
+offset_bottom = 115.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "DEATH "
+
+[node name="ResourceFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=229621586]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 164.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 7
+text = "Resource Feed"
+
+[node name="Research" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=2093172065]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Kitchen" type="Control" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=134904111]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KitchenLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=1309082820]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 255.0
+offset_top = 1.0
+offset_right = 408.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 13
+text = "kitchen order"
+horizontal_alignment = 1
+
+[node name="ProduceRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=552208627]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 98.0
+offset_right = 304.0
+offset_bottom = 112.0
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="ProduceButton" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ProduceRect" unique_id=263079548]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+theme_override_font_sizes/font_size = 10
+text = "PRODUCE
+"
+flat = true
+
+[node name="ButtonUpRRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=815069431]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 28.0
+offset_right = 296.0
+offset_bottom = 42.0
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="ButtonUpR" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonUpRRect" unique_id=1318077704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+text = "+"
+flat = true
+
+[node name="ButtonUpGRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=612891977]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 28.0
+offset_right = 344.0
+offset_bottom = 42.0
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="ButtonUpG" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonUpGRect" unique_id=150404302]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+text = "+"
+flat = true
+
+[node name="ButtonUpBRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=728679869]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 28.0
+offset_right = 391.0
+offset_bottom = 42.0
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="ButtonUpB" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonUpBRect" unique_id=1423564551]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+text = "+"
+flat = true
+
+[node name="ButtonDownRRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=934768516]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 77.0
+offset_right = 296.0
+offset_bottom = 91.0
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="ButtonDownR" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonDownRRect" unique_id=1289763108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 18.0
+offset_right = 40.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+text = "-"
+flat = true
+
+[node name="ButtonDownGRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=2015904639]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 77.0
+offset_right = 344.0
+offset_bottom = 91.0
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="ButtonDownG" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonDownGRect" unique_id=1825631934]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 18.0
+offset_right = 40.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+text = "-"
+flat = true
+
+[node name="ButtonDownBRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=37067138]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 77.0
+offset_right = 391.0
+offset_bottom = 91.0
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="ButtonDownB" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonDownBRect" unique_id=722198801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 18.0
+offset_right = 40.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5449743, 0.54497427, 0.54497427, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+text = "-"
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=848643149]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 74.0
+offset_right = 254.0
+offset_bottom = 114.0
+
+[node name="RLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=1704057938]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 13.0
+offset_right = 312.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "R"
+
+[node name="GLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=1453745642]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 13.0
+offset_right = 359.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0.032666635, 0.49, 0, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "G"
+
+[node name="BLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=1520168967]
+layout_mode = 0
+offset_left = 366.0
+offset_top = 13.0
+offset_right = 406.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0, 0.16449995, 0.47, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "B"
+
+[node name="RNumLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=381829431]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 48.0
+offset_right = 309.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="GNumLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=899497825]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 48.0
+offset_right = 356.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0.032666635, 0.49, 0, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="BNumLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=520916708]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 48.0
+offset_right = 403.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0, 0.16449995, 0.47, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Infection" type="Control" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=995576608]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InfectionBar" type="ProgressBar" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=1316630024]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = 56.0
+offset_right = 186.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d0u6y")
+value = 50.0
+
+[node name="InfectionLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=1358685583]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 4.5
+offset_top = 78.0
+offset_right = 157.5
+offset_bottom = 101.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "INFECTION SPREAD"
+horizontal_alignment = 1
+
+[node name="BrainSprite" type="AnimatedSprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=419965108]
+position = Vector2(102, 43)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_fcnqv")
+animation = &"brainStages"
+
+[node name="Panic" type="Control" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=603282731]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanicLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=934332834]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 65.0
+offset_top = 57.0
+offset_right = 218.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "PANIC"
+horizontal_alignment = 1
+
+[node name="PanicSprites" type="AnimatedSprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=1334885043]
+position = Vector2(104, 45)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_lcvqc")
+animation = &"panic"
+autoplay = "panic"
+frame_progress = 0.60762084
+speed_scale = 0.6
+
+[node name="ResearchFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=229480706]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 164.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 7
+text = "research feed"
+
+[node name="Offline" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=1028250980]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Offline" unique_id=613546071]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -15.0
+offset_right = 144.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.27058825, 0, 0.039215688, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 32
+text = "SYSTEMS OFFLINE"
+
+[node name="Cameras" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=1792632733]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Map" type="Node2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras" unique_id=768314028]
+position = Vector2(210, 75)
+
+[node name="MapSprite" type="Sprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=1077596127]
+texture_filter = 1
+position = Vector2(-90.00001, -19.000002)
+scale = Vector2(0.53, 0.53)
+texture = ExtResource("1_mv0hc")
+
+[node name="1" type="Marker2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=10407991]
+position = Vector2(-123, -44)
+gizmo_extents = 25.0
+
+[node name="2" type="Marker2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=1894755004]
+position = Vector2(-84, -44)
+gizmo_extents = 25.0
+
+[node name="3" type="Marker2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=578397426]
+position = Vector2(-44, -44)
+gizmo_extents = 25.0
+
+[node name="4" type="Marker2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=1696334949]
+position = Vector2(-103, -11)
+gizmo_extents = 25.0
+
+[node name="5" type="Marker2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=937216639]
+position = Vector2(-57, -11)
+gizmo_extents = 25.0
+
+[node name="6" type="Marker2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=548009091]
+position = Vector2(-81, 25)
+gizmo_extents = 25.0
+
+[node name="Plague" type="Node2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=1194051043 node_paths=PackedStringArray("pos_positions", "movetimer")]
+script = ExtResource("4_ciybh")
+pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
+movetimer = NodePath("MovechanceTimer")
+timer_time_left = 2
+ai_difficulty = 1
+
+[node name="PlaguePlaceholder" type="Sprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague" unique_id=1029311834]
+scale = Vector2(0.115, 0.115)
+texture = SubResource("AnimatedTexture_d0u6y")
+
+[node name="MovechanceTimer" type="Timer" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague" unique_id=717435922]
+
+[node name="Player" type="Node2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=750469057 node_paths=PackedStringArray("pos_positions")]
+visible = false
+script = ExtResource("6_vifcx")
+pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
+
+[node name="PlayerPlaceholder" type="Sprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Player" unique_id=1602402136]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("21_pmm7v")
+
+[node name="Lures" type="Control" parent="OfficeRoom/InformationFeed/BasePanel/Cameras" unique_id=1720739337]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Labels" type="VBoxContainer" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" unique_id=1002788685]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 245.0
+offset_top = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Kitchen" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Labels" unique_id=1536465201]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 16
+text = "Kitchen   "
+vertical_alignment = 1
+
+[node name="Grid" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Labels" unique_id=239305952]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 16
+text = "power grid"
+vertical_alignment = 1
+
+[node name="Heat" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Labels" unique_id=1833231803]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 16
+text = "Heat      "
+vertical_alignment = 1
+
+[node name="Oxygen" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Labels" unique_id=117398393]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 16
+text = "Oxygen    "
+vertical_alignment = 1
+
+[node name="Comms" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Labels" unique_id=741978664]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 16
+text = "Comms     "
+vertical_alignment = 1
+
+[node name="Lures" type="VBoxContainer" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" unique_id=712786142]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 344.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -2
+
+[node name="LureK" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures" unique_id=370829526]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_colors/font_focus_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+theme_override_colors/font_pressed_color = Color(0.43519253, 0.4351922, 0.43519217, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3gngh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p6run")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jebrn")
+text = "LURE"
+
+[node name="LureP" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures" unique_id=281931433]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_colors/font_focus_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+theme_override_colors/font_pressed_color = Color(0.43519253, 0.4351922, 0.43519217, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3gngh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p6run")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jebrn")
+text = "LURE"
+
+[node name="LureH" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures" unique_id=1298563089]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_colors/font_focus_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+theme_override_colors/font_pressed_color = Color(0.43519253, 0.4351922, 0.43519217, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3gngh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p6run")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jebrn")
+text = "LURE"
+
+[node name="LureO" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures" unique_id=2017402451]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_colors/font_focus_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+theme_override_colors/font_pressed_color = Color(0.43519253, 0.4351922, 0.43519217, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3gngh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p6run")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jebrn")
+text = "LURE"
+
+[node name="LureC" type="Button" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures" unique_id=1022447830]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_colors/font_focus_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+theme_override_colors/font_pressed_color = Color(0.43519253, 0.4351922, 0.43519217, 1)
+theme_override_fonts/font = ExtResource("24_jebrn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3gngh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p6run")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jebrn")
+text = "LURE"
+
+[node name="RechargingLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" unique_id=1655767651]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 100.0
+offset_right = 340.0
+offset_bottom = 123.0
+theme_override_fonts/font = ExtResource("2_qikps")
+text = "recharging..."
+
+[node name="SabotageWarnings" type="VBoxContainer" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" unique_id=871406594]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 225.0
+offset_top = 4.0
+offset_right = -114.0
+offset_bottom = 237.94336
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.265, 0.265)
+theme_override_constants/separation = 7
+
+[node name="SabotageTexture" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=943529973]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_jebrn")
+
+[node name="SabotageTexture2" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=2012677065]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_jebrn")
+
+[node name="SabotageTexture3" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=497653627]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_jebrn")
+
+[node name="SabotageTexture4" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=1792334340]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_jebrn")
+
+[node name="SabotageTexture5" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=1876485950]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_jebrn")
+
+[node name="ResourceFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras" unique_id=734139647]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 164.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 7
+text = "camera feed"
+
 [node name="CommsRoom" type="Node2D" parent="." unique_id=114717402]
 position = Vector2(671, 779)
 
@@ -605,6 +1607,7 @@ position = Vector2(671, 779)
 z_index = -8
 scale = Vector2(12.9734125, 3.5324478)
 texture = ExtResource("1_qxfds")
+metadata/_edit_lock_ = true
 
 [node name="Roomnum" type="Label" parent="CommsRoom" unique_id=351385601]
 offset_left = -579.0
@@ -661,17 +1664,17 @@ side = 1
 button = NodePath("../MaskHideRight/Hide")
 sprite = NodePath("../MaskHideRight")
 
-[node name="LeaveDoor" type="Button" parent="CommsRoom/Interactables"]
-offset_left = 360.0
-offset_top = -320.0
-offset_right = 580.0
-offset_bottom = -266.0
+[node name="LeaveDoor" type="Button" parent="CommsRoom/Interactables" unique_id=1403143431]
+offset_left = -393.0
+offset_top = -174.0
+offset_right = -191.0
+offset_bottom = 188.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 28
-text = "LEAVE"
+flat = true
 script = ExtResource("27_leave")
 
-[node name="CommsTerminal" type="Node2D" parent="CommsRoom" unique_id=555035815]
+[node name="CommsTerminal" type="Node2D" parent="CommsRoom/Interactables" unique_id=555035815]
 position = Vector2(0, 30)
 script = ExtResource("20_cmter")
 
@@ -680,8 +1683,10 @@ position = Vector2(2048, 779)
 
 [node name="Background" type="Sprite2D" parent="KitchenRoom" unique_id=1203471648]
 z_index = -8
+position = Vector2(21.999998, 6)
 scale = Vector2(12.9734125, 3.5324478)
 texture = ExtResource("1_qxfds")
+metadata/_edit_lock_ = true
 
 [node name="Roomnum" type="Label" parent="KitchenRoom" unique_id=927550463]
 offset_left = -579.0
@@ -692,9 +1697,9 @@ theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 70
 text = "KITCHEN"
 
-[node name="Interactables" type="Node2D" parent="KitchenRoom"]
+[node name="Interactables" type="Node2D" parent="KitchenRoom" unique_id=593987383]
 
-[node name="LeaveDoor" type="Button" parent="KitchenRoom/Interactables"]
+[node name="LeaveDoor" type="Button" parent="KitchenRoom/Interactables" unique_id=1260005242]
 offset_left = 360.0
 offset_top = -320.0
 offset_right = 580.0
@@ -704,38 +1709,37 @@ theme_override_font_sizes/font_size = 28
 text = "LEAVE"
 script = ExtResource("27_leave")
 
-[node name="MaskHideLeft" type="Sprite2D" parent="KitchenRoom/Interactables"]
+[node name="MaskHideLeft" type="Sprite2D" parent="KitchenRoom/Interactables" unique_id=868657311]
 z_index = 5
 position = Vector2(-520, 240)
 texture = ExtResource("5_ypmwd")
 flip_h = true
 
-[node name="Hide" type="Button" parent="KitchenRoom/Interactables/MaskHideLeft"]
+[node name="Hide" type="Button" parent="KitchenRoom/Interactables/MaskHideLeft" unique_id=2034363703]
 offset_left = -60.0
 offset_top = -25.0
 offset_right = 60.0
 offset_bottom = 25.0
 flat = true
 
-[node name="HideSpotLeft" type="Node2D" parent="KitchenRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+[node name="HideSpotLeft" type="Node2D" parent="KitchenRoom/Interactables" unique_id=572577331 node_paths=PackedStringArray("button", "sprite")]
 script = ExtResource("23_hides")
-side = 0
 button = NodePath("../MaskHideLeft/Hide")
 sprite = NodePath("../MaskHideLeft")
 
-[node name="MaskHideRight" type="Sprite2D" parent="KitchenRoom/Interactables"]
+[node name="MaskHideRight" type="Sprite2D" parent="KitchenRoom/Interactables" unique_id=545019066]
 z_index = 5
 position = Vector2(520, 240)
 texture = ExtResource("5_ypmwd")
 
-[node name="Hide" type="Button" parent="KitchenRoom/Interactables/MaskHideRight"]
+[node name="Hide" type="Button" parent="KitchenRoom/Interactables/MaskHideRight" unique_id=1042613750]
 offset_left = -60.0
 offset_top = -25.0
 offset_right = 60.0
 offset_bottom = 25.0
 flat = true
 
-[node name="HideSpotRight" type="Node2D" parent="KitchenRoom/Interactables" node_paths=PackedStringArray("button", "sprite")]
+[node name="HideSpotRight" type="Node2D" parent="KitchenRoom/Interactables" unique_id=157892459 node_paths=PackedStringArray("button", "sprite")]
 script = ExtResource("23_hides")
 side = 1
 button = NodePath("../MaskHideRight/Hide")
@@ -744,56 +1748,6 @@ sprite = NodePath("../MaskHideRight")
 [node name="KitchenTerminal" type="Node2D" parent="KitchenRoom" unique_id=623439123]
 position = Vector2(0, 40)
 script = ExtResource("21_ktter")
-
-[node name="Map" type="Node2D" parent="." unique_id=768314028]
-
-[node name="MapSprite" type="Sprite2D" parent="Map" unique_id=1077596127]
-texture_filter = 1
-texture = ExtResource("1_mv0hc")
-
-[node name="1" type="Marker2D" parent="Map" unique_id=10407991]
-position = Vector2(-86, -61)
-gizmo_extents = 25.0
-
-[node name="2" type="Marker2D" parent="Map" unique_id=1894755004]
-position = Vector2(0, -59)
-gizmo_extents = 25.0
-
-[node name="3" type="Marker2D" parent="Map" unique_id=578397426]
-position = Vector2(87, -61)
-gizmo_extents = 25.0
-
-[node name="4" type="Marker2D" parent="Map" unique_id=1696334949]
-position = Vector2(-61, 12)
-gizmo_extents = 25.0
-
-[node name="5" type="Marker2D" parent="Map" unique_id=937216639]
-position = Vector2(56, 14)
-gizmo_extents = 25.0
-
-[node name="6" type="Marker2D" parent="Map" unique_id=548009091]
-position = Vector2(0, 82)
-gizmo_extents = 25.0
-
-[node name="Plague" type="Node2D" parent="Map" unique_id=1194051043 node_paths=PackedStringArray("pos_positions", "movetimer")]
-script = ExtResource("4_ciybh")
-pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
-movetimer = NodePath("MovechanceTimer")
-timer_time_left = 2
-ai_difficulty = 1
-
-[node name="PlaguePlaceholder" type="Sprite2D" parent="Map/Plague" unique_id=1029311834]
-texture = ExtResource("4_i1e5p")
-
-[node name="MovechanceTimer" type="Timer" parent="Map/Plague" unique_id=717435922]
-
-[node name="Player" type="Node2D" parent="Map" unique_id=750469057 node_paths=PackedStringArray("pos_positions")]
-script = ExtResource("6_vifcx")
-pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
-
-[node name="PlayerPlaceholder" type="Sprite2D" parent="Map/Player" unique_id=1602402136]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("21_pmm7v")
 
 [node name="CameraMovement" type="Node2D" parent="." unique_id=1623921742 node_paths=PackedStringArray("camera_2d")]
 script = ExtResource("8_xfil1")
@@ -849,4 +1803,4 @@ script = ExtResource("25_pmm7v")
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/O2RebootBSprite/O2Reboot" to="InteractionHandler" method="_on_o_2_reboot_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/HRebootBSprite/HeatReboot" to="InteractionHandler" method="_on_heat_reboot_pressed"]
-[connection signal="timeout" from="Map/Plague/MovechanceTimer" to="Map/Plague" method="_on_movechance_timer_timeout"]
+[connection signal="timeout" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague/MovechanceTimer" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague" method="_on_movechance_timer_timeout"]
