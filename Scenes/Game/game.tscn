@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://d4d2aytd6twe1" path="res://Scenes/Game/player_movement.gd" id="6_vifcx"]
 [ext_resource type="Texture2D" uid="uid://6en5pfoiohv3" path="res://Sprites/Game/Office/LeverHandleSheet.png" id="7_nxex1"]
 [ext_resource type="Texture2D" uid="uid://duutt3mxjrdr3" path="res://Sprites/Game/Office/BigRebootPress.png" id="7_yox4t"]
+[ext_resource type="Texture2D" uid="uid://ddrxr4s50j8rm" path="res://Sprites/Game/Office/PowerButton.png" id="8_qjf7v"]
 [ext_resource type="Script" uid="uid://cmmdtf8fsg0u2" path="res://Scripts/camera_movement.gd" id="8_xfil1"]
 [ext_resource type="Texture2D" uid="uid://dhfo5v4jbgntk" path="res://Sprites/Game/Office/ControlStation.png" id="9_2vowc"]
 [ext_resource type="Texture2D" uid="uid://du8hu4q16qy71" path="res://Sprites/Game/Office/Computer.png" id="10_2vowc"]
@@ -22,11 +23,13 @@
 [ext_resource type="Texture2D" uid="uid://br8nalqwcwy00" path="res://Sprites/Game/Comms/CommunicationsLeftBackground.png" id="14_2lc0x"]
 [ext_resource type="Texture2D" uid="uid://b8aoe7r220bdi" path="res://Sprites/Game/Office/Printer.png" id="14_upfqs"]
 [ext_resource type="Texture2D" uid="uid://g5cw3ntyky1c" path="res://Sprites/Game/Comms/CommunicationsLeftBaseElements.png" id="15_4ti5a"]
+[ext_resource type="Texture2D" uid="uid://d20w8mrdjg0sm" path="res://Sprites/Game/Office/PaperSlip.png" id="16_4gqoa"]
 [ext_resource type="Texture2D" uid="uid://bgno3daeue8wh" path="res://Sprites/Game/Office/ComputerOptionHUD.png" id="19_diago"]
 [ext_resource type="Script" uid="uid://dbodhsg7duwfc" path="res://Scripts/check_scanlines.gd" id="19_lemb1"]
 [ext_resource type="Script" uid="uid://nu65n6etrn1x" path="res://Scenes/Game/information_feed.gd" id="20_56h2t"]
 [ext_resource type="Script" uid="uid://wu7aag2iqx5x" path="res://Scripts/comms_terminal.gd" id="20_cmter"]
 [ext_resource type="FontFile" uid="uid://cqhdwfqbp38m3" path="res://Fonts/home-video/HomeVideo-Bold.ttf" id="20_fl2fe"]
+[ext_resource type="Script" uid="uid://cptbxwgvjwcap" path="res://Scenes/Game/computer_base.gd" id="20_th41f"]
 [ext_resource type="Script" uid="uid://yl1c43bebyqa" path="res://Scripts/kitchen_terminal.gd" id="21_ktter"]
 [ext_resource type="Texture2D" uid="uid://dxfkvklklq211" path="res://Sprites/Icons/playerTokenDebug.png" id="21_pmm7v"]
 [ext_resource type="Texture2D" uid="uid://dnw0r6hrjshac" path="res://Sprites/Game/BrainInfectionStages.png" id="22_lcvqc"]
@@ -35,9 +38,16 @@
 [ext_resource type="Texture2D" uid="uid://cvo6j581mu4p2" path="res://Sprites/Game/PanicOverlayShet.png" id="23_p6run"]
 [ext_resource type="FontFile" uid="uid://ckxwo1esfu618" path="res://Fonts/home-video/HomeVideo-Regular.otf" id="24_jebrn"]
 [ext_resource type="Script" uid="uid://ddkx24xwn1bpu" path="res://Scenes/Game/interaction_handler.gd" id="25_pmm7v"]
+[ext_resource type="Script" uid="uid://dumnb4u7obxu7" path="res://Scenes/Game/infectionResearchHandler.gd" id="26_7icik"]
 [ext_resource type="Script" uid="uid://cbot80qesiu5f" path="res://Scripts/office_door.gd" id="26_odoor"]
 [ext_resource type="Script" uid="uid://b3wsjpgw816d5" path="res://Scripts/leave_door.gd" id="27_leave"]
 [ext_resource type="Texture2D" uid="uid://dljb7beowr4cs" path="res://Sprites/Game/Office/Warning.png" id="29_jebrn"]
+[ext_resource type="Script" uid="uid://dgmi3rdsiu3dc" path="res://Scenes/Game/lures.gd" id="33_j8rd5"]
+[ext_resource type="AudioStream" uid="uid://bmwq4vakbyso5" path="res://SOUNDS/pcselect1.wav" id="41_26aa6"]
+[ext_resource type="AudioStream" uid="uid://sb4jso5acwm2" path="res://SOUNDS/pcselect2.wav" id="42_4gqoa"]
+[ext_resource type="AudioStream" uid="uid://c3a675ifebp8n" path="res://SOUNDS/pcselect3.wav" id="43_7icik"]
+[ext_resource type="AudioStream" uid="uid://dklfhy3v605a8" path="res://SOUNDS/AmbientPanic.mp3" id="46_kllvy"]
+[ext_resource type="AudioStream" uid="uid://s40st63lm2ws" path="res://SOUNDS/CalmOffice.mp3" id="47_h5vdi"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -132,6 +142,18 @@ animations = [{
 "name": &"Pressing",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_th41f"]
+colors = PackedColorArray(0.4, 0, 0.05490196, 1, 0.4, 0, 0.05490196, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d0u6y"]
+gradient = SubResource("Gradient_th41f")
+
+[sub_resource type="Gradient" id="Gradient_jpnbm"]
+colors = PackedColorArray(0, 0, 0, 1, 0.1210658, 2.4892623e-07, 0.005811298, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fxv8i"]
+gradient = SubResource("Gradient_jpnbm")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d3jd4"]
 atlas = ExtResource("7_nxex1")
@@ -315,6 +337,43 @@ animations = [{
 "name": &"spinning",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_7icik"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaperBg:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-539, 343)]
+}
+
+[sub_resource type="Animation" id="Animation_4gqoa"]
+resource_name = "coming"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaperBg:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-539, 352), Vector2(-539, 174)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7icik"]
+_data = {
+&"RESET": SubResource("Animation_7icik"),
+&"coming": SubResource("Animation_4gqoa")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 bg_color = Color(0.15686275, 0, 0, 1)
@@ -524,6 +583,13 @@ _data = {
 &"new_animation": SubResource("Animation_lemb1")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g4v7s"]
+random_pitch = 1.1124573
+streams_count = 3
+stream_0/stream = ExtResource("41_26aa6")
+stream_1/stream = ExtResource("42_4gqoa")
+stream_2/stream = ExtResource("43_7icik")
+
 [node name="Game" type="Node2D" unique_id=1249205629]
 script = ExtResource("1_4ti5a")
 
@@ -635,12 +701,10 @@ offset_right = 21.0
 offset_bottom = 19.5
 flat = true
 
-[node name="PowerSwitchSprite" type="AnimatedSprite2D" parent="OfficeRoom/Interactables" unique_id=569954301]
+[node name="PowerSwitchSprite" type="Sprite2D" parent="OfficeRoom/Interactables" unique_id=637830788]
 z_index = 5
 position = Vector2(-373, -51)
-sprite_frames = SubResource("SpriteFrames_57qmd")
-animation = &"IdleUp"
-autoplay = "IdleUp"
+texture = ExtResource("8_qjf7v")
 
 [node name="Switch" type="Button" parent="OfficeRoom/Interactables/PowerSwitchSprite" unique_id=894845755]
 offset_left = -21.0
@@ -650,38 +714,33 @@ offset_bottom = 19.5
 flat = true
 
 [node name="PowerLabel" type="Label" parent="OfficeRoom/Interactables/PowerSwitchSprite" unique_id=48756333]
-offset_left = -95.0
-offset_top = 24.0
-offset_right = 95.0
-offset_bottom = 50.0
+z_index = 1
+offset_left = -34.0
+offset_top = -71.0
+offset_right = 40.0
+offset_bottom = -34.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 18
-text = "POWER: ON"
-horizontal_alignment = 1
+text = "POWER:
+ON"
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="OfficeRoom/Interactables/PowerSwitchSprite" unique_id=1030222192]
+position = Vector2(1.9999552, -52.250008)
+scale = Vector2(1.281249, 0.74218774)
+texture = SubResource("GradientTexture2D_d0u6y")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OfficeRoom/Interactables/PowerSwitchSprite/Sprite2D" unique_id=984567808]
+position = Vector2(0, -0.336792)
+scale = Vector2(0.95122, 0.9052629)
+texture = SubResource("GradientTexture2D_fxv8i")
 
 [node name="PowerSwitch" type="Node2D" parent="OfficeRoom/Interactables" unique_id=1624164655 node_paths=PackedStringArray("lever", "button", "label")]
 script = ExtResource("22_pwrsw")
-lever = NodePath("../PowerSwitchSprite")
+lever = NodePath("")
 button = NodePath("../PowerSwitchSprite/Switch")
 label = NodePath("../PowerSwitchSprite/PowerLabel")
-
-[node name="MaskHideLeft" type="Sprite2D" parent="OfficeRoom/Interactables" unique_id=517314192]
-z_index = 5
-position = Vector2(-505, 235)
-texture = ExtResource("5_ypmwd")
-flip_h = true
-
-[node name="Hide" type="Button" parent="OfficeRoom/Interactables/MaskHideLeft" unique_id=418592128]
-offset_left = -60.0
-offset_top = -25.0
-offset_right = 60.0
-offset_bottom = 25.0
-flat = true
-
-[node name="HideSpotLeft" type="Node2D" parent="OfficeRoom/Interactables" unique_id=1587778369 node_paths=PackedStringArray("button", "sprite")]
-script = ExtResource("23_hides")
-button = NodePath("../MaskHideLeft/Hide")
-sprite = NodePath("../MaskHideLeft")
 
 [node name="HideSpotRight" type="Node2D" parent="OfficeRoom/Interactables" unique_id=977634357 node_paths=PackedStringArray("button", "sprite")]
 script = ExtResource("23_hides")
@@ -739,6 +798,22 @@ z_index = 5
 position = Vector2(83, 123)
 texture = ExtResource("14_upfqs")
 
+[node name="PaperSlip" type="Sprite2D" parent="OfficeRoom/BaseElements/Printer" unique_id=115115472]
+position = Vector2(21, 11)
+texture = ExtResource("16_4gqoa")
+
+[node name="CheckRecipe" type="Button" parent="OfficeRoom/BaseElements/Printer/PaperSlip" unique_id=2108252834]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_top = -26.0
+offset_right = -69.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
 [node name="ControlStation" type="Sprite2D" parent="OfficeRoom/BaseElements" unique_id=1064663764]
 z_index = 5
 position = Vector2(-153, -15)
@@ -767,6 +842,47 @@ autoplay = "spinning"
 frame_progress = 0.028109312
 speed_scale = 1.23
 
+[node name="PaperBg" type="ColorRect" parent="OfficeRoom/BaseElements" unique_id=1354086244]
+offset_left = -539.0
+offset_top = 343.0
+offset_right = -285.0
+offset_bottom = 534.99976
+color = Color(0.4, 0, 0.05490196, 1)
+
+[node name="Manual1Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=1254497241]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 221.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+text = "Manual 1: Awaiting print"
+
+[node name="Manual2Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=1274016660]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 34.0
+offset_right = 241.0
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+text = "Manual 2: Awaiting print"
+
+[node name="Manual3Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=918476379]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 64.0
+offset_right = 241.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+text = "Manual 3: Awaiting print"
+
+[node name="PaperAppearance" type="AnimationPlayer" parent="OfficeRoom/BaseElements" unique_id=380319260]
+libraries/ = SubResource("AnimationLibrary_7icik")
+autoplay = &"RESET"
+
 [node name="ButtonSpread" type="Control" parent="OfficeRoom" unique_id=1575171991]
 layout_mode = 3
 anchors_preset = 0
@@ -774,6 +890,7 @@ offset_left = -175.0
 offset_top = 6.0
 offset_right = -29.0
 offset_bottom = 101.0
+script = ExtResource("20_th41f")
 
 [node name="ComputerBase" type="Panel" parent="OfficeRoom/ButtonSpread" unique_id=1387435187]
 self_modulate = Color(1, 1, 1, 0)
@@ -784,7 +901,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OfficeRoom/ButtonSpread/ComputerBase" unique_id=1953178103]
+[node name="Options" type="VBoxContainer" parent="OfficeRoom/ButtonSpread/ComputerBase" unique_id=1953178103]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -796,14 +913,14 @@ offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Cameras" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer" unique_id=445776797]
+[node name="Cameras" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/Options" unique_id=445776797]
 layout_mode = 2
 texture = ExtResource("19_diago")
 region_rect = Rect2(2, 5, 125, 12)
 patch_margin_left = 16
 patch_margin_bottom = 25
 
-[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer/Cameras" unique_id=1425244557]
+[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/Options/Cameras" unique_id=1425244557]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -815,14 +932,23 @@ theme_override_fonts/font = ExtResource("2_qikps")
 text = " CAMERAS"
 vertical_alignment = 1
 
-[node name="Resources" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer" unique_id=384433005]
+[node name="CamButton" type="Button" parent="OfficeRoom/ButtonSpread/ComputerBase/Options/Cameras" unique_id=957768602]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Resources" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/Options" unique_id=384433005]
 layout_mode = 2
 texture = ExtResource("19_diago")
 region_rect = Rect2(2, 5, 125, 12)
 patch_margin_left = 16
 patch_margin_bottom = 25
 
-[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer/Resources" unique_id=1464345592]
+[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/Options/Resources" unique_id=1464345592]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -834,14 +960,23 @@ theme_override_fonts/font = ExtResource("2_qikps")
 text = " RESOURCES"
 vertical_alignment = 1
 
-[node name="Research" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer" unique_id=639884275]
+[node name="ResourcesButton" type="Button" parent="OfficeRoom/ButtonSpread/ComputerBase/Options/Resources" unique_id=1109088197]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Research" type="NinePatchRect" parent="OfficeRoom/ButtonSpread/ComputerBase/Options" unique_id=639884275]
 layout_mode = 2
 texture = ExtResource("19_diago")
 region_rect = Rect2(2, 5, 125, 12)
 patch_margin_left = 16
 patch_margin_bottom = 25
 
-[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/VBoxContainer/Research" unique_id=1089101040]
+[node name="CamLabel" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/Options/Research" unique_id=1089101040]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -852,6 +987,68 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_qikps")
 text = " RESEARCH"
 vertical_alignment = 1
+
+[node name="ResearchButton" type="Button" parent="OfficeRoom/ButtonSpread/ComputerBase/Options/Research" unique_id=1373271364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="OfflineBase" type="ColorRect" parent="OfficeRoom/ButtonSpread/ComputerBase" unique_id=971022115]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = -7.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5411765, 0, 0.07450981, 1)
+
+[node name="PowerOffline" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/OfflineBase" unique_id=34824181]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 134.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "power offline"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Booting" type="ColorRect" parent="OfficeRoom/ButtonSpread/ComputerBase" unique_id=1274458297]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = -7.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5411765, 0, 0.07450981, 1)
+
+[node name="PowerOffline" type="Label" parent="OfficeRoom/ButtonSpread/ComputerBase/Booting" unique_id=1113613619]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 134.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "Booting up..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RebootTime" type="Timer" parent="OfficeRoom/ButtonSpread/ComputerBase" unique_id=970459948]
+wait_time = 1.7999999999999998
 
 [node name="InformationFeed" type="Control" parent="OfficeRoom" unique_id=1700604748]
 layout_mode = 3
@@ -973,7 +1170,38 @@ theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 7
 text = "Resource Feed"
 
+[node name="PowerLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=1276573141]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 122.5
+offset_top = 12.0
+offset_right = 180.5
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "POWER"
+horizontal_alignment = 1
+
+[node name="ChargesLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Resources" unique_id=1539740495]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 122.5
+offset_top = 34.0
+offset_right = 180.5
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "5/5"
+horizontal_alignment = 1
+
 [node name="Research" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=2093172065]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -1175,7 +1403,7 @@ theme_override_fonts/font = ExtResource("24_jebrn")
 text = "-"
 flat = true
 
-[node name="ColorRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=848643149]
+[node name="ColorMix" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=848643149]
 layout_mode = 0
 offset_left = 214.0
 offset_top = 74.0
@@ -1211,6 +1439,26 @@ offset_bottom = 36.0
 theme_override_colors/font_color = Color(0, 0.16449995, 0.47, 1)
 theme_override_fonts/font = ExtResource("20_fl2fe")
 text = "B"
+
+[node name="SumLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=1624212254]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 57.0
+offset_right = 254.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "SUM:"
+
+[node name="SumLabel2" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=9433554]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 38.0
+offset_right = 254.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+text = "SUM:"
 
 [node name="RNumLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=381829431]
 layout_mode = 0
@@ -1249,6 +1497,7 @@ text = "0"
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("26_7icik")
 
 [node name="InfectionBar" type="ProgressBar" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=1316630024]
 layout_mode = 1
@@ -1316,7 +1565,7 @@ scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_lcvqc")
 animation = &"panic"
 autoplay = "panic"
-frame_progress = 0.60762084
+frame_progress = 0.17853971
 speed_scale = 0.6
 
 [node name="ResearchFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=229480706]
@@ -1333,6 +1582,7 @@ text = "research feed"
 [node name="Offline" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=1028250980]
 visible = false
 self_modulate = Color(0, 0, 0, 1)
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1359,7 +1609,6 @@ theme_override_font_sizes/font_size = 32
 text = "SYSTEMS OFFLINE"
 
 [node name="Cameras" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=1792632733]
-visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -1430,6 +1679,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("33_j8rd5")
 
 [node name="Labels" type="VBoxContainer" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" unique_id=1002788685]
 layout_mode = 1
@@ -1555,7 +1805,7 @@ offset_bottom = 123.0
 theme_override_fonts/font = ExtResource("2_qikps")
 text = "recharging..."
 
-[node name="SabotageWarnings" type="VBoxContainer" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" unique_id=871406594]
+[node name="SabotageWarnings" type="Control" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" unique_id=2145358154]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1567,26 +1817,39 @@ offset_bottom = 237.94336
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.265, 0.265)
-theme_override_constants/separation = 7
 
 [node name="SabotageTexture" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=943529973]
-layout_mode = 2
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
 texture = SubResource("AnimatedTexture_jebrn")
 
 [node name="SabotageTexture2" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=2012677065]
-layout_mode = 2
+layout_mode = 0
+offset_top = 71.0
+offset_right = 64.0
+offset_bottom = 135.0
 texture = SubResource("AnimatedTexture_jebrn")
 
 [node name="SabotageTexture3" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=497653627]
-layout_mode = 2
+layout_mode = 0
+offset_top = 142.0
+offset_right = 64.0
+offset_bottom = 206.0
 texture = SubResource("AnimatedTexture_jebrn")
 
 [node name="SabotageTexture4" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=1792334340]
-layout_mode = 2
+layout_mode = 0
+offset_top = 213.0
+offset_right = 64.0
+offset_bottom = 277.0
 texture = SubResource("AnimatedTexture_jebrn")
 
 [node name="SabotageTexture5" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/SabotageWarnings" unique_id=1876485950]
-layout_mode = 2
+layout_mode = 0
+offset_top = 284.0
+offset_right = 64.0
+offset_bottom = 348.0
 texture = SubResource("AnimatedTexture_jebrn")
 
 [node name="ResourceFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Cameras" unique_id=734139647]
@@ -1630,7 +1893,7 @@ texture = ExtResource("15_4ti5a")
 
 [node name="MaskHideLeft" type="Sprite2D" parent="CommsRoom/Interactables" unique_id=952323967]
 z_index = 5
-position = Vector2(-520, 240)
+position = Vector2(-443, 240)
 texture = ExtResource("5_ypmwd")
 flip_h = true
 
@@ -1648,7 +1911,7 @@ sprite = NodePath("../MaskHideLeft")
 
 [node name="MaskHideRight" type="Sprite2D" parent="CommsRoom/Interactables" unique_id=174333992]
 z_index = 5
-position = Vector2(520, 240)
+position = Vector2(444, 248)
 texture = ExtResource("5_ypmwd")
 
 [node name="Hide" type="Button" parent="CommsRoom/Interactables/MaskHideRight" unique_id=513002193]
@@ -1800,7 +2063,43 @@ autoplay = &"new_animation"
 [node name="InteractionHandler" type="Node2D" parent="." unique_id=397913693]
 script = ExtResource("25_pmm7v")
 
+[node name="AUDIO" type="Node" parent="." unique_id=1574462877]
+
+[node name="PcSelect" type="AudioStreamPlayer" parent="AUDIO" unique_id=1933069955]
+stream = SubResource("AudioStreamRandomizer_g4v7s")
+volume_db = -15.638
+pitch_scale = 0.89
+bus = &"SFX"
+
+[node name="AmbientPanic" type="AudioStreamPlayer" parent="AUDIO" unique_id=462371763]
+stream = ExtResource("46_kllvy")
+bus = &"Music"
+parameters/looping = false
+
+[node name="CalmAmbient" type="AudioStreamPlayer" parent="AUDIO" unique_id=893178399]
+stream = ExtResource("47_h5vdi")
+bus = &"Music"
+parameters/looping = true
+
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/O2RebootBSprite/O2Reboot" to="InteractionHandler" method="_on_o_2_reboot_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/HRebootBSprite/HeatReboot" to="InteractionHandler" method="_on_heat_reboot_pressed"]
+[connection signal="mouse_entered" from="OfficeRoom/BaseElements/Printer/PaperSlip/CheckRecipe" to="KitchenRoom/KitchenTerminal" method="_on_check_recipe_mouse_entered"]
+[connection signal="mouse_exited" from="OfficeRoom/BaseElements/Printer/PaperSlip/CheckRecipe" to="KitchenRoom/KitchenTerminal" method="_on_check_recipe_mouse_exited"]
+[connection signal="pressed" from="OfficeRoom/ButtonSpread/ComputerBase/Options/Cameras/CamButton" to="OfficeRoom/ButtonSpread" method="_on_cam_button_pressed"]
+[connection signal="pressed" from="OfficeRoom/ButtonSpread/ComputerBase/Options/Resources/ResourcesButton" to="OfficeRoom/ButtonSpread" method="_on_resources_button_pressed"]
+[connection signal="pressed" from="OfficeRoom/ButtonSpread/ComputerBase/Options/Research/ResearchButton" to="OfficeRoom/ButtonSpread" method="_on_research_button_pressed"]
+[connection signal="timeout" from="OfficeRoom/ButtonSpread/ComputerBase/RebootTime" to="OfficeRoom/ButtonSpread" method="_on_reboot_time_timeout"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ProduceRect/ProduceButton" to="KitchenRoom/KitchenTerminal" method="_on_produce_button_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonUpRRect/ButtonUpR" to="KitchenRoom/KitchenTerminal" method="_on_button_up_r_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonUpGRect/ButtonUpG" to="KitchenRoom/KitchenTerminal" method="_on_button_up_g_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonUpBRect/ButtonUpB" to="KitchenRoom/KitchenTerminal" method="_on_button_up_b_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonDownRRect/ButtonDownR" to="KitchenRoom/KitchenTerminal" method="_on_button_down_r_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonDownGRect/ButtonDownG" to="KitchenRoom/KitchenTerminal" method="_on_button_down_g_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ButtonDownBRect/ButtonDownB" to="KitchenRoom/KitchenTerminal" method="_on_button_down_b_pressed"]
 [connection signal="timeout" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague/MovechanceTimer" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague" method="_on_movechance_timer_timeout"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureK" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_k_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureP" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_p_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureH" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_h_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureO" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_o_pressed"]
+[connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureC" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_c_pressed"]

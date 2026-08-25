@@ -1,5 +1,6 @@
 extends Node
 
+
 enum Room {
 	KITCHEN,
 	POWER_GRID,
@@ -49,6 +50,7 @@ func _process(delta: float) -> void:
 		if infection_value >= 100.0:
 			infection_value = 100.0
 			panic = true
+			
 
 var cur_pos = 0 # 0 -> Hidden
 				# 1 -> Kitchen,   2 -> PowerGrid, 3 -> HeatSys, 

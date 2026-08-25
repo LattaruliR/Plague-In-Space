@@ -2,7 +2,13 @@ extends Node
 
 const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
 const TONE_SOUND := preload("res://SOUNDS/barTone2.wav")
-const CLICK_SOUND := preload("res://SOUNDS/selecting.wav")
+const CLICK_SOUND := preload("res://SOUNDS/shutoutBlackout.wav")
+const BLACKOUT = preload("uid://8cajtyxcjxg7")
+const CALM_OFFICE = preload("uid://s40st63lm2ws")
+const LURE_BROADCAST = preload("uid://cqneqee1ttis6")
+const PLAGUE_OXYGEN = preload("uid://dwlthbsebu0cx")
+const PLAGUE_WALK = preload("uid://b1d5cfp71sxoa")
+
 
 ## seconds the grid needs in the dark before it can be brought back online
 const POWER_REBOOT_TIME := 25.0
@@ -22,6 +28,7 @@ const HUNT_CUE_OFFSET := 600.0
 ## one sound clue per room, keyed by Global.Room - and toasted dont forget to swap these for dedicated sfx
 ## when they exist; the pitch shifts are only here to keep the six rooms tellable apart by ear
 var room_clues := {}
+
 
 signal blackout_started
 signal blackout_ended
@@ -47,12 +54,12 @@ var _active := false # mirrors Global.blackout so its possible to catch external
 
 func _ready() -> void:
 	room_clues = {
-		Global.Room.KITCHEN: {"stream": CLICK_SOUND, "db": -8.0, "pitch": 0.55},
-		Global.Room.POWER_GRID: {"stream": TONE_SOUND, "db": -10.0, "pitch": 0.45},
-		Global.Room.HEAT_SYS: {"stream": ALERT_SOUND, "db": -12.0, "pitch": 1.7},
-		Global.Room.OXYGEN_SYS: {"stream": TONE_SOUND, "db": -10.0, "pitch": 1.25},
-		Global.Room.COMMS_SYS: {"stream": CLICK_SOUND, "db": -8.0, "pitch": 1.55},
-		Global.Room.PLAYER_ROOM: {"stream": ALERT_SOUND, "db": -6.0, "pitch": 0.35},
+		Global.Room.KITCHEN: {"stream": PLAGUE_WALK, "db": -8.0, "pitch": 0.55},
+		Global.Room.POWER_GRID: {"stream": PLAGUE_WALK, "db": -10.0, "pitch": 0.45},
+		Global.Room.HEAT_SYS: {"stream": PLAGUE_WALK, "db": -12.0, "pitch": 1.7},
+		Global.Room.OXYGEN_SYS: {"stream": PLAGUE_WALK, "db": -10.0, "pitch": 1.25},
+		Global.Room.COMMS_SYS: {"stream": PLAGUE_WALK, "db": -8.0, "pitch": 1.55},
+		Global.Room.PLAYER_ROOM: {"stream": PLAGUE_WALK, "db": -6.0, "pitch": 0.35},
 	}
 
 func register_plague(plague: Node) -> void:
@@ -103,6 +110,8 @@ func begin_blackout() -> void:
 
 
 func _start_blackout_state() -> void:
+	AudioManager.stop_music()
+	AudioManager.play_music(BLACKOUT, 0.2)
 	_active = true
 	CoreResources.power = 0
 	power_online = false
@@ -119,18 +128,18 @@ func try_restore_power() -> bool:
 
 	if Global.hunting:
 		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.3)
-		restore_refused.emit("IT IS IN HERE WITH YOU")
+		#restore_refused.emit("IT IS IN HERE WITH YOU")
 		return false
 
 	if not power_online:
 		var remaining := int(ceil(POWER_REBOOT_TIME - reboot_elapsed))
 		AudioManager.play_sfx(ALERT_SOUND, -6.0, 0.4)
-		restore_refused.emit("GRID REBOOTING - %ds" % remaining)
+		#restore_refused.emit("GRID REBOOTING - %ds" % remaining)
 		return false
 
 	if _plague_room() == Global.player_room:
 		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.3)
-		restore_refused.emit("SOMETHING IS IN THE ROOM")
+		#restore_refused.emit("SOMETHING IS IN THE ROOM")
 		return false
 
 	_end_blackout()
@@ -138,6 +147,8 @@ func try_restore_power() -> bool:
 
 
 func _end_blackout() -> void:
+	AudioManager.stop_music()
+	AudioManager.play_music(CALM_OFFICE, 0.8)
 	Global.blackout = false
 	_active = false
 	Global.hunting = false

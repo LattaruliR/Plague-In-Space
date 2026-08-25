@@ -9,7 +9,7 @@ var textTip = " "
 @onready var reboot_all: Button = $"../OfficeRoom/Interactables/RebootAllBSprite/RebootAll"
 @onready var door: Button = $"../OfficeRoom/Interactables/Door"
 @onready var door_handle_button: Button = $"../OfficeRoom/Interactables/DoorHandle/DoorHandleButton"
-@onready var computer_button: Button = $"../OfficeRoom/BaseElements/Computer/ComputerButton"
+#@onready var computer_button: Button = $"../OfficeRoom/BaseElements/Computer/ComputerButton"
 
 const BAR_TONE = preload("uid://cmabygqmehtnw")
 
@@ -22,7 +22,7 @@ func _ready() -> void:
 	reboot_all: "Reboot all",
 	door: "Leave",
 	door_handle_button: "Switch",
-	computer_button: "Cameras / Oxygen / Heat"
+	#computer_button: "Cameras / Oxygen / Heat"
 	}
 	
 	for button in hover_tips:
@@ -31,7 +31,7 @@ func _ready() -> void:
 
 	comms_reboot.pressed.connect(_on_comms_reboot_pressed)
 	reboot_all.pressed.connect(_on_reboot_all_pressed)
-	computer_button.pressed.connect(Monitor.toggle)
+	#computer_button.pressed.connect(Monitor.toggle)
 
 
 func _process(_delta: float) -> void:

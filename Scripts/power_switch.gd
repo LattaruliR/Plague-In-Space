@@ -5,6 +5,11 @@ extends Node2D
 const FONT := preload("res://Fonts/home-video/HomeVideo-Regular.ttf")
 const GREEN := TerminalStyle.GREEN
 const AMBER := TerminalStyle.AMBER
+@onready var offline: Panel = $"../../InformationFeed/BasePanel/Offline"
+@onready var offline_base: ColorRect = $"../../ButtonSpread/ComputerBase/OfflineBase"
+@onready var reboot_time: Timer = $"../../ButtonSpread/ComputerBase/RebootTime"
+@onready var booting: ColorRect = $"../../ButtonSpread/ComputerBase/Booting"
+
 
 @export var lever: AnimatedSprite2D
 @export var button: Button
@@ -38,7 +43,7 @@ func _on_restore_refused(reason: String) -> void:
 	_flash(reason)
 
 func _on_power_online() -> void:
-	_flash("GRID ONLINE - THROW THE SWITCH")
+	_flash("FLIP\n SWITCH")
 
 func _flash(text: String) -> void:
 	_message = text
@@ -60,11 +65,15 @@ func _refresh() -> void:
 
 	if Global.blackout:
 		if Blackout.power_online:
-			label.text = "POWER: READY"
+			label.text = "POWER:\n READY"
 			label.add_theme_color_override("font_color", GREEN)
 		else:
-			label.text = "REBOOTING %ds" % int(ceil(Blackout.reboot_remaining()))
+			offline_base.visible = true
+			offline.visible = true
+			label.text = "REBOOT:\n %ds" % int(ceil(Blackout.reboot_remaining()))
 			label.add_theme_color_override("font_color", AMBER)
 	else:
-		label.text = "POWER: ON"
+		offline_base.visible = false
+		offline.visible = false
+		label.text = "POWER:\n ON"
 		label.add_theme_color_override("font_color", GREEN)

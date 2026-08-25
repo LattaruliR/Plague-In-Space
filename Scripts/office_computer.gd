@@ -31,7 +31,8 @@ var _offline_label: Label
 
 
 func _ready() -> void:
-	layer = 14
+	
+	layer = -1
 	_build_ui()
 	visible = false
 
@@ -75,8 +76,8 @@ func toggle() -> void:
 func open() -> void:
 	if Global.player_room != Global.Room.PLAYER_ROOM:
 		return # the computer is bolted to the office desk
-	is_open = true
-	visible = true
+	is_open = false
+	visible = false
 	_set_mode(mode)
 	AudioManager.play_sfx(CLICK_SOUND, -6.0, 1.2)
 

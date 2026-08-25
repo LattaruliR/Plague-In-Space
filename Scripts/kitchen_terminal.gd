@@ -2,6 +2,16 @@ extends Node2D
 
 const PRESS_SOUND := preload("res://SOUNDS/selecting.wav")
 const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
+@onready var manual_1_label: Label = $"../../OfficeRoom/BaseElements/PaperBg/Manual1Label"
+@onready var manual_2_label: Label = $"../../OfficeRoom/BaseElements/PaperBg/Manual2Label"
+@onready var manual_3_label: Label = $"../../OfficeRoom/BaseElements/PaperBg/Manual3Label"
+@onready var r_num_label: Label = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/RNumLabel"
+@onready var g_num_label: Label = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/GNumLabel"
+@onready var b_num_label: Label = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/BNumLabel"
+@onready var sum_label: Label = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/SumLabel"
+@onready var color_mix: ColorRect = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ColorMix"
+
+const BAR_TONE_2 = preload("uid://v1coedd33f1w")
 
 const CHANNEL_NAMES := ["R", "G", "B"]
 const CHANNEL_COLORS := [
@@ -99,10 +109,11 @@ func _refresh() -> void:
 
 	CoreResources.num_display = combo[0] + combo[1] + combo[2]
 	CoreResources.kitchen_sum = [CoreResources.num_display]
-	_sum_label.text = "SUM: %02d" % CoreResources.num_display
+	sum_label.text = "SUM: %02d" % CoreResources.num_display
 
 	var dial_max := float(CoreResources.KITCHEN_DIAL_MAX)
 	_swatch.color = Color(combo[0] / dial_max, combo[1] / dial_max, combo[2] / dial_max)
+	color_mix.color = Color(combo[0] / dial_max, combo[1] / dial_max, combo[2] / dial_max)
 
 	for index in _recipe_labels.size():
 		_recipe_labels[index].text = _recipe_text(index)
@@ -127,16 +138,23 @@ func _refresh() -> void:
 		]
 
 	_root.modulate = Color(0.4, 0.4, 0.4) if offline else Color.WHITE
-
+	
+	sum_label.text = str(CoreResources.kitchen_sum)
+	r_num_label.text = str(combo[0])
+	g_num_label.text = str(combo[1])
+	b_num_label.text = str(combo[2])
+	manual_1_label.text = _recipe_text(0)
+	manual_2_label.text = _recipe_text(1)
+	manual_3_label.text = _recipe_text(2)
 
 func _recipe_text(index: int) -> String:
 	if not CoreResources.unlocked_recipes.has(index):
-		return "MANUAL %d   - - -   LOCKED" % (index + 1)
+		return "MANUAL %d  AWAITING PRINT" % (index + 1)
 
 	var recipe := CoreResources.get_recipe(index)
 	var values := "%d / %d / %d" % [recipe[0], recipe[1], recipe[2]]
 	if CoreResources.produced_recipes.has(index):
-		return "MANUAL %d   %s   DONE" % [index + 1, values]
+		return "MANUAL %d   %s  OK!" % [index + 1, values]
 	return "MANUAL %d   %s" % [index + 1, values]
 
 func _build_ui() -> void:
@@ -248,3 +266,45 @@ func _build_dial(channel: int) -> Control:
 	box.add_child(down)
 
 	return box
+
+
+func _on_produce_button_pressed() -> void:
+	_on_produce_pressed()
+
+
+func _on_button_up_r_pressed() -> void:
+	AudioManager.play_sfx(BAR_TONE_2)
+	_on_dial_changed(0, 1)
+
+
+func _on_button_up_g_pressed() -> void:
+	AudioManager.play_sfx(BAR_TONE_2)
+	_on_dial_changed(1, 1)
+
+
+func _on_button_up_b_pressed() -> void:
+	AudioManager.play_sfx(BAR_TONE_2)
+	_on_dial_changed(2, 1)
+
+
+func _on_button_down_r_pressed() -> void:
+	AudioManager.play_sfx(BAR_TONE_2)
+	_on_dial_changed(0, -1)
+
+
+func _on_button_down_g_pressed() -> void:
+	AudioManager.play_sfx(BAR_TONE_2)
+	_on_dial_changed(1, -1)
+
+
+func _on_button_down_b_pressed() -> void:
+	AudioManager.play_sfx(BAR_TONE_2)
+	_on_dial_changed(2, -1)
+
+
+func _on_check_recipe_mouse_entered() -> void:
+	$"../../OfficeRoom/BaseElements/PaperAppearance".play("coming")
+
+
+func _on_check_recipe_mouse_exited() -> void:
+	$"../../OfficeRoom/BaseElements/PaperAppearance".play_backwards("coming")
