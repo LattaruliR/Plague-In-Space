@@ -43,11 +43,16 @@
 [ext_resource type="Script" uid="uid://b3wsjpgw816d5" path="res://Scripts/leave_door.gd" id="27_leave"]
 [ext_resource type="Texture2D" uid="uid://dljb7beowr4cs" path="res://Sprites/Game/Office/Warning.png" id="29_jebrn"]
 [ext_resource type="Script" uid="uid://dgmi3rdsiu3dc" path="res://Scenes/Game/lures.gd" id="33_j8rd5"]
+[ext_resource type="Texture2D" uid="uid://cn4oj4qsjvf6n" path="res://Sprites/Game/General Decor/ArakGayMonster.png" id="35_rht7h"]
 [ext_resource type="AudioStream" uid="uid://bmwq4vakbyso5" path="res://SOUNDS/pcselect1.wav" id="41_26aa6"]
+[ext_resource type="Texture2D" uid="uid://ca5dxfs6qkwks" path="res://Sprites/Game/General Decor/PostIt.png" id="41_caws5"]
 [ext_resource type="AudioStream" uid="uid://sb4jso5acwm2" path="res://SOUNDS/pcselect2.wav" id="42_4gqoa"]
 [ext_resource type="AudioStream" uid="uid://c3a675ifebp8n" path="res://SOUNDS/pcselect3.wav" id="43_7icik"]
 [ext_resource type="AudioStream" uid="uid://dklfhy3v605a8" path="res://SOUNDS/AmbientPanic.mp3" id="46_kllvy"]
 [ext_resource type="AudioStream" uid="uid://s40st63lm2ws" path="res://SOUNDS/CalmOffice.mp3" id="47_h5vdi"]
+[ext_resource type="Texture2D" uid="uid://baqv6kj2uemn5" path="res://Sprites/Game/General Decor/Posters.png" id="50_bkdpl"]
+[ext_resource type="Texture2D" uid="uid://j00ocnhcl8qk" path="res://Sprites/Game/General Decor/TrashCan.png" id="52_2r0uj"]
+[ext_resource type="AudioStream" uid="uid://cqneqee1ttis6" path="res://SOUNDS/LureBroadcast.mp3" id="53_2r0uj"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -589,6 +594,11 @@ streams_count = 3
 stream_0/stream = ExtResource("41_26aa6")
 stream_1/stream = ExtResource("42_4gqoa")
 stream_2/stream = ExtResource("43_7icik")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_caws5"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("53_2r0uj")
 
 [node name="Game" type="Node2D" unique_id=1249205629]
 script = ExtResource("1_4ti5a")
@@ -1565,7 +1575,7 @@ scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_lcvqc")
 animation = &"panic"
 autoplay = "panic"
-frame_progress = 0.8949086
+frame_progress = 0.73992157
 speed_scale = 0.6
 
 [node name="ResearchFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=229480706]
@@ -1863,6 +1873,19 @@ theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 7
 text = "camera feed"
 
+[node name="Decorations" type="Node2D" parent="OfficeRoom" unique_id=690010154]
+
+[node name="Posters" type="Sprite2D" parent="OfficeRoom/Decorations" unique_id=1238979926]
+position = Vector2(151, -64)
+texture = ExtResource("50_bkdpl")
+
+[node name="ArakGayMonster" type="Sprite2D" parent="OfficeRoom/Decorations" unique_id=615604116]
+position = Vector2(-413, 128)
+texture = ExtResource("35_rht7h")
+
+[node name="Timer" type="Timer" parent="OfficeRoom" unique_id=1041760982]
+wait_time = 7.0
+
 [node name="CommsRoom" type="Node2D" parent="." unique_id=114717402]
 position = Vector2(671, 779)
 
@@ -1940,6 +1963,17 @@ script = ExtResource("27_leave")
 [node name="CommsTerminal" type="Node2D" parent="CommsRoom/Interactables" unique_id=555035815]
 position = Vector2(0, 30)
 script = ExtResource("20_cmter")
+
+[node name="Decorations" type="Node2D" parent="CommsRoom" unique_id=239005365]
+position = Vector2(-671, -779)
+
+[node name="PostIt" type="Sprite2D" parent="CommsRoom/Decorations" unique_id=1164266041]
+position = Vector2(543, 764)
+texture = ExtResource("41_caws5")
+
+[node name="TrashCan" type="Sprite2D" parent="CommsRoom/Decorations" unique_id=385853418]
+position = Vector2(1197, 1045)
+texture = ExtResource("52_2r0uj")
 
 [node name="KitchenRoom" type="Node2D" parent="." unique_id=269335039]
 position = Vector2(2048, 779)
@@ -2082,6 +2116,7 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="LureBroadcast" type="AudioStreamPlayer" parent="AUDIO" unique_id=1896583175]
+stream = SubResource("AudioStreamRandomizer_caws5")
 pitch_scale = 0.6
 
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
@@ -2106,3 +2141,4 @@ pitch_scale = 0.6
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureH" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_h_pressed"]
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureO" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_o_pressed"]
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureC" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_c_pressed"]
+[connection signal="timeout" from="OfficeRoom/Timer" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_timer_timeout"]
