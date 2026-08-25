@@ -60,8 +60,7 @@ func _update_labels() -> void:
 
 	if Global.hunting:
 		if Global.hiding:
-			var side_name := "LEFT" if Global.hide_side == 0 else "RIGHT"
-			_warning.text = "HIDDEN - %s" % side_name
+			_warning.text = "HIDDEN"
 			_warning.add_theme_color_override("font_color", GREEN)
 		else:
 			_warning.text = "IT IS IN THE ROOM"
@@ -82,7 +81,7 @@ func _on_refused(reason: String) -> void:
 	_flash(reason, 3.0)
 
 
-func _on_hunt_started(_side: int) -> void:
+func _on_hunt_started() -> void:
 	_flash("SOMETHING CAME IN", 2.0)
 
 
