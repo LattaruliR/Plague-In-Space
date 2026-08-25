@@ -11,6 +11,11 @@ const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
 @export var download_time: float = 6.0
 @export var reroll_on_failure: bool = false
 
+@export_range(0.2, 1.5, 0.01) var ui_scale: float = 0.42
+@export var ui_offset: Vector2 = Vector2(128, -70)
+
+const PANEL_SIZE := Vector2(920, 560)
+
 enum State { LISTENING, DOWNLOADING, COMPLETE, OFFLINE }
 
 var state: int = State.LISTENING
@@ -207,8 +212,10 @@ func _refresh_input_display() -> void:
 
 func _build_ui() -> void:
 	_root = Control.new()
-	_root.size = Vector2(920, 560)
-	_root.position = Vector2(-460, -300)
+	_root.size = PANEL_SIZE
+	_root.scale = Vector2(ui_scale, ui_scale)
+	# Keep it centred on this node whatever the scale is.
+	_root.position = -PANEL_SIZE * 0.5 * ui_scale + ui_offset
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_root)
 
