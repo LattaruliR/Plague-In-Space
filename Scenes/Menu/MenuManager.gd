@@ -21,7 +21,7 @@ func _on_play_button_pressed() -> void:
 	CoreResources.reset_systems()
 	Global.reset_player_state()
 	Blackout.reset()
-	get_tree().change_scene_to_file("res://Scenes/Game/game.tscn")
+	get_tree().change_scene_to_file("res://Scenes/cutscene.tscn")
 
 
 func _on_quit_button_mouse_entered() -> void:

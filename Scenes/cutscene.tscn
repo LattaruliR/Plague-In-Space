@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://llj0vvw4lb01"]
+
+[ext_resource type="Texture2D" uid="uid://ipct8ampfvgq" path="res://Sprites/Game/Office/Sprite-0037.png" id="1_7n648"]
+[ext_resource type="Script" uid="uid://blg0vplxovnta" path="res://Scenes/cutscene.gd" id="1_j1a0j"]
+[ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="2_iy4n7"]
+[ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="3_j1a0j"]
+[ext_resource type="FontFile" uid="uid://cqhdwfqbp38m3" path="res://Fonts/home-video/HomeVideo-Bold.ttf" id="4_j6j7k"]
+[ext_resource type="AudioStream" uid="uid://dklfhy3v605a8" path="res://SOUNDS/AmbientPanic.mp3" id="6_j6j7k"]
+
+[node name="cutscene" type="Node2D" unique_id=879893286]
+script = ExtResource("1_j1a0j")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1484168120]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1415510925]
+position = Vector2(0, -137)
+texture = ExtResource("1_7n648")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1477001070]
+z_index = -1
+offset_left = -847.0
+offset_top = -457.99997
+offset_right = -758.3407
+offset_bottom = -393.0888
+scale = Vector2(19.84, 15.759998)
+color = Color(0, 0, 0, 1)
+
+[node name="Scanlines" type="Sprite2D" parent="." unique_id=1634622805]
+z_index = 99
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(71, 40)
+texture = ExtResource("2_iy4n7")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 1000)
+
+[node name="Label" type="Label" parent="." unique_id=2026156619]
+offset_left = -286.0
+offset_right = 264.0
+offset_bottom = 267.0
+theme_override_fonts/font = ExtResource("3_j1a0j")
+text = "Humanity has been wiped out by a mysterious plague.
+
+You are in a lone spaceship, stranded...
+
+
+But that same plague has infested your ship, it can
+sabotage your eletronics and your head.
+
+Manage the resources you have left, interact with the
+communication room left and attempt to fabricate the cure
+while evading death.
+
+Careful with the 5 systems you have.
+kitchen, power, heat, oxygen and communication."
+
+[node name="Button" type="Button" parent="." unique_id=1874177763]
+offset_left = 432.0
+offset_top = 279.0
+offset_right = 526.0
+offset_bottom = 302.0
+theme_override_fonts/font = ExtResource("4_j6j7k")
+text = "ADVANCE >"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=264862770]
+stream = ExtResource("6_j6j7k")
+autoplay = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
