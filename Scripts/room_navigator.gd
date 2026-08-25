@@ -32,7 +32,7 @@ func _build_views() -> void:
 	views = {
 		Global.Room.PLAYER_ROOM: Vector2(-706, 778),
 		Global.Room.COMMS_SYS: Vector2(671, 779),
-		Global.Room.KITCHEN: Vector2(2048, 779),
+		#Global.Room.KITCHEN: Vector2(2048, 779),
 	}
 
 
