@@ -6,3 +6,4 @@ const CALM_OFFICE = preload("uid://s40st63lm2ws")
 func _ready() -> void:
 	AudioManager.play_music(CALM_OFFICE)
 	GameOver.arm()
+	Archivist.arm()
