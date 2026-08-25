@@ -64,6 +64,9 @@ func _process(delta: float) -> void:
 func _on_player_caught() -> void:
 	_cause = "IT FOUND YOU"
 
+func record_cause(text: String) -> void:
+	_cause = text
+
 func _infection_cause() -> String:
 	if _cause != "":
 		return _cause
@@ -103,6 +106,7 @@ func _end(did_win: bool) -> void:
 	]
 
 	BlackoutHUD.visible = false
+	Archivist.visible = false
 	Rooms.close_travel_menu()
 	Monitor.close()
 
@@ -129,6 +133,7 @@ func _to_menu() -> void:
 func _leave_to(path: String) -> void:
 	get_tree().paused = false
 	reset()
+	Archivist.reset()
 	CoreResources.reset_systems()
 	Global.reset_player_state()
 	Blackout.reset()

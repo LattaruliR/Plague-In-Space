@@ -41,6 +41,8 @@
 [ext_resource type="Script" uid="uid://dumnb4u7obxu7" path="res://Scenes/Game/infectionResearchHandler.gd" id="26_7icik"]
 [ext_resource type="Script" uid="uid://cbot80qesiu5f" path="res://Scripts/office_door.gd" id="26_odoor"]
 [ext_resource type="Script" uid="uid://b3wsjpgw816d5" path="res://Scripts/leave_door.gd" id="27_leave"]
+[ext_resource type="Script" path="res://Scripts/containment_crank.gd" id="28_crank"]
+[ext_resource type="Script" path="res://Scripts/music_box.gd" id="29_mbox"]
 [ext_resource type="Texture2D" uid="uid://dljb7beowr4cs" path="res://Sprites/Game/Office/Warning.png" id="29_jebrn"]
 [ext_resource type="Script" uid="uid://dgmi3rdsiu3dc" path="res://Scenes/Game/lures.gd" id="33_j8rd5"]
 [ext_resource type="Texture2D" uid="uid://cn4oj4qsjvf6n" path="res://Sprites/Game/General Decor/ArakGayMonster.png" id="35_rht7h"]
@@ -787,6 +789,30 @@ door_sprite = NodePath("../../BaseElements/Door")
 handle_sprite = NodePath("../DoorHandle")
 handle_button = NodePath("../DoorHandle/DoorHandleButton")
 leave_button = NodePath("../Door")
+
+[node name="MusicBoxButton" type="Button" parent="OfficeRoom/Interactables"]
+offset_left = 150.0
+offset_top = 120.0
+offset_right = 340.0
+offset_bottom = 186.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 24
+text = "MUSIC BOX"
+
+[node name="MusicBoxLabel" type="Label" parent="OfficeRoom/Interactables"]
+offset_left = 150.0
+offset_top = 192.0
+offset_right = 340.0
+offset_bottom = 220.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 20
+text = "CALM"
+horizontal_alignment = 1
+
+[node name="MusicBox" type="Node2D" parent="OfficeRoom/Interactables" node_paths=PackedStringArray("button", "label")]
+script = ExtResource("29_mbox")
+button = NodePath("../MusicBoxButton")
+label = NodePath("../MusicBoxLabel")
 
 [node name="PointLight2D" type="PointLight2D" parent="OfficeRoom" unique_id=1055643177]
 position = Vector2(-103, 66)
@@ -1961,6 +1987,30 @@ theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 28
 flat = true
 script = ExtResource("27_leave")
+
+[node name="CrankButton" type="Button" parent="CommsRoom/Interactables"]
+offset_left = -520.0
+offset_top = -60.0
+offset_right = -320.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 26
+text = "WIND"
+
+[node name="CrankLabel" type="Label" parent="CommsRoom/Interactables"]
+offset_left = -520.0
+offset_top = 16.0
+offset_right = -320.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("2_qikps")
+theme_override_font_sizes/font_size = 20
+text = "CONTAINMENT"
+horizontal_alignment = 1
+
+[node name="ContainmentCrank" type="Node2D" parent="CommsRoom/Interactables" node_paths=PackedStringArray("button", "label")]
+script = ExtResource("28_crank")
+button = NodePath("../CrankButton")
+label = NodePath("../CrankLabel")
 
 [node name="CommsTerminal" type="Node2D" parent="CommsRoom/Interactables" unique_id=555035815]
 position = Vector2(0, 30)
