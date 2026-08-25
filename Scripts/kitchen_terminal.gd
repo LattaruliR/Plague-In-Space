@@ -43,11 +43,17 @@ func _ready() -> void:
 
 	CoreResources.recipe_unlocked.connect(_on_recipe_unlocked)
 	CoreResources.system_sabotaged.connect(func(_r): _refresh())
+	CoreResources.synthesis_started.connect(func(_i): _refresh())
+	CoreResources.synthesis_lost.connect(func(_i): _flash("BATCH LOST"))
+	CoreResources.cure_produced.connect(func(_n): _flash("DOSE COMPLETE"))
 	CoreResources.system_repaired.connect(func(_r): _refresh())
 	_refresh()
 
 
 func _process(delta: float) -> void:
+	if CoreResources.synthesis_index >= 0:
+		_refresh()
+
 	if _message_time > 0.0:
 		_message_time -= delta
 		if _message_time <= 0.0:
@@ -126,7 +132,10 @@ func _refresh() -> void:
 		button.disabled = offline
 	_produce_button.disabled = offline or CoreResources.get_pending_recipes().is_empty()
 
-	if _message != "":
+	if CoreResources.synthesis_index >= 0:
+		_status_label.text = "SYNTHESISING ... %d%%   (KEEP THE BENCH UP)" % int(
+			CoreResources.synthesis_progress * 100.0)
+	elif _message != "":
 		_status_label.text = _message
 	elif CoreResources.is_sabotaged(Global.Room.KITCHEN):
 		_status_label.text = "BENCH SABOTAGED - REBOOT FROM THE OFFICE"

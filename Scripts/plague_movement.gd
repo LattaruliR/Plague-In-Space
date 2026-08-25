@@ -243,7 +243,7 @@ func move():
 			else:
 				wanted = 2
 
-		5: # Player Room
+		5: # Player Roomb
 			if (coin_flip == 1 && Global.panic == true):
 				return
 			else:

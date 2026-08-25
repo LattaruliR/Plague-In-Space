@@ -1664,8 +1664,10 @@ gizmo_extents = 25.0
 script = ExtResource("4_ciybh")
 pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
 movetimer = NodePath("MovechanceTimer")
+cur_position = 3
 move_interval_base = 16.0
 move_interval_jitter = 0.3
+first_move_interval = 8.0
 
 [node name="PlaguePlaceholder" type="Sprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague" unique_id=1029311834]
 scale = Vector2(0.115, 0.115)

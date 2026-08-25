@@ -44,6 +44,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	CoreResources.comms_downloading = state == State.DOWNLOADING
+
 	if Global.blackout or CoreResources.is_sabotaged(Global.Room.COMMS_SYS):
 		if state != State.OFFLINE:
 			_abort_for_blackout()
@@ -90,7 +92,6 @@ func _apply_broadcast_visibility() -> void:
 		else:
 			slot.glyph_index = -1
 
-## Seconds this stage's manual takes.
 func current_download_time() -> float:
 	return download_time + download_extra_per_stage * float(CoreResources.comms_stage)
 
@@ -156,6 +157,15 @@ func _on_submit_pressed() -> void:
 		return
 
 	if CoreResources.check_communication_combo(_input_sequence):
+		if not CoreResources.can_afford_download():
+			_input_sequence.clear()
+			AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.5)
+			_refresh_input_display()
+			_refresh_state()
+			_status_label.text = "CODE ACCEPTED - NOT ENOUGH POWER TO PULL IT"
+			return
+
+		CoreResources.deplete_charge(CoreResources.DOWNLOAD_CHARGE_COST)
 		state = State.DOWNLOADING
 		_download_progress = 0.0
 		_input_sequence.clear()
