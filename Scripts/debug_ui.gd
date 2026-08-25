@@ -77,6 +77,8 @@ controls:
 0 throw the power breaker
 M finish a manual download
 L sabotage the plague's room
+V win instantly
+K kill instantly
 """
 	controls.modulate = Color(0.7, 0.7, 0.7)
 	box.add_child(controls)
@@ -133,6 +135,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		KEY_M when debug_open:
 			CoreResources.complete_manual_download()
+
+		KEY_V when debug_open:
+			CoreResources.produced_recipes = [0, 1, 2]
+
+		KEY_K when debug_open:
+			Global.infection_value = 100.0
 
 		KEY_L when debug_open:
 			var plague := Blackout.get_plague()

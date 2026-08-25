@@ -36,6 +36,7 @@ AudioManager="*res://Scripts/AudioManager.gd"
 BlackoutHUD="*res://Scripts/blackout_hud.gd"
 Rooms="*res://Scripts/room_navigator.gd"
 Monitor="*res://Scripts/office_computer.gd"
+GameOver="*res://Scripts/game_over.gd"
 
 [display]
 
