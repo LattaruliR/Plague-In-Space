@@ -41,9 +41,9 @@
 [ext_resource type="Script" uid="uid://dumnb4u7obxu7" path="res://Scenes/Game/infectionResearchHandler.gd" id="26_7icik"]
 [ext_resource type="Script" uid="uid://cbot80qesiu5f" path="res://Scripts/office_door.gd" id="26_odoor"]
 [ext_resource type="Script" uid="uid://b3wsjpgw816d5" path="res://Scripts/leave_door.gd" id="27_leave"]
-[ext_resource type="Script" path="res://Scripts/containment_crank.gd" id="28_crank"]
-[ext_resource type="Script" path="res://Scripts/music_box.gd" id="29_mbox"]
+[ext_resource type="Script" uid="uid://bjeakoi3pj6xd" path="res://Scripts/containment_crank.gd" id="28_crank"]
 [ext_resource type="Texture2D" uid="uid://dljb7beowr4cs" path="res://Sprites/Game/Office/Warning.png" id="29_jebrn"]
+[ext_resource type="Script" uid="uid://bp6p2xi0l1tan" path="res://Scripts/music_box.gd" id="29_mbox"]
 [ext_resource type="Script" uid="uid://dgmi3rdsiu3dc" path="res://Scenes/Game/lures.gd" id="33_j8rd5"]
 [ext_resource type="Texture2D" uid="uid://cn4oj4qsjvf6n" path="res://Sprites/Game/General Decor/ArakGayMonster.png" id="35_rht7h"]
 [ext_resource type="AudioStream" uid="uid://bmwq4vakbyso5" path="res://SOUNDS/pcselect1.wav" id="41_26aa6"]
@@ -52,12 +52,17 @@
 [ext_resource type="AudioStream" uid="uid://c3a675ifebp8n" path="res://SOUNDS/pcselect3.wav" id="43_7icik"]
 [ext_resource type="AudioStream" uid="uid://dklfhy3v605a8" path="res://SOUNDS/AmbientPanic.mp3" id="46_kllvy"]
 [ext_resource type="AudioStream" uid="uid://s40st63lm2ws" path="res://SOUNDS/CalmOffice.mp3" id="47_h5vdi"]
+[ext_resource type="Script" uid="uid://e631yn6p85pw" path="res://Scenes/Game/audioInitializer.gd" id="50_858on"]
 [ext_resource type="Texture2D" uid="uid://baqv6kj2uemn5" path="res://Sprites/Game/General Decor/Posters.png" id="50_bkdpl"]
 [ext_resource type="Texture2D" uid="uid://j00ocnhcl8qk" path="res://Sprites/Game/General Decor/TrashCan.png" id="52_2r0uj"]
 [ext_resource type="AudioStream" uid="uid://me6stdeg12dj" path="res://SOUNDS/LureBroadcast2.mp3" id="54_8trit"]
 [ext_resource type="AudioStream" uid="uid://gnhedenycgks" path="res://SOUNDS/LureBroadcast3.mp3" id="55_71giq"]
 [ext_resource type="AudioStream" uid="uid://dl1jciu0q4s2p" path="res://SOUNDS/LureBroadcast4.mp3" id="56_3mdsk"]
 [ext_resource type="AudioStream" uid="uid://dwpsqocj46r8e" path="res://SOUNDS/LureBroadcast5.mp3" id="57_a4qm0"]
+[ext_resource type="AudioStream" uid="uid://b2l86sbpurpo3" path="res://SOUNDS/Plague/PlagueLaugh1.mp3" id="59_lis5c"]
+[ext_resource type="AudioStream" uid="uid://cqugkt2gnkvc8" path="res://SOUNDS/Plague/PlagueLaugh2.mp3" id="60_858on"]
+[ext_resource type="AudioStream" uid="uid://bym0y15t73k4y" path="res://SOUNDS/Plague/PlagueLaugh3.mp3" id="61_l5fxq"]
+[ext_resource type="AudioStream" uid="uid://dskjinh6mj1k3" path="res://SOUNDS/Plague/PlagueLaugh4.mp3" id="62_jcrx1"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -609,6 +614,14 @@ stream_1/stream = ExtResource("55_71giq")
 stream_2/stream = ExtResource("56_3mdsk")
 stream_3/stream = ExtResource("57_a4qm0")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_71giq"]
+random_pitch = 1.086421
+streams_count = 4
+stream_0/stream = ExtResource("59_lis5c")
+stream_1/stream = ExtResource("60_858on")
+stream_2/stream = ExtResource("61_l5fxq")
+stream_3/stream = ExtResource("62_jcrx1")
+
 [node name="Game" type="Node2D" unique_id=1249205629]
 script = ExtResource("1_4ti5a")
 
@@ -796,26 +809,25 @@ handle_sprite = NodePath("../DoorHandle")
 handle_button = NodePath("../DoorHandle/DoorHandleButton")
 leave_button = NodePath("../Door")
 
-[node name="MusicBoxButton" type="Button" parent="OfficeRoom/Interactables"]
-offset_left = 150.0
-offset_top = 120.0
-offset_right = 340.0
-offset_bottom = 186.0
+[node name="MusicBoxButton" type="Button" parent="OfficeRoom/Interactables" unique_id=430064120]
+offset_left = -430.0
+offset_top = 96.0
+offset_right = -394.0
+offset_bottom = 145.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 24
-text = "MUSIC BOX"
 
-[node name="MusicBoxLabel" type="Label" parent="OfficeRoom/Interactables"]
-offset_left = 150.0
-offset_top = 192.0
-offset_right = 340.0
-offset_bottom = 220.0
+[node name="MusicBoxLabel" type="Label" parent="OfficeRoom/Interactables" unique_id=845729069]
+offset_left = -506.0
+offset_top = 77.0
+offset_right = -316.0
+offset_bottom = 105.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 20
 text = "CALM"
 horizontal_alignment = 1
 
-[node name="MusicBox" type="Node2D" parent="OfficeRoom/Interactables" node_paths=PackedStringArray("button", "label")]
+[node name="MusicBox" type="Node2D" parent="OfficeRoom/Interactables" unique_id=1299406611 node_paths=PackedStringArray("button", "label")]
 script = ExtResource("29_mbox")
 button = NodePath("../MusicBoxButton")
 label = NodePath("../MusicBoxLabel")
@@ -1956,42 +1968,6 @@ texture = ExtResource("15_4ti5a")
 
 [node name="Interactables" type="Node2D" parent="CommsRoom" unique_id=1172559673]
 
-[node name="MaskHideLeft" type="Sprite2D" parent="CommsRoom/Interactables" unique_id=952323967]
-z_index = 5
-position = Vector2(-443, 240)
-texture = ExtResource("5_ypmwd")
-flip_h = true
-
-[node name="Hide" type="Button" parent="CommsRoom/Interactables/MaskHideLeft" unique_id=1163239740]
-offset_left = -60.0
-offset_top = -25.0
-offset_right = 60.0
-offset_bottom = 25.0
-flat = true
-
-[node name="HideSpotLeft" type="Node2D" parent="CommsRoom/Interactables" unique_id=1611311053 node_paths=PackedStringArray("button", "sprite")]
-script = ExtResource("23_hides")
-button = NodePath("../MaskHideLeft/Hide")
-sprite = NodePath("../MaskHideLeft")
-
-[node name="MaskHideRight" type="Sprite2D" parent="CommsRoom/Interactables" unique_id=174333992]
-z_index = 5
-position = Vector2(444, 248)
-texture = ExtResource("5_ypmwd")
-
-[node name="Hide" type="Button" parent="CommsRoom/Interactables/MaskHideRight" unique_id=513002193]
-offset_left = -60.0
-offset_top = -25.0
-offset_right = 60.0
-offset_bottom = 25.0
-flat = true
-
-[node name="HideSpotRight" type="Node2D" parent="CommsRoom/Interactables" unique_id=1168299719 node_paths=PackedStringArray("button", "sprite")]
-script = ExtResource("23_hides")
-side = 1
-button = NodePath("../MaskHideRight/Hide")
-sprite = NodePath("../MaskHideRight")
-
 [node name="LeaveDoor" type="Button" parent="CommsRoom/Interactables" unique_id=1403143431]
 offset_left = -393.0
 offset_top = -174.0
@@ -2002,7 +1978,7 @@ theme_override_font_sizes/font_size = 28
 flat = true
 script = ExtResource("27_leave")
 
-[node name="CrankButton" type="Button" parent="CommsRoom/Interactables"]
+[node name="CrankButton" type="Button" parent="CommsRoom/Interactables" unique_id=1874714350]
 offset_left = -520.0
 offset_top = -60.0
 offset_right = -320.0
@@ -2011,7 +1987,7 @@ theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 26
 text = "WIND"
 
-[node name="CrankLabel" type="Label" parent="CommsRoom/Interactables"]
+[node name="CrankLabel" type="Label" parent="CommsRoom/Interactables" unique_id=2084462135]
 offset_left = -520.0
 offset_top = 16.0
 offset_right = -320.0
@@ -2021,7 +1997,7 @@ theme_override_font_sizes/font_size = 20
 text = "CONTAINMENT"
 horizontal_alignment = 1
 
-[node name="ContainmentCrank" type="Node2D" parent="CommsRoom/Interactables" node_paths=PackedStringArray("button", "label")]
+[node name="ContainmentCrank" type="Node2D" parent="CommsRoom/Interactables" unique_id=1284176404 node_paths=PackedStringArray("button", "label")]
 script = ExtResource("28_crank")
 button = NodePath("../CrankButton")
 label = NodePath("../CrankLabel")
@@ -2164,6 +2140,7 @@ autoplay = &"new_animation"
 script = ExtResource("25_pmm7v")
 
 [node name="AUDIO" type="Node" parent="." unique_id=1574462877]
+script = ExtResource("50_858on")
 
 [node name="PcSelect" type="AudioStreamPlayer" parent="AUDIO" unique_id=1933069955]
 stream = SubResource("AudioStreamRandomizer_g4v7s")
@@ -2184,6 +2161,15 @@ parameters/looping = true
 [node name="LureBroadcast" type="AudioStreamPlayer" parent="AUDIO" unique_id=1896583175]
 stream = SubResource("AudioStreamRandomizer_caws5")
 pitch_scale = 0.95
+bus = &"SFX"
+
+[node name="GopherLaughs" type="AudioStreamPlayer" parent="AUDIO" unique_id=777777539]
+bus = &"SFX"
+
+[node name="PlagueLaughs" type="AudioStreamPlayer" parent="AUDIO" unique_id=681085335]
+stream = SubResource("AudioStreamRandomizer_71giq")
+volume_db = -2.09
+pitch_scale = 0.87
 bus = &"SFX"
 
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]

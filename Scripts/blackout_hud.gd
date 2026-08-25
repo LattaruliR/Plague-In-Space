@@ -2,6 +2,7 @@ extends CanvasLayer
 
 ## toasted não entendi se no blackout teria penalidade visual, entao fiz isso: o escuro em si, quao longe
 ## o grid reboot é, e o prompt de caça de quando o plague ta na sala
+var plague_laughs: AudioStreamPlayer
 
 const FONT := preload("res://Fonts/home-video/HomeVideo-Regular.ttf")
 
@@ -64,6 +65,7 @@ func _update_labels() -> void:
 			_warning.add_theme_color_override("font_color", GREEN)
 		else:
 			_warning.text = "IT IS IN THE ROOM"
+			play_laugh(0)
 			_warning.add_theme_color_override("font_color", RED)
 	else:
 		_warning.text = _message
@@ -76,19 +78,24 @@ func _update_labels() -> void:
 		_status.text = "BLACKOUT - GRID REBOOTING %ds" % int(ceil(Blackout.reboot_remaining()))
 		_status.add_theme_color_override("font_color", AMBER)
 
+func play_laugh(volume: int):
+	plague_laughs.volume_db = volume
+	plague_laughs.play()
 
 func _on_refused(reason: String) -> void:
 	_flash(reason, 3.0)
 
 
 func _on_hunt_started() -> void:
+	
 	_flash("SOMETHING CAME IN", 2.0)
-
+	play_laugh(0)
 
 func _on_threat_warning(room: int) -> void:
 	if Global.blackout:
 		return # the sound clues carry it once the lights are out
 	_flash("MOVEMENT IN THE %s" % Global.ROOM_NAMES.get(room, "SHIP"), 3.0)
+	play_laugh(-2)
 
 
 func _flash(text: String, duration: float) -> void:

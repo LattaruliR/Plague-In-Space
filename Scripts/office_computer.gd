@@ -172,8 +172,6 @@ func _refresh_oxygen() -> void:
 
 	_oxygen_bar.modulate = colour
 	var text := "%.1f%%   [%s]" % [CoreResources.oxygen, zone]
-	if CoreResources.is_sabotaged(Global.Room.OXYGEN_SYS):
-		text += "\nSCRUBBER SABOTAGED - REBOOT OXYGEN"
 	_oxygen_text.text = text
 	_oxygen_text.add_theme_color_override("font_color", colour)
 
@@ -199,8 +197,6 @@ func _refresh_heat() -> void:
 
 	_heat_bar.modulate = colour
 	var text := "%.1f%%   [%s]" % [CoreResources.heat, zone]
-	if CoreResources.is_sabotaged(Global.Room.HEAT_SYS):
-		text += "\nEXCHANGER SABOTAGED - REBOOT HEAT"
 	_heat_text.text = text
 	_heat_text.add_theme_color_override("font_color", colour)
 
