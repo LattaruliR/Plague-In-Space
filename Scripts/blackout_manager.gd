@@ -22,8 +22,6 @@ const INTRUSION_CHANCE_PANIC := 0.55
 ## how long the player has to be hidden on the right side once a hunt starts
 const HUNT_DURATION := 6.5
 const HUNT_CUE_INTERVAL := 1.6
-## how far off-camera the directional hunt cue is placed, in pixels
-const HUNT_CUE_OFFSET := 600.0
 
 ## one sound clue per room, keyed by Global.Room - and toasted dont forget to swap these for dedicated sfx
 ## when they exist; the pitch shifts are only here to keep the six rooms tellable apart by ear
@@ -33,7 +31,7 @@ var room_clues := {}
 signal blackout_started
 signal blackout_ended
 signal power_came_online
-signal hunt_started(side: int) # 0 left, 1 right
+signal hunt_started
 signal hunt_survived
 signal restore_refused(reason: String)
 signal threat_warning(room: int) # the plague reached somewhere that matters
@@ -42,7 +40,6 @@ signal threat_warning(room: int) # the plague reached somewhere that matters
 var power_online := false
 var reboot_elapsed := 0.0
 
-var hunt_side: int = -1
 var hunt_elapsed := 0.0
 
 var _clue_elapsed := 0.0
@@ -152,7 +149,6 @@ func _end_blackout() -> void:
 	Global.blackout = false
 	_active = false
 	Global.hunting = false
-	hunt_side = -1
 	hunt_elapsed = 0.0
 	power_online = false
 	reboot_elapsed = 0.0
@@ -203,12 +199,11 @@ func _begin_hunt() -> void:
 		return # it cannot get through the blast door
 
 	Global.hunting = true
-	hunt_side = randi() % 2
 	hunt_elapsed = 0.0
 	_hunt_cue_elapsed = HUNT_CUE_INTERVAL
 
 	AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.25)
-	hunt_started.emit(hunt_side)
+	hunt_started.emit()
 
 
 func _tick_hunt(delta: float) -> void:
@@ -224,20 +219,13 @@ func _tick_hunt(delta: float) -> void:
 
 
 func _play_hunt_cue() -> void:
-	var origin := Vector2.ZERO
-	var camera := get_viewport().get_camera_2d()
-	if camera != null:
-		origin = camera.get_screen_center_position()
-
-	var direction := -1.0 if hunt_side == 0 else 1.0
-	AudioManager.play_sfx_at(CLICK_SOUND, origin + Vector2(direction * HUNT_CUE_OFFSET, 0.0), -2.0, 0.4)
+	AudioManager.play_sfx(CLICK_SOUND, -2.0, 0.4)
 
 
 func _resolve_hunt() -> void:
-	var safe := Global.hiding and Global.hide_side == hunt_side
+	var safe := Global.hiding
 
 	Global.hunting = false
-	hunt_side = -1
 	hunt_elapsed = 0.0
 
 	if safe:
@@ -281,7 +269,6 @@ func reset() -> void:
 	Global.hide_side = -1
 	power_online = false
 	reboot_elapsed = 0.0
-	hunt_side = -1
 	hunt_elapsed = 0.0
 	_clue_elapsed = 0.0
 	_move_elapsed = 0.0
