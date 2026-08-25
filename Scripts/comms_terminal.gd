@@ -8,7 +8,8 @@ const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
 ## the broadcast repeats on this period, showing itself for the stages window
 @export var broadcast_period: float = 8.0
 @export var visible_time_per_stage: Array[float] = [2.0, 1.5, 1.1]
-@export var download_time: float = 6.0
+@export var download_time: float = 15.0
+@export var download_extra_per_stage: float = 5.0
 @export var reroll_on_failure: bool = false
 
 @export_range(0.2, 1.5, 0.01) var ui_scale: float = 0.42
@@ -43,7 +44,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# No power, or the Plague tore the rack apart: either way it is dead.
+	CoreResources.comms_downloading = state == State.DOWNLOADING
+
 	if Global.blackout or CoreResources.is_sabotaged(Global.Room.COMMS_SYS):
 		if state != State.OFFLINE:
 			_abort_for_blackout()
@@ -90,8 +92,12 @@ func _apply_broadcast_visibility() -> void:
 		else:
 			slot.glyph_index = -1
 
+func current_download_time() -> float:
+	return download_time + download_extra_per_stage * float(CoreResources.comms_stage)
+
+
 func _tick_download(delta: float) -> void:
-	_download_progress += delta / maxf(download_time, 0.01)
+	_download_progress += delta / maxf(current_download_time(), 0.01)
 	_download_bar.value = clampf(_download_progress * 100.0, 0.0, 100.0)
 	_status_label.text = "DOWNLOADING MANUAL %d/%d ... %d%%" % [
 		CoreResources.comms_stage + 1, CoreResources.MANUAL_COUNT, int(_download_bar.value)
@@ -151,6 +157,15 @@ func _on_submit_pressed() -> void:
 		return
 
 	if CoreResources.check_communication_combo(_input_sequence):
+		if not CoreResources.can_afford_download():
+			_input_sequence.clear()
+			AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.5)
+			_refresh_input_display()
+			_refresh_state()
+			_status_label.text = "CODE ACCEPTED - NOT ENOUGH POWER TO PULL IT"
+			return
+
+		CoreResources.deplete_charge(CoreResources.DOWNLOAD_CHARGE_COST)
 		state = State.DOWNLOADING
 		_download_progress = 0.0
 		_input_sequence.clear()
@@ -214,7 +229,6 @@ func _build_ui() -> void:
 	_root = Control.new()
 	_root.size = PANEL_SIZE
 	_root.scale = Vector2(ui_scale, ui_scale)
-	# Keep it centred on this node whatever the scale is.
 	_root.position = -PANEL_SIZE * 0.5 * ui_scale + ui_offset
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_root)

@@ -14,6 +14,9 @@ var current_oxygen_zone: int = 0 # 0: Safe, 1: Dry, 2: Danger
 
 #  this is the extra bleeding of every system on top of its normal decay during blackout
 const BLACKOUT_OXYGEN_LEAK: float = 1.0 / 1.5 # extra % per second
+
+const DOWNLOAD_OXYGEN_MULT: float = 2.0
+var comms_downloading := false
 const BLACKOUT_HEAT_LEAK: float = 1.0 # extra % per second
 
 func _process(delta: float) -> void:
@@ -23,6 +26,8 @@ func _process(delta: float) -> void:
 		var o_rate := oxygen_decay_base_rate * o_decay_step
 		if is_sabotaged(Global.Room.OXYGEN_SYS):
 			o_rate *= SABOTAGE_DECAY_MULT
+		if comms_downloading:
+			o_rate *= DOWNLOAD_OXYGEN_MULT
 		oxygen -= o_rate * delta
 		if leaking:
 			oxygen -= BLACKOUT_OXYGEN_LEAK * delta
@@ -43,6 +48,33 @@ func _process(delta: float) -> void:
 			heat = 0.0
 			
 	_update_heat_zone()
+	_tick_synthesis(delta)
+
+
+func _tick_synthesis(delta: float) -> void:
+	if synthesis_index < 0:
+		return
+
+	if Global.blackout or is_sabotaged(Global.Room.KITCHEN):
+		var lost := synthesis_index
+		synthesis_index = -1
+		synthesis_progress = 0.0
+		AudioManager.play_sfx(ALERT_SOUND, -2.0, 0.4)
+		synthesis_lost.emit(lost)
+		return
+
+	synthesis_progress += delta / SYNTHESIS_TIME
+	if synthesis_progress < 1.0:
+		return
+
+	var done := synthesis_index
+	synthesis_index = -1
+	synthesis_progress = 0.0
+	produced_recipes.append(done)
+	Global.cure_stage += 1
+	cure_produced.emit(produced_recipes.size())
+	AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.8)
+
 
 func _update_oxygen_zone() -> void:
 	var new_zone = 0
@@ -155,6 +187,13 @@ const COMMS_SYMBOL_COUNT := 4 # how many distinct symbols the keypad offers
 var communication_combo: Array[int] = [] # Size 5
 var comms_stage = 0 # 0 - no comms uploaded, 1 - one comm uploaded, so on
 
+const SYNTHESIS_TIME := 10.0
+var synthesis_index: int = -1
+var synthesis_progress: float = 0.0
+
+signal synthesis_started(index: int)
+signal synthesis_lost(index: int)
+
 signal manual_downloaded(stage: int)
 signal recipe_unlocked(index: int)
 signal cure_produced(count: int)
@@ -189,6 +228,10 @@ func complete_manual_download() -> void:
 # the recipes are rolled once per run so a player cannot memorise them
 const KITCHEN_DIAL_MAX := 9 # dials run 0..9
 const CURE_CHARGE_COST := 1
+const DOWNLOAD_CHARGE_COST := 1
+
+func can_afford_download() -> bool:
+	return power >= DOWNLOAD_CHARGE_COST + 1
 
 var kitchen_combo: Array[int] = [] # Size 3 (R, G, B puzzle)
 var kitchen_sum: Array[int] = [] # sum of the 3 separate numbers, [].sum method
@@ -214,7 +257,7 @@ func get_recipe(index: int) -> Array:
 func get_pending_recipes() -> Array[int]:
 	var pending: Array[int] = []
 	for index in unlocked_recipes:
-		if not produced_recipes.has(index):
+		if not produced_recipes.has(index) and index != synthesis_index:
 			pending.append(index)
 	return pending
 
@@ -228,13 +271,17 @@ func try_produce_cure(input: Array[int]) -> int:
 		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.6)
 		return -1
 
+	if synthesis_index >= 0:
+		AudioManager.play_sfx(ALERT_SOUND, -6.0, 0.5)
+		return -1 # the bench is already running a batch
+
 	for index in get_pending_recipes():
 		if _matches_recipe(input, recipes[index]):
 			deplete_charge(CURE_CHARGE_COST)
-			produced_recipes.append(index)
-			Global.cure_stage += 1
-			cure_produced.emit(produced_recipes.size())
-			AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.8)
+			synthesis_index = index
+			synthesis_progress = 0.0
+			AudioManager.play_sfx(ALERT_SOUND, 0.0, 1.4)
+			synthesis_started.emit(index)
 			return index
 
 	AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.5)
@@ -274,7 +321,6 @@ func is_sabotaged(room: int) -> bool:
 func any_sabotaged() -> bool:
 	return not sabotaged.is_empty()
 
-## returns true if this actually broke something new
 func apply_sabotage(room: int) -> bool:
 	if room == Global.Room.POWER_GRID:
 		if Global.blackout:
@@ -368,3 +414,6 @@ func reset_systems() -> void:
 	roll_recipes()
 
 	sabotaged.clear()
+	comms_downloading = false
+	synthesis_index = -1
+	synthesis_progress = 0.0
