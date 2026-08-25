@@ -1565,7 +1565,7 @@ scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_lcvqc")
 animation = &"panic"
 autoplay = "panic"
-frame_progress = 0.8949086
+frame_progress = 0.6872987
 speed_scale = 0.6
 
 [node name="ResearchFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=229480706]
