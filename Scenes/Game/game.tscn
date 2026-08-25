@@ -52,7 +52,10 @@
 [ext_resource type="AudioStream" uid="uid://s40st63lm2ws" path="res://SOUNDS/CalmOffice.mp3" id="47_h5vdi"]
 [ext_resource type="Texture2D" uid="uid://baqv6kj2uemn5" path="res://Sprites/Game/General Decor/Posters.png" id="50_bkdpl"]
 [ext_resource type="Texture2D" uid="uid://j00ocnhcl8qk" path="res://Sprites/Game/General Decor/TrashCan.png" id="52_2r0uj"]
-[ext_resource type="AudioStream" uid="uid://cqneqee1ttis6" path="res://SOUNDS/LureBroadcast.mp3" id="53_2r0uj"]
+[ext_resource type="AudioStream" uid="uid://me6stdeg12dj" path="res://SOUNDS/LureBroadcast2.mp3" id="54_8trit"]
+[ext_resource type="AudioStream" uid="uid://gnhedenycgks" path="res://SOUNDS/LureBroadcast3.mp3" id="55_71giq"]
+[ext_resource type="AudioStream" uid="uid://dl1jciu0q4s2p" path="res://SOUNDS/LureBroadcast4.mp3" id="56_3mdsk"]
+[ext_resource type="AudioStream" uid="uid://dwpsqocj46r8e" path="res://SOUNDS/LureBroadcast5.mp3" id="57_a4qm0"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -597,8 +600,12 @@ stream_2/stream = ExtResource("43_7icik")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_caws5"]
 playback_mode = 1
-streams_count = 2
-stream_0/stream = ExtResource("53_2r0uj")
+random_pitch = 1.140105
+streams_count = 4
+stream_0/stream = ExtResource("54_8trit")
+stream_1/stream = ExtResource("55_71giq")
+stream_2/stream = ExtResource("56_3mdsk")
+stream_3/stream = ExtResource("57_a4qm0")
 
 [node name="Game" type="Node2D" unique_id=1249205629]
 script = ExtResource("1_4ti5a")
@@ -1575,7 +1582,7 @@ scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_lcvqc")
 animation = &"panic"
 autoplay = "panic"
-frame_progress = 0.73992157
+frame_progress = 0.67451566
 speed_scale = 0.6
 
 [node name="ResearchFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=229480706]
@@ -2117,7 +2124,8 @@ parameters/looping = true
 
 [node name="LureBroadcast" type="AudioStreamPlayer" parent="AUDIO" unique_id=1896583175]
 stream = SubResource("AudioStreamRandomizer_caws5")
-pitch_scale = 0.6
+pitch_scale = 0.95
+bus = &"SFX"
 
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/O2RebootBSprite/O2Reboot" to="InteractionHandler" method="_on_o_2_reboot_pressed"]
