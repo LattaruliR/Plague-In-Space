@@ -43,7 +43,7 @@ signal player_caught
 
 var infection_value: float = 0.0 # max: 100, min: 0
 var infection_step: int = 0
-var infection_base_rate: float = 0.5 # how much infection increases per second per step
+var infection_base_rate: float = 0.4 # how much infection increases per second per step
 var cure_stage := 0 # the higher the cure stage, the more aggro plague has
 
 func _process(delta: float) -> void:

@@ -15,7 +15,7 @@ var textTip = " "
 const BAR_TONE = preload("uid://cmabygqmehtnw")
 
 func _ready() -> void:
-	var hover_tips := {
+	var hover_tips := {	
 	hidemask: "hide",
 	o_2_reboot: "Reboot oxygen",
 	heat_reboot: "Reboot heat",

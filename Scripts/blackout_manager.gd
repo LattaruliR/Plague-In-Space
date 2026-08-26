@@ -231,7 +231,11 @@ func _resolve_hunt() -> void:
 
 	if safe:
 		if _plague != null:
-			_plague.cur_position = Global.Room.COMMS_SYS
+			var elsewhere: Array[int] = []
+			for room in Global.ROOM_NAMES:
+				if room != Global.Room.PLAYER_ROOM:
+					elsewhere.append(room)
+			_plague.cur_position = elsewhere.pick_random()
 		AudioManager.play_sfx(TONE_SOUND, -6.0, 0.8)
 		hunt_survived.emit()
 	else:

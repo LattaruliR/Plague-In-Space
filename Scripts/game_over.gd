@@ -67,6 +67,10 @@ func _on_player_caught() -> void:
 func record_cause(text: String) -> void:
 	_cause = text
 
+
+func is_running() -> bool:
+	return _armed and not is_over
+
 func _infection_cause() -> String:
 	if _cause != "":
 		return _cause
@@ -133,6 +137,7 @@ func _to_menu() -> void:
 
 func _leave_to(path: String) -> void:
 	get_tree().paused = false
+	AudioManager.stop_music() # hard stop: no fade left running across the load
 	reset()
 	Archivist.reset()
 	CoreResources.reset_systems()

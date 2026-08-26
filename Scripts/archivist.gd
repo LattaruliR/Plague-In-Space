@@ -57,7 +57,9 @@ func set_winding(active: bool) -> void:
 
 func _process(delta: float) -> void:
 	if not _armed:
+		visible = false
 		return
+	visible = true
 
 	if loose:
 		_tick_escape(delta)

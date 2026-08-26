@@ -8,9 +8,12 @@ var _steal_index := 0
 
 var _music_player: AudioStreamPlayer
 var _music_tween: Tween
+var _stopping := false
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	for i in SFX_POOL_SIZE:
 		_sfx_pool.append(_make_player(&"SFX"))
 
@@ -69,8 +72,9 @@ func _get_free_sfx_player() -> AudioStreamPlayer:
 func play_music(stream: AudioStream, fade_in: float = 0.0) -> void:
 	if stream == null:
 		return
-	if _music_player.stream == stream and _music_player.playing:
+	if _music_player.stream == stream and _music_player.playing and not _stopping:
 		return
+	_stopping = false
 
 	if _music_tween:
 		_music_tween.kill()
@@ -91,12 +95,19 @@ func stop_music(fade_out: float = 0.0) -> void:
 		_music_tween.kill()
 
 	if fade_out <= 0.0:
+		_stopping = false
 		_music_player.stop()
+		_music_player.volume_db = 0.0
 		return
+
+	_stopping = true
 
 	_music_tween = create_tween()
 	_music_tween.tween_property(_music_player, "volume_db", MIN_VOLUME_DB, fade_out)
 	_music_tween.tween_callback(_music_player.stop)
+	_music_tween.tween_callback(func():
+		_stopping = false
+		_music_player.volume_db = 0.0)
 
 
 func set_sfx_volume(percent: float) -> void:

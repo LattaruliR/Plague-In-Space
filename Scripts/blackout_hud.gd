@@ -34,7 +34,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if get_tree().current_scene and get_tree().current_scene.name == "Menu":
+	if not GameOver.is_running():
+		_message = ""
+		_message_time = 0.0
+		_shade_alpha = 0.0
+		_warning.text = ""
+		_status.text = ""
 		visible = false
 		return
 	visible = true
