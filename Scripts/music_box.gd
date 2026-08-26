@@ -30,11 +30,12 @@ func _process(delta: float) -> void:
 		return
 
 	if not Global.panic:
-		label.text = "CALM"
+		label.text = " "
 		label.add_theme_color_override("font_color", TerminalStyle.GREEN)
 	elif _held > 0.0:
-		label.text = "WINDING %d%%" % int(_held / WIND_SECONDS * 100.0)
+		$"../../../AUDIO/Sipping".play()
+		label.text = "SIPPING %d%%" % int(_held / WIND_SECONDS * 100.0)
 		label.add_theme_color_override("font_color", TerminalStyle.AMBER)
 	else:
-		label.text = "PANIC - HOLD TO WIND"
+		label.text = "PANIC - HOLD TO DRINK"
 		label.add_theme_color_override("font_color", TerminalStyle.RED)

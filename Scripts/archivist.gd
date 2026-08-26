@@ -4,9 +4,9 @@ const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
 const TONE_SOUND := preload("res://SOUNDS/barTone2.wav")
 const FONT := preload("res://Fonts/home-video/HomeVideo-Regular.ttf")
 
-const CONTAINMENT_DRAIN := 2.0
-const CONTAINMENT_WIND := 14.0
-const BLACKOUT_DRAIN_MULT := 2.0
+const CONTAINMENT_DRAIN := 1.6
+const CONTAINMENT_WIND := 9.0
+const BLACKOUT_DRAIN_MULT := 0.7
 const ESCAPE_WINDOW := 12.0
 const CRITICAL_THRESHOLD := 25.0
 

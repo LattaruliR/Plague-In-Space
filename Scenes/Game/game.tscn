@@ -49,7 +49,9 @@
 [ext_resource type="AudioStream" uid="uid://bmwq4vakbyso5" path="res://SOUNDS/pcselect1.wav" id="41_26aa6"]
 [ext_resource type="Texture2D" uid="uid://ca5dxfs6qkwks" path="res://Sprites/Game/General Decor/PostIt.png" id="41_caws5"]
 [ext_resource type="AudioStream" uid="uid://sb4jso5acwm2" path="res://SOUNDS/pcselect2.wav" id="42_4gqoa"]
+[ext_resource type="Texture2D" uid="uid://d02k4u566lh25" path="res://Sprites/Game/GopherMadnessSheet.png" id="42_53spd"]
 [ext_resource type="AudioStream" uid="uid://c3a675ifebp8n" path="res://SOUNDS/pcselect3.wav" id="43_7icik"]
+[ext_resource type="Script" uid="uid://b00klwmm0cnen" path="res://Scenes/Game/gopher_sprite.gd" id="44_4qu01"]
 [ext_resource type="AudioStream" uid="uid://dklfhy3v605a8" path="res://SOUNDS/AmbientPanic.mp3" id="46_kllvy"]
 [ext_resource type="AudioStream" uid="uid://s40st63lm2ws" path="res://SOUNDS/CalmOffice.mp3" id="47_h5vdi"]
 [ext_resource type="Script" uid="uid://e631yn6p85pw" path="res://Scenes/Game/audioInitializer.gd" id="50_858on"]
@@ -61,8 +63,13 @@
 [ext_resource type="AudioStream" uid="uid://dwpsqocj46r8e" path="res://SOUNDS/LureBroadcast5.mp3" id="57_a4qm0"]
 [ext_resource type="AudioStream" uid="uid://b2l86sbpurpo3" path="res://SOUNDS/Plague/PlagueLaugh1.mp3" id="59_lis5c"]
 [ext_resource type="AudioStream" uid="uid://cqugkt2gnkvc8" path="res://SOUNDS/Plague/PlagueLaugh2.mp3" id="60_858on"]
+[ext_resource type="AudioStream" uid="uid://p4eotdtq0tw" path="res://SOUNDS/Gopher/GopherLaugh1.mp3" id="60_d85t2"]
+[ext_resource type="AudioStream" uid="uid://pdnvceclldhp" path="res://SOUNDS/Gopher/GopherLaugh2.mp3" id="61_53spd"]
 [ext_resource type="AudioStream" uid="uid://bym0y15t73k4y" path="res://SOUNDS/Plague/PlagueLaugh3.mp3" id="61_l5fxq"]
+[ext_resource type="AudioStream" uid="uid://ntb6fehvf7hl" path="res://SOUNDS/Gopher/GopherLaugh3.mp3" id="62_4qu01"]
 [ext_resource type="AudioStream" uid="uid://dskjinh6mj1k3" path="res://SOUNDS/Plague/PlagueLaugh4.mp3" id="62_jcrx1"]
+[ext_resource type="AudioStream" uid="uid://b7s818e3gqjoq" path="res://SOUNDS/Gopher/GopherLaugh4.mp3" id="63_qqdjj"]
+[ext_resource type="AudioStream" uid="uid://chf64ytmhjcfr" path="res://SOUNDS/Office/Sipping.mp3" id="64_l5fxq"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -546,6 +553,56 @@ frame_0/duration = 0.9
 frame_1/texture = SubResource("GradientTexture2D_qjf7v")
 frame_1/duration = 0.2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qu01"]
+atlas = ExtResource("42_53spd")
+region = Rect2(0, 0, 170, 159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqdjj"]
+atlas = ExtResource("42_53spd")
+region = Rect2(170, 0, 170, 159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8opw"]
+atlas = ExtResource("42_53spd")
+region = Rect2(340, 0, 170, 159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntkbw"]
+atlas = ExtResource("42_53spd")
+region = Rect2(510, 0, 170, 159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4puy"]
+atlas = ExtResource("42_53spd")
+region = Rect2(680, 0, 170, 159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xft3b"]
+atlas = ExtResource("42_53spd")
+region = Rect2(850, 0, 170, 159)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7numd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qu01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqdjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8opw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntkbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4puy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xft3b")
+}],
+"loop": 1,
+"name": &"madness",
+"speed": 5.0
+}]
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g4v7s"]
 blend_mode = 3
 
@@ -613,6 +670,14 @@ stream_0/stream = ExtResource("54_8trit")
 stream_1/stream = ExtResource("55_71giq")
 stream_2/stream = ExtResource("56_3mdsk")
 stream_3/stream = ExtResource("57_a4qm0")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qfy56"]
+random_pitch = 1.0804757
+streams_count = 4
+stream_0/stream = ExtResource("60_d85t2")
+stream_1/stream = ExtResource("61_53spd")
+stream_2/stream = ExtResource("62_4qu01")
+stream_3/stream = ExtResource("63_qqdjj")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_71giq"]
 random_pitch = 1.086421
@@ -816,6 +881,7 @@ offset_right = -394.0
 offset_bottom = 145.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 24
+flat = true
 
 [node name="MusicBoxLabel" type="Label" parent="OfficeRoom/Interactables" unique_id=845729069]
 offset_left = -506.0
@@ -1979,19 +2045,20 @@ flat = true
 script = ExtResource("27_leave")
 
 [node name="CrankButton" type="Button" parent="CommsRoom/Interactables" unique_id=1874714350]
-offset_left = -520.0
-offset_top = -60.0
-offset_right = -320.0
-offset_bottom = 10.0
+z_index = 1
+offset_left = 105.0
+offset_top = 132.0
+offset_right = 272.0
+offset_bottom = 271.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 26
-text = "WIND"
+flat = true
 
 [node name="CrankLabel" type="Label" parent="CommsRoom/Interactables" unique_id=2084462135]
-offset_left = -520.0
-offset_top = 16.0
-offset_right = -320.0
-offset_bottom = 44.0
+offset_left = 86.0
+offset_top = 109.0
+offset_right = 286.0
+offset_bottom = 137.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 20
 text = "CONTAINMENT"
@@ -2005,6 +2072,15 @@ label = NodePath("../CrankLabel")
 [node name="CommsTerminal" type="Node2D" parent="CommsRoom/Interactables" unique_id=555035815]
 position = Vector2(0, 30)
 script = ExtResource("20_cmter")
+
+[node name="GopherSprite" type="AnimatedSprite2D" parent="CommsRoom/Interactables" unique_id=72785571]
+position = Vector2(193, 191)
+sprite_frames = SubResource("SpriteFrames_7numd")
+animation = &"madness"
+script = ExtResource("44_4qu01")
+
+[node name="laughTimer" type="Timer" parent="CommsRoom/Interactables" unique_id=421018753]
+wait_time = 3.0
 
 [node name="Decorations" type="Node2D" parent="CommsRoom" unique_id=239005365]
 position = Vector2(-671, -779)
@@ -2164,12 +2240,18 @@ pitch_scale = 0.95
 bus = &"SFX"
 
 [node name="GopherLaughs" type="AudioStreamPlayer" parent="AUDIO" unique_id=777777539]
+stream = SubResource("AudioStreamRandomizer_qfy56")
 bus = &"SFX"
 
 [node name="PlagueLaughs" type="AudioStreamPlayer" parent="AUDIO" unique_id=681085335]
 stream = SubResource("AudioStreamRandomizer_71giq")
 volume_db = -2.09
 pitch_scale = 0.87
+bus = &"SFX"
+
+[node name="Sipping" type="AudioStreamPlayer" parent="AUDIO" unique_id=1759663215]
+stream = ExtResource("64_l5fxq")
+volume_db = -2.06
 bus = &"SFX"
 
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
@@ -2195,3 +2277,4 @@ bus = &"SFX"
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureO" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_o_pressed"]
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureC" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_c_pressed"]
 [connection signal="timeout" from="OfficeRoom/Timer" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_timer_timeout"]
+[connection signal="timeout" from="CommsRoom/Interactables/laughTimer" to="CommsRoom/Interactables/ContainmentCrank" method="_on_laugh_timer_timeout"]
