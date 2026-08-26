@@ -73,6 +73,9 @@ func _process(delta: float) -> void:
 			_start_blackout_state()
 		else:
 			_active = false
+			
+	if Global.hunting:
+		_tick_hunt(delta)
 
 	if not Global.blackout:
 		return
@@ -84,9 +87,7 @@ func _process(delta: float) -> void:
 			AudioManager.play_sfx(TONE_SOUND, -4.0, 1.9)
 			power_came_online.emit()
 
-	if Global.hunting:
-		_tick_hunt(delta)
-	else:
+	if not Global.hunting:
 		_tick_roaming(delta)
 
 	_tick_clues(delta)
@@ -223,7 +224,7 @@ func _play_hunt_cue() -> void:
 
 
 func _resolve_hunt() -> void:
-	var safe := Global.hiding
+	var safe := Global.hiding and Global.player_room == Global.Room.PLAYER_ROOM
 
 	Global.hunting = false
 	hunt_elapsed = 0.0

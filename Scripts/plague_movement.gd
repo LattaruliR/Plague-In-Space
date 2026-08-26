@@ -141,6 +141,7 @@ func _on_arrived() -> void:
 
 	if cur_position == Global.player_room:
 		Global.saw_player()
+		Blackout._begin_hunt()
 	else:
 		_roll_sabotage()
 

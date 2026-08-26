@@ -53,25 +53,23 @@ func _process(delta: float) -> void:
 
 
 func _update_labels() -> void:
-	if not Global.blackout:
-		_status.text = _message
-		_status.add_theme_color_override("font_color", GREEN)
-		_warning.text = ""
-		return
-
 	if Global.hunting:
 		if Global.hiding:
 			_warning.text = "HIDDEN"
 			_warning.add_theme_color_override("font_color", GREEN)
 		else:
 			_warning.text = "IT IS IN THE ROOM"
-			play_laugh(0)
 			_warning.add_theme_color_override("font_color", RED)
+	elif not Global.blackout:
+		_warning.text = ""
 	else:
 		_warning.text = _message
 		_warning.add_theme_color_override("font_color", AMBER)
 
-	if Blackout.power_online:
+	if not Global.blackout:
+		_status.text = _message
+		_status.add_theme_color_override("font_color", GREEN)
+	elif Blackout.power_online:
 		_status.text = "POWER RESTORED - THROW THE SWITCH IN THE OFFICE"
 		_status.add_theme_color_override("font_color", GREEN)
 	else:

@@ -64,8 +64,6 @@ func close_travel_menu() -> void:
 
 
 func _blocked_reason() -> String:
-	if Global.hunting:
-		return "IT IS IN HERE WITH YOU"
 	if Global.hiding:
 		return "NOT WHILE YOU ARE HIDDEN"
 	if Global.door_closed and Global.player_room == Global.Room.PLAYER_ROOM:
