@@ -176,6 +176,7 @@ func _build_ui() -> void:
 	_label.add_theme_font_size_override("font_size", 20)
 	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_label.visible = false
 	column.add_child(_label)
 
 	_bar = ProgressBar.new()
@@ -184,4 +185,5 @@ func _build_ui() -> void:
 	_bar.show_percentage = false
 	_bar.custom_minimum_size = Vector2(0, 14)
 	_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_bar.visible = false
 	column.add_child(_bar)
