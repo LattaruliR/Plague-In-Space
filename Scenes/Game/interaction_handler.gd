@@ -9,6 +9,7 @@ var textTip = " "
 @onready var reboot_all: Button = $"../OfficeRoom/Interactables/RebootAllBSprite/RebootAll"
 @onready var door: Button = $"../OfficeRoom/Interactables/Door"
 @onready var door_handle_button: Button = $"../OfficeRoom/Interactables/DoorHandle/DoorHandleButton"
+@onready var arak_energy: Button = $"../OfficeRoom/Interactables/MusicBoxButton"
 #@onready var computer_button: Button = $"../OfficeRoom/BaseElements/Computer/ComputerButton"
 
 const BAR_TONE = preload("uid://cmabygqmehtnw")
@@ -22,6 +23,7 @@ func _ready() -> void:
 	reboot_all: "Reboot all",
 	door: "Leave",
 	door_handle_button: "Switch",
+	arak_energy: "Monster"
 	#computer_button: "Cameras / Oxygen / Heat"
 	}
 	
