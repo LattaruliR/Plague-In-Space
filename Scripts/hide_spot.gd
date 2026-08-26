@@ -11,6 +11,7 @@ const GREEN := Color(0.35, 1.0, 0.35)
 @export var button: Button
 @export var sprite: Node2D
 
+
 func _ready() -> void:
 	if button != null and not button.pressed.is_connected(_on_pressed):
 		button.pressed.connect(_on_pressed)
@@ -23,6 +24,7 @@ func _on_pressed() -> void:
 	# clicking the spot you are already in climbs back out of it
 	var already_here := Global.hiding and Global.hide_side == side
 	Blackout.set_hiding(side, not already_here)
+
 	_refresh()
 
 func _on_player_caught() -> void:

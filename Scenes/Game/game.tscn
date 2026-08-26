@@ -21,8 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://bk4hv13n1wvwt" path="res://Sprites/Game/Office/FanSpinningDeco.png" id="12_a6ftd"]
 [ext_resource type="Texture2D" uid="uid://c8n5qybmblvhq" path="res://Sprites/Game/Office/empty.png" id="13_6k7u1"]
 [ext_resource type="Texture2D" uid="uid://br8nalqwcwy00" path="res://Sprites/Game/Comms/CommunicationsLeftBackground.png" id="14_2lc0x"]
+[ext_resource type="Texture2D" uid="uid://c3ejfjq02o5u0" path="res://Sprites/Game/MaskOverlay.png" id="14_qqdjj"]
 [ext_resource type="Texture2D" uid="uid://b8aoe7r220bdi" path="res://Sprites/Game/Office/Printer.png" id="14_upfqs"]
 [ext_resource type="Texture2D" uid="uid://g5cw3ntyky1c" path="res://Sprites/Game/Comms/CommunicationsLeftBaseElements.png" id="15_4ti5a"]
+[ext_resource type="Script" uid="uid://dvikp5v3kpd2x" path="res://Scenes/Game/mask_overlay.gd" id="15_x8opw"]
 [ext_resource type="Texture2D" uid="uid://d20w8mrdjg0sm" path="res://Sprites/Game/Office/PaperSlip.png" id="16_4gqoa"]
 [ext_resource type="Texture2D" uid="uid://bgno3daeue8wh" path="res://Sprites/Game/Office/ComputerOptionHUD.png" id="19_diago"]
 [ext_resource type="Script" uid="uid://dbodhsg7duwfc" path="res://Scripts/check_scanlines.gd" id="19_lemb1"]
@@ -219,6 +221,44 @@ animations = [{
 "name": &"pressingDown",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_x8opw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MaskOverlay:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -44)]
+}
+
+[sub_resource type="Animation" id="Animation_qqdjj"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MaskOverlay:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 1, 1.53, 2),
+"transitions": PackedFloat32Array(1, 0.27739218, 0.45062566, 1, 0.2253126),
+"update": 0,
+"values": [Vector2(0, -44), Vector2(0, -53.68), Vector2(0, -44), Vector2(0, -29.725), Vector2(0, -44)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8opw"]
+_data = {
+&"RESET": SubResource("Animation_x8opw"),
+&"idle": SubResource("Animation_qqdjj")
+}
 
 [sub_resource type="Gradient" id="Gradient_lemb1"]
 offsets = PackedFloat32Array(0, 0.42444444, 1)
@@ -897,6 +937,16 @@ horizontal_alignment = 1
 script = ExtResource("29_mbox")
 button = NodePath("../MusicBoxButton")
 label = NodePath("../MusicBoxLabel")
+
+[node name="MaskOverlay" type="Sprite2D" parent="OfficeRoom/Interactables" unique_id=1242330330]
+z_index = 6
+position = Vector2(0, -44)
+texture = ExtResource("14_qqdjj")
+script = ExtResource("15_x8opw")
+
+[node name="MaskIdle" type="AnimationPlayer" parent="OfficeRoom/Interactables" unique_id=1175818590]
+libraries/ = SubResource("AnimationLibrary_x8opw")
+autoplay = &"idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="OfficeRoom" unique_id=1055643177]
 position = Vector2(-103, 66)
