@@ -504,6 +504,7 @@ volume_db = -5.29
 bus = &"SFX"
 
 [node name="Cure" type="Sprite2D" parent="." unique_id=559701913]
+visible = false
 position = Vector2(0, 217)
 texture = ExtResource("19_wv7rd")
 script = ExtResource("20_k0qon")
