@@ -94,6 +94,7 @@ func _end(did_win: bool) -> void:
 			TerminalStyle.outline_style(Color(0, 0, 0, 0.96), accent))
 
 	if did_win:
+		Global.cure_found = true
 		_cause_label.text = "All %d doses produced. The ship is clean." % CoreResources.MANUAL_COUNT
 	else:
 		_cause_label.text = _infection_cause()

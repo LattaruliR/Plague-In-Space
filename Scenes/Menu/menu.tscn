@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://0kjjx8de2ghd" path="res://SOUNDS/MenuThemeSong.mp3" id="16_wxa3f"]
 [ext_resource type="AudioStream" uid="uid://rcoe7u0qb5d6" path="res://SOUNDS/selecting.wav" id="17_0401g"]
 [ext_resource type="AudioStream" uid="uid://v1coedd33f1w" path="res://SOUNDS/barTone2.wav" id="18_lnqkc"]
+[ext_resource type="Texture2D" uid="uid://cufpc7p8erwga" path="res://Sprites/Game/GameBeatPrize.png" id="19_wv7rd"]
+[ext_resource type="Script" uid="uid://du8squbox0wjy" path="res://Scenes/Menu/cure.gd" id="20_k0qon"]
 
 [sub_resource type="Animation" id="Animation_7qvly"]
 length = 0.001
@@ -500,6 +502,11 @@ bus = &"SFX"
 stream = SubResource("AudioStreamRandomizer_lnqkc")
 volume_db = -5.29
 bus = &"SFX"
+
+[node name="Cure" type="Sprite2D" parent="." unique_id=559701913]
+position = Vector2(0, 217)
+texture = ExtResource("19_wv7rd")
+script = ExtResource("20_k0qon")
 
 [connection signal="mouse_entered" from="Parallaxes/Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="mouse_exited" from="Parallaxes/Spaceship/Sprite2D/PlayButton" to="." method="_on_play_button_mouse_exited"]

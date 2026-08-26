@@ -939,6 +939,7 @@ button = NodePath("../MusicBoxButton")
 label = NodePath("../MusicBoxLabel")
 
 [node name="MaskOverlay" type="Sprite2D" parent="OfficeRoom/Interactables" unique_id=1242330330]
+visible = false
 z_index = 6
 position = Vector2(0, -44)
 texture = ExtResource("14_qqdjj")

@@ -19,6 +19,8 @@ const ROOM_NAMES := {
 	Room.PLAYER_ROOM: "OFFICE",
 }
 
+var cure_found := false
+
 var blackout := false # handles blackout state
 var panic := false # handles if player is in a panic
 
