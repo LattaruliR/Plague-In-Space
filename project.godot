@@ -38,6 +38,9 @@ Rooms="*res://Scripts/room_navigator.gd"
 Monitor="*res://Scripts/office_computer.gd"
 GameOver="*res://Scripts/game_over.gd"
 Archivist="*res://Scripts/archivist.gd"
+SaveData="*res://Scripts/save_data.gd"
+Achievements="*res://Scripts/achievements.gd"
+AchievementsUI="*res://Scripts/achievements_ui.gd"
 
 [display]
 

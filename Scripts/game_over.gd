@@ -104,11 +104,21 @@ func _end(did_win: bool) -> void:
 		_cause_label.text = _infection_cause()
 	_cause_label.add_theme_color_override("font_color", accent)
 
+	var new_record := SaveData.record_run(did_win, _elapsed, Global.hard_mode)
+
 	_stats.text = "MANUALS %d/%d      DOSES %d/%d      TIME %s" % [
 		CoreResources.comms_stage, CoreResources.MANUAL_COUNT,
 		CoreResources.produced_recipes.size(), CoreResources.MANUAL_COUNT,
 		_format_time(_elapsed),
 	]
+	if did_win:
+		var best := SaveData.best_time(Global.hard_mode)
+		if new_record:
+			_stats.text += "
+NEW BEST TIME"
+		else:
+			_stats.text += "
+BEST %s" % SaveData.format_time(best)
 
 	BlackoutHUD.visible = false
 	Archivist.visible = false

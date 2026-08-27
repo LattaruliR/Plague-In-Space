@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://v1coedd33f1w" path="res://SOUNDS/barTone2.wav" id="18_lnqkc"]
 [ext_resource type="Texture2D" uid="uid://cufpc7p8erwga" path="res://Sprites/Game/GameBeatPrize.png" id="19_wv7rd"]
 [ext_resource type="Script" uid="uid://du8squbox0wjy" path="res://Scenes/Menu/cure.gd" id="20_k0qon"]
+[ext_resource type="Script" path="res://Scripts/profile_panel.gd" id="99_prof"]
 
 [sub_resource type="Animation" id="Animation_7qvly"]
 length = 0.001
@@ -358,6 +359,61 @@ offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
+
+[node name="ProfilePanel" type="Control" parent="." node_paths=PackedStringArray("best_time_label", "achievements_button", "delete_button")]
+script = ExtResource("99_prof")
+best_time_label = NodePath("BestTimeLabel")
+achievements_button = NodePath("AchievementsButton")
+delete_button = NodePath("DeleteSaveButton")
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -136.0
+offset_right = 470.0
+offset_bottom = -28.0
+grow_vertical = 0
+
+[node name="BestTimeLabel" type="Label" parent="ProfilePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.61, 0, 0.0824, 1)
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 26
+text = "YOUR BEST TIME: --:--"
+vertical_alignment = 1
+
+[node name="AchievementsButton" type="Button" parent="ProfilePanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_right = 270.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.61, 0, 0.0824, 1)
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 26
+text = "ACHIEVEMENTS"
+
+[node name="DeleteSaveButton" type="Button" parent="ProfilePanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 280.0
+offset_top = -48.0
+offset_right = 470.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.25, 0.2, 1)
+theme_override_fonts/font = ExtResource("10_7qvly")
+theme_override_font_sizes/font_size = 22
+text = "DELETE SAVE"
 
 [node name="OptionsUI" type="Control" parent="." unique_id=1928797231]
 visible = false
