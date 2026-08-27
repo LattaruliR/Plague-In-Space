@@ -24,7 +24,9 @@ func _process(delta: float) -> void:
 	if not Global.door_closed:
 		return
 
-	Global.infection_value = minf(Global.infection_value + INFECTION_PER_SECOND * delta, 100.0)
+	Global.infection_value = minf(
+		Global.infection_value + INFECTION_PER_SECOND * Global.infection_multiplier() * delta,
+		100.0)
 	if Global.infection_value >= 100.0:
 		Global.panic = true
 

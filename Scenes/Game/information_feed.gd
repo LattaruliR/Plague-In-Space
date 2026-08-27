@@ -21,7 +21,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	Monitor._refresh_heat()
 	Monitor._refresh_oxygen()
-	charges_label.text = str(CoreResources.power) + "/5"
+	charges_label.text = str(CoreResources.power) + "/" + str(CoreResources.max_power())
 	oxygen_bar.value = Monitor._oxygen_bar.value
 	heat_bar.value = Monitor._heat_bar.value
 	ox_status.text = Monitor._oxygen_text.text

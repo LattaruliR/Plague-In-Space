@@ -45,11 +45,16 @@ signal player_caught
 var infection_value: float = 0.0 # max: 100, min: 0
 var infection_step: int = 0
 var infection_base_rate: float = 0.4 # how much infection increases per second per step
+
+const HARD_INFECTION_MULT := 1.5
+
+func infection_multiplier() -> float:
+	return HARD_INFECTION_MULT if hard_mode else 1.0
 var cure_stage := 0 # the higher the cure stage, the more aggro plague has
 
 func _process(delta: float) -> void:
 	if infection_step > 0 and infection_value < 100.0:
-		infection_value += infection_base_rate * infection_step * delta
+		infection_value += infection_base_rate * infection_step * infection_multiplier() * delta
 		if infection_value >= 100.0:
 			infection_value = 100.0
 			panic = true

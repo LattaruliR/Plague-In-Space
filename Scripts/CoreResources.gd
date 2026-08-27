@@ -109,7 +109,11 @@ var plague_heat_aggro: bool = false
 
 # Power
 const MAX_POWER: int = 5
-var power: int = 5 # mininum: 0, max: 5
+const HARD_BONUS_POWER: int = 1
+var power: int = 5 # mininum: 0, max: max_power()
+
+func max_power() -> int:
+	return MAX_POWER + (HARD_BONUS_POWER if Global.hard_mode else 0)
 
 func deplete_charge(charge_cost: int):
 	power -= charge_cost
@@ -401,7 +405,7 @@ func reset_systems() -> void:
 	heat_reboot_cost = 1
 	plague_heat_aggro = false
 	
-	power = MAX_POWER
+	power = max_power()
 
 	communication_combo.clear()
 	comms_stage = 0

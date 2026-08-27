@@ -152,7 +152,6 @@ func _build_confirm() -> void:
 	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
 	column.add_child(buttons)
 
-	# Cancel sits first and reads as the normal choice.
 	var cancel := TerminalStyle.text_button("KEEP IT", Vector2(230, 52), 28, ACCENT)
 	cancel.pressed.connect(_close_confirm)
 	buttons.add_child(cancel)

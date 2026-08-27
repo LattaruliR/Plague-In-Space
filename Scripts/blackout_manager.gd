@@ -156,7 +156,7 @@ func _end_blackout() -> void:
 	power_online = false
 	reboot_elapsed = 0.0
 
-	CoreResources.power = CoreResources.MAX_POWER
+	CoreResources.power = CoreResources.max_power()
 
 	if _plague != null:
 		_plague.cur_position = Global.Room.KITCHEN

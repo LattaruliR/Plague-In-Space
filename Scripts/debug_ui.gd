@@ -118,7 +118,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			CoreResources.reboot_system(true) # reboot heat
 			
 		KEY_6 when debug_open:
-			CoreResources.power = CoreResources.MAX_POWER
+			CoreResources.power = CoreResources.max_power()
 			Blackout.reset()
 
 		KEY_7 when debug_open:
@@ -181,7 +181,7 @@ func _update_debug_info() -> void:
 	heat_label.text = "Heat: %.1f [%s]" % [CoreResources.heat, heat_zone_name]
 	
 	heat_label.text += "\nPower: %d/%d  Blackout: %s" % [
-		CoreResources.power, CoreResources.MAX_POWER, Global.blackout
+		CoreResources.power, CoreResources.max_power(), Global.blackout
 	]
 
 	var grid := "ONLINE"
