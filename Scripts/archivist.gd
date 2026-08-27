@@ -14,6 +14,8 @@ signal broke_loose
 signal contained_again
 signal survived_escape
 
+var hm_multiplier = 1
+
 var containment := 100.0
 var loose := false
 var escape_left := 0.0
@@ -29,6 +31,7 @@ var _label: Label
 
 
 func _ready() -> void:
+
 	layer = 22
 	_build_ui()
 	visible = false
@@ -70,13 +73,15 @@ func _process(delta: float) -> void:
 
 
 func _tick_containment(delta: float) -> void:
+	hm_multiplier = 3 if Global.hard_mode == true else 1
 	if winding and Global.player_room == Global.Room.COMMS_SYS:
-		containment = minf(containment + CONTAINMENT_WIND * delta, 100.0)
+		hm_multiplier = 0.5 if Global.hard_mode == true else 1.0
+		containment = minf(containment + CONTAINMENT_WIND * hm_multiplier * delta, 100.0)
 	else:
 		var drain := CONTAINMENT_DRAIN
 		if Global.blackout:
 			drain *= BLACKOUT_DRAIN_MULT
-		containment = maxf(containment - drain * delta, 0.0)
+		containment = maxf(containment - drain * hm_multiplier * delta, 0.0)
 
 	var critical := containment <= CRITICAL_THRESHOLD
 	if critical and not _was_critical:

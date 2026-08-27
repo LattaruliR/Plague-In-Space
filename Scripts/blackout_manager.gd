@@ -11,7 +11,7 @@ const PLAGUE_WALK = preload("uid://b1d5cfp71sxoa")
 
 
 ## seconds the grid needs in the dark before it can be brought back online
-const POWER_REBOOT_TIME := 25.0
+var POWER_REBOOT_TIME := 25.0
 ## how often the plagues current room announces itself
 const CLUE_INTERVAL := 2.6
 ## how often the plague relocates while the lights are off
@@ -48,6 +48,7 @@ var _hunt_cue_elapsed := 0.0
 var _plague: Node = null
 var _active := false # mirrors Global.blackout so its possible to catch external flips
 
+var hm_multiplier := 0.0
 
 func _ready() -> void:
 	room_clues = {
@@ -68,6 +69,7 @@ func get_plague() -> Node:
 
 
 func _process(delta: float) -> void:
+	POWER_REBOOT_TIME = 15.0 if Global.hard_mode == true else 25.0
 	if Global.blackout != _active:
 		if Global.blackout:
 			_start_blackout_state()

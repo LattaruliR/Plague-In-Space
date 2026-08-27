@@ -94,10 +94,11 @@ func _on_hunt_started() -> void:
 	_flash("SOMETHING CAME IN", 2.0)
 	play_laugh(0)
 
+@warning_ignore("unused_parameter")
 func _on_threat_warning(room: int) -> void:
 	if Global.blackout:
 		return # the sound clues carry it once the lights are out
-	_flash("MOVEMENT IN THE %s" % Global.ROOM_NAMES.get(room, "SHIP"), 3.0)
+	#_flash("MOVEMENT IN THE %s" % Global.ROOM_NAMES.get(room, "SHIP"), 3.0)
 	play_laugh(-2)
 
 

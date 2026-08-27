@@ -21,6 +21,7 @@ func _on_play_button_pressed() -> void:
 	CoreResources.reset_systems()
 	Global.reset_player_state()
 	Blackout.reset()
+	Global.hard_mode = false
 	get_tree().change_scene_to_file("res://Scenes/cutscene.tscn")
 
 
@@ -48,3 +49,26 @@ func _on_options_button_mouse_exited() -> void:
 func _on_options_button_pressed() -> void:
 	$Selecting.play()
 	$OptionsUI.show()
+
+
+func _on_hard_mode_button_pressed() -> void:
+	$Selecting.play()
+	CoreResources.reset_systems()
+	Global.reset_player_state()
+	Blackout.reset()
+	Global.hard_mode = true
+	get_tree().change_scene_to_file("res://Scenes/cutscene.tscn")
+	
+
+
+func _on_hard_mode_button_mouse_entered() -> void:
+	textTip = "Play Hard Mode?\n
+				- Frequent Sabotages\n
+				- Faster Archive wind down\n
+				- Invisible Plague\n
+				- Faster Infection spread\n
+				+ Faster Reboot Cooldown\n
+				+ Additional Power Charge"
+
+func _on_hard_mode_button_mouse_exited() -> void:
+	textTip = " "

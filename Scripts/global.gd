@@ -19,6 +19,7 @@ const ROOM_NAMES := {
 	Room.PLAYER_ROOM: "OFFICE",
 }
 
+var hard_mode := false
 var cure_found := false
 
 var blackout := false # handles blackout state

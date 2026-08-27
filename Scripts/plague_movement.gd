@@ -46,6 +46,7 @@ func _ready() -> void:
 	Blackout.register_plague(self)
 
 func _process(delta: float) -> void:
+	$PlaguePlaceholder.visible = false if Global.hard_mode == true else true
 	position = pos_positions[cur_position].position
 
 	if lure_cooldown_left > 0.0:
@@ -149,6 +150,8 @@ func _on_arrived() -> void:
 		Blackout.threat_warning.emit(Global.Room.COMMS_SYS)
 
 func _roll_sabotage() -> void:
+	var hm_multiplier = 1.0
+	hm_multiplier = 2.0 if Global.hard_mode == true else 1.0
 	if not CoreResources.sabotageable_rooms.has(cur_position):
 		return
 	if CoreResources.is_sabotaged(cur_position):
@@ -156,8 +159,8 @@ func _roll_sabotage() -> void:
 
 	var chance := minf(
 		SABOTAGE_BASE_CHANCE
-			+ SABOTAGE_PER_LURE * float(Global.lure_streak)
-			+ SABOTAGE_PER_CURE * float(Global.cure_stage),
+			+ SABOTAGE_PER_LURE * float(Global.lure_streak) * hm_multiplier
+			+ SABOTAGE_PER_CURE * float(Global.cure_stage) * hm_multiplier,
 		SABOTAGE_MAX_CHANCE)
 
 	if randf() < chance and CoreResources.apply_sabotage(cur_position):

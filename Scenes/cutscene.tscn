@@ -52,7 +52,9 @@ communication room left and attempt to fabricate the cure
 while evading death.
 
 Careful with the 5 systems you have.
-kitchen, power, heat, oxygen and communication."
+kitchen, power, heat, oxygen and communication.
+
+And wind up your archive so it doesn't get contaminated."
 
 [node name="Button" type="Button" parent="." unique_id=1874177763]
 offset_left = 432.0
@@ -65,5 +67,6 @@ text = "ADVANCE >"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=264862770]
 stream = ExtResource("6_j6j7k")
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
