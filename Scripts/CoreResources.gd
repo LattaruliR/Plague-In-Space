@@ -86,16 +86,10 @@ func _update_oxygen_zone() -> void:
 		new_zone = 0
 		
 	if new_zone != current_oxygen_zone:
-		var zone_difference = new_zone - current_oxygen_zone
-		Global.infection_step += zone_difference
-
-		if Global.infection_step < 0:
-			Global.infection_step = 0
-
 		if new_zone == 2:
 			Global.panic = true
 
-		if zone_difference > 0: # got worse
+		if new_zone > current_oxygen_zone: # got worse
 			AudioManager.play_sfx(ALERT_SOUND, 0.0, 0.85 + 0.15 * new_zone)
 
 		current_oxygen_zone = new_zone

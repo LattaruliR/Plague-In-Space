@@ -109,7 +109,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		KEY_3 when debug_open:
 			Global.infection_value = 0.0
-			Global.infection_step = 0
 
 		KEY_4 when debug_open:
 			Global.panic = false
@@ -165,7 +164,12 @@ func _update_debug_info() -> void:
 	oxygen_label.text = "oxygen: [%s]" % _get_oxygen_zone_name()
 	oxygen_bar.value = CoreResources.oxygen
 
-	infection_label.text = "infection: (step: %d)" % Global.infection_step
+	var parts: Array[String] = []
+	for c in Global.infection_contributions():
+		parts.append("%s %+.2f" % [c["label"], c["rate"]])
+	infection_label.text = "infection %+.2f%%/s" % Global.infection_rate()
+	if not parts.is_empty():
+		infection_label.text += "\n  " + "\n  ".join(parts)
 	infection_bar.value = Global.infection_value
 
 	panic_label.text = "Panic State: %s" % str(Global.panic)

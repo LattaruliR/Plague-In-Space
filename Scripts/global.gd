@@ -43,21 +43,67 @@ var lure_streak := 0
 signal player_caught
 
 var infection_value: float = 0.0 # max: 100, min: 0
-var infection_step: int = 0
-var infection_base_rate: float = 0.4 # how much infection increases per second per step
+
+const INF_OXYGEN_DRY := 0.4
+const INF_OXYGEN_DANGER := 0.9
+const INF_HEAT_CHILLY := 0.1
+const INF_HEAT_DANGER := 0.4
+const INF_HEAT_DEATH := 0.8
+const INF_PER_SABOTAGE := 0.25
+const INF_DOOR_SEALED := 0.5
+const INF_RECOVERY := -0.2
 
 const HARD_INFECTION_MULT := 1.5
 
 func infection_multiplier() -> float:
 	return HARD_INFECTION_MULT if hard_mode else 1.0
 var cure_stage := 0 # the higher the cure stage, the more aggro plague has
+						
+func infection_contributions() -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+
+	match CoreResources.current_oxygen_zone:
+		1: out.append({"label": "OXYGEN DRY", "rate": INF_OXYGEN_DRY})
+		2: out.append({"label": "OXYGEN DANGER", "rate": INF_OXYGEN_DANGER})
+
+	match CoreResources.current_heat_zone:
+		2: out.append({"label": "HEAT CHILLY", "rate": INF_HEAT_CHILLY})
+		3: out.append({"label": "HEAT DANGER", "rate": INF_HEAT_DANGER})
+		4: out.append({"label": "HEAT DEATH", "rate": INF_HEAT_DEATH})
+
+	for room in CoreResources.sabotaged:
+		out.append({
+			"label": "%s SABOTAGED" % ROOM_NAMES.get(room, "SYSTEM"),
+			"rate": INF_PER_SABOTAGE,
+		})
+
+	if door_closed:
+		out.append({"label": "DOOR SEALED", "rate": INF_DOOR_SEALED})
+
+	if out.is_empty() and CoreResources.current_heat_zone == 1:
+		# Nominal: oxygen SAFE, heat PERFECT, nothing broken, door open.
+		out.append({"label": "ALL NOMINAL", "rate": INF_RECOVERY})
+
+	return out
+
+func infection_rate() -> float:
+	var harm := 0.0
+	var relief := 0.0
+	for c in infection_contributions():
+		if c["rate"] > 0.0:
+			harm += c["rate"]
+		else:
+			relief += c["rate"]
+	return harm * infection_multiplier() + relief
+
 
 func _process(delta: float) -> void:
-	if infection_step > 0 and infection_value < 100.0:
-		infection_value += infection_base_rate * infection_step * infection_multiplier() * delta
-		if infection_value >= 100.0:
-			infection_value = 100.0
-			panic = true
+	if infection_value >= 100.0:
+		return
+
+	infection_value = clampf(infection_value + infection_rate() * delta, 0.0, 100.0)
+	if infection_value >= 100.0:
+		panic = true
 			
 
 var cur_pos = 0 # 0 -> Hidden
@@ -81,7 +127,6 @@ func reset_player_state() -> void:
 	blackout = false
 	panic = false
 	infection_value = 0.0
-	infection_step = 0
 	cure_stage = 0
 	player_room = Room.PLAYER_ROOM
 	hiding = false

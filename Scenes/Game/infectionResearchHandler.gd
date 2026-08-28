@@ -17,6 +17,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	infection_bar.value = Global.infection_value
+
+	var lines: Array[String] = ["INFECTION %+.2f%%/s" % Global.infection_rate()]
+	for c in Global.infection_contributions():
+		lines.append("  %s %+.2f" % [c["label"], c["rate"]])
+	infection_label.text = "\n".join(lines)
 	if (infection_bar.value < 10.0):
 		brain_sprite.frame = 0
 	elif (infection_bar.value < 30.0):
