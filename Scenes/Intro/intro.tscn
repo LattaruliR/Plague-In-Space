@@ -1,0 +1,337 @@
+[gd_scene format=3 uid="uid://c1b24ka7aw36v"]
+
+[ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="1_duh1u"]
+[ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="2_alxvg"]
+[ext_resource type="Texture2D" uid="uid://bl717h8e0odnu" path="res://Sprites/Game/DocumentFile.png" id="2_geirw"]
+[ext_resource type="AudioStream" uid="uid://8cajtyxcjxg7" path="res://SOUNDS/Blackout.mp3" id="3_alxvg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_alxvg"]
+
+[sub_resource type="Animation" id="Animation_geirw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel/ColorRect2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scanlines:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 2000, 1000)]
+}
+
+[sub_resource type="Animation" id="Animation_hwjxs"]
+resource_name = "blink"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel/ColorRect2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.21400002), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scanlines:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 2000, 1000), Rect2(0, 1, 2000, 1000), Rect2(0, 2, 2000, 1000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rsiac"]
+_data = {
+&"RESET": SubResource("Animation_geirw"),
+&"blink": SubResource("Animation_hwjxs")
+}
+
+[sub_resource type="Animation" id="Animation_rsiac"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel/AT:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_alxvg"]
+resource_name = "text"
+length = 1.5999999999999999
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel/AT:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.97, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.45, 0.45, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_geirw"]
+_data = {
+&"RESET": SubResource("Animation_rsiac"),
+&"text": SubResource("Animation_alxvg")
+}
+
+[sub_resource type="Animation" id="Animation_nn7w8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel/CEA:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/Panel/SFTMT:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_3bmuq"]
+resource_name = "text"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel/CEA:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 3.69),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/Panel/SFTMT:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nn7w8"]
+_data = {
+&"RESET": SubResource("Animation_nn7w8"),
+&"text": SubResource("Animation_3bmuq")
+}
+
+[sub_resource type="Animation" id="Animation_ewknp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b26wi"]
+resource_name = "up"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.7666667, 2.2666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -259)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ewknp"]
+_data = {
+&"RESET": SubResource("Animation_ewknp"),
+&"up": SubResource("Animation_b26wi")
+}
+
+[node name="intro" type="Node2D" unique_id=1250818513]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=578569108]
+offset_left = -63.0
+offset_top = -47.0
+offset_right = 1218.0
+offset_bottom = 698.0
+color = Color(0, 0, 0, 1)
+
+[node name="Panel" type="Panel" parent="ColorRect" unique_id=2022767192]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_alxvg")
+
+[node name="AT" type="Label" parent="ColorRect/Panel" unique_id=168736362]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 418.5
+offset_top = 337.5
+offset_right = 822.5
+offset_bottom = 367.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_duh1u")
+theme_override_font_sizes/font_size = 32
+text = "awaiting transmission"
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/Panel/AT" unique_id=304145817]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -99.5
+offset_top = 387.5
+offset_right = 9.5
+offset_bottom = 532.5
+grow_horizontal = 2
+scale = Vector2(2, 2)
+texture = ExtResource("2_geirw")
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect/Panel" unique_id=1291857172]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CEA" type="Label" parent="ColorRect/Panel" unique_id=213650184]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 462.5
+offset_top = 374.0
+offset_right = 778.5
+offset_bottom = 397.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_duh1u")
+theme_override_font_sizes/font_size = 24
+text = "contacting earth alpha"
+vertical_alignment = 1
+
+[node name="SFTMT" type="Label" parent="ColorRect/Panel" unique_id=18601791]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 426.0
+offset_top = 402.0
+offset_right = 815.0
+offset_bottom = 425.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_duh1u")
+theme_override_font_sizes/font_size = 24
+text = "FAILURE TO MEET TRANSMITTER"
+
+[node name="Scanlines" type="Sprite2D" parent="." unique_id=674093003]
+z_index = 99
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(599, 348)
+texture = ExtResource("2_alxvg")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 1000)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1071550952]
+stream = ExtResource("3_alxvg")
+pitch_scale = 0.65
+autoplay = true
+parameters/looping = true
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=869517046]
+stream = ExtResource("3_alxvg")
+pitch_scale = 0.65
+autoplay = true
+parameters/looping = true
+
+[node name="ScreenFeels" type="AnimationPlayer" parent="." unique_id=812645503]
+libraries/ = SubResource("AnimationLibrary_rsiac")
+autoplay = &"blink"
+speed_scale = 0.2
+
+[node name="TextRead" type="AnimationPlayer" parent="." unique_id=1905666912]
+libraries/ = SubResource("AnimationLibrary_geirw")
+autoplay = &"text"
+speed_scale = 0.375
+
+[node name="TextRead2" type="AnimationPlayer" parent="." unique_id=1981310289]
+libraries/ = SubResource("AnimationLibrary_nn7w8")
+autoplay = &"text"
+speed_scale = 0.375
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=472906545]
+libraries/ = SubResource("AnimationLibrary_ewknp")
+autoplay = &"up"
+speed_scale = 0.1

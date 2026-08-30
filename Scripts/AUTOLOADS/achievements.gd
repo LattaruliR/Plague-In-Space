@@ -6,7 +6,14 @@ const UNLOCK_SOUND := preload("res://SOUNDS/barTone2.wav")
 const TOAST_SECONDS := 4.0
 const TOAST_FADE := 0.4
 
-const DEFS: Array[Dictionary] = []
+const DEFS: Array[Dictionary] = [
+	{
+		"id": "lorekeeper",
+		"name": "Lorekeeper",
+		"description": "Spend 5 seconds in a cutscene."
+	}
+	
+]
 
 signal unlocked(id: String)
 
@@ -34,7 +41,7 @@ func get_def(id: String) -> Dictionary:
 	for def in DEFS:
 		if def.get("id", "") == id:
 			return def
-	return {}
+	return {}	
 
 
 func is_unlocked(id: String) -> bool:

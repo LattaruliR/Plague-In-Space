@@ -226,7 +226,7 @@ func _play_hunt_cue() -> void:
 
 
 func _resolve_hunt() -> void:
-	var safe := Global.hiding and Global.player_room == Global.Room.PLAYER_ROOM
+	var safe = Global.hiding and Global.player_room == Global.Room.PLAYER_ROOM
 
 	Global.hunting = false
 	hunt_elapsed = 0.0
