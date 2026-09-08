@@ -20,6 +20,8 @@ var comms_downloading := false
 const BLACKOUT_HEAT_LEAK: float = 1.0 # extra % per second
 
 func _process(delta: float) -> void:
+	if Global.hasnt_started_night == true:
+		return
 	var leaking := Global.blackout
 
 	if oxygen > 0.0:

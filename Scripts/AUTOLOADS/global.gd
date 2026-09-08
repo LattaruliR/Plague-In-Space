@@ -27,6 +27,7 @@ var panic := false # handles if player is in a panic
 
 # the office (player room) is home base
 var player_room: int = Room.PLAYER_ROOM
+var hasnt_started_night = true
 
 var hiding := false
 var hide_side: int = -1 # -1 not hidden, 0 left spot, 1 right spot

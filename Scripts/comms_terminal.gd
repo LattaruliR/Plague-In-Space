@@ -44,6 +44,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if Global.hasnt_started_night == true:
+		return
 	CoreResources.comms_downloading = state == State.DOWNLOADING
 
 	if Global.blackout or CoreResources.is_sabotaged(Global.Room.COMMS_SYS):

@@ -1,6 +1,6 @@
 extends Node2D
 
-const PRESS_SOUND := preload("res://SOUNDS/selecting.wav")
+const PRESS_SOUND := preload("res://SOUNDS/click.wav")
 const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
 @onready var manual_1_label: Label = $"../../OfficeRoom/BaseElements/PaperBg/Manual1Label"
 @onready var manual_2_label: Label = $"../../OfficeRoom/BaseElements/PaperBg/Manual2Label"
@@ -9,9 +9,9 @@ const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
 @onready var g_num_label: Label = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/GNumLabel"
 @onready var b_num_label: Label = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/BNumLabel"
 @onready var sum_label: Label = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/SumLabel"
-@onready var color_mix: ColorRect = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ColorMix"
+@onready var color_mix: TextureRect = $"../../OfficeRoom/InformationFeed/BasePanel/Research/Kitchen/ColorMix"
 
-const BAR_TONE_2 = preload("uid://v1coedd33f1w")
+const BAR_TONE_2 = preload("res://SOUNDS/click.wav")
 
 const CHANNEL_NAMES := ["R", "G", "B"]
 const CHANNEL_COLORS := [
@@ -119,7 +119,7 @@ func _refresh() -> void:
 
 	var dial_max := float(CoreResources.KITCHEN_DIAL_MAX)
 	_swatch.color = Color(combo[0] / dial_max, combo[1] / dial_max, combo[2] / dial_max)
-	color_mix.color = Color(combo[0] / dial_max, combo[1] / dial_max, combo[2] / dial_max)
+	color_mix.self_modulate = Color(combo[0] / dial_max, combo[1] / dial_max, combo[2] / dial_max)
 
 	for index in _recipe_labels.size():
 		_recipe_labels[index].text = _recipe_text(index)

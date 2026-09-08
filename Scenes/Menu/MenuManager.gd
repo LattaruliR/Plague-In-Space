@@ -22,7 +22,7 @@ func _on_play_button_pressed() -> void:
 	Global.reset_player_state()
 	Blackout.reset()
 	Global.hard_mode = false
-	get_tree().change_scene_to_file("res://Scenes/cutscene.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Cutscenes/cutscene.tscn")
 
 
 func _on_quit_button_mouse_entered() -> void:
@@ -57,7 +57,7 @@ func _on_hard_mode_button_pressed() -> void:
 	Global.reset_player_state()
 	Blackout.reset()
 	Global.hard_mode = true
-	get_tree().change_scene_to_file("res://Scenes/cutscene.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Cutscenes/cutscene.tscn")
 	
 
 

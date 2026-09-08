@@ -2,8 +2,31 @@ extends Node2D
 const AMBIENT_PANIC = preload("uid://dklfhy3v605a8")
 const BLACKOUT = preload("uid://8cajtyxcjxg7")
 const CALM_OFFICE = preload("uid://s40st63lm2ws")
+const PRELUDE = preload("uid://n3j1nw15qwo1")
 
 func _ready() -> void:
-	AudioManager.play_music(CALM_OFFICE)
+	Global.hasnt_started_night = true
+	AudioManager.play_music(PRELUDE, 1.0)
 	GameOver.arm()
 	Archivist.arm()
+
+
+func _on_start_night_pressed() -> void:
+	_on_ghost_button_mouse_entered()
+	Global.hasnt_started_night = false
+	AudioManager.stop_music(1.0)
+	AudioManager.play_music(CALM_OFFICE, 2.0)
+
+
+func _on_ghost_button_mouse_entered() -> void:
+	$GhostMouse/GhostButton.hide()
+	$GhostMouse2.play("disappear")
+
+
+func _on_crank_button_pressed() -> void:
+	$GhostMouse2.play("disappearHold")
+
+
+func _on_ghost_mouse_2_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "disappearHold":
+		$GmHold.hide()

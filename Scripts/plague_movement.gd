@@ -46,6 +46,11 @@ func _ready() -> void:
 	Blackout.register_plague(self)
 
 func _process(delta: float) -> void:
+	if Global.hasnt_started_night == true:
+		$PlaguePlaceholder.hide()
+		return
+	
+	$PlaguePlaceholder.show()
 	$PlaguePlaceholder.visible = false if Global.hard_mode == true else true
 	position = pos_positions[cur_position].position
 
@@ -75,6 +80,8 @@ func next_move_interval() -> float:
 
 
 func _on_movechance_timer_timeout() -> void:
+	if Global.hasnt_started_night == true:
+		return
 	if not Global.blackout:
 		move()
 		_on_arrived()
@@ -85,6 +92,8 @@ func can_lure() -> bool:
 	return lure_cooldown_left <= 0.0 and not Global.blackout
 
 func play_lure(room: int) -> bool:
+	if Global.hasnt_started_night == true:
+		return false
 	if not can_lure():
 		return false
 	if room == cur_position:
@@ -168,6 +177,8 @@ func _roll_sabotage() -> void:
 		sabotage_committed.emit(cur_position)
 
 func blackout_step() -> void:
+	if Global.hasnt_started_night == true:
+		return
 	var options: Array = NEIGHBOURS.get(cur_position, []).duplicate()
 	if options.is_empty():
 		return
@@ -208,6 +219,8 @@ func blackout_step() -> void:
 	_on_arrived()
 
 func move():
+	if Global.hasnt_started_night == true:
+		return
 	if lure_target >= 0:
 		var step := _step_toward(cur_position, lure_target)
 		if step >= 0 and _can_enter(step):

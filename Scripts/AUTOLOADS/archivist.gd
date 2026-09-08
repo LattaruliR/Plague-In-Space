@@ -59,6 +59,8 @@ func set_winding(active: bool) -> void:
 
 
 func _process(delta: float) -> void:
+	if Global.hasnt_started_night == true:
+		return
 	if not _armed:
 		visible = false
 		return

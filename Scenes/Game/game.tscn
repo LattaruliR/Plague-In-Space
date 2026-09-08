@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://ceml0i2v3jwun" path="res://Scripts/hide_spot.gd" id="23_hides"]
 [ext_resource type="Texture2D" uid="uid://cvo6j581mu4p2" path="res://Sprites/Game/PanicOverlayShet.png" id="23_p6run"]
 [ext_resource type="FontFile" uid="uid://ckxwo1esfu618" path="res://Fonts/home-video/HomeVideo-Regular.otf" id="24_jebrn"]
+[ext_resource type="Texture2D" uid="uid://bikm87vqe50s0" path="res://Sprites/Game/PaperBack.png" id="24_xft3b"]
 [ext_resource type="Script" uid="uid://ddkx24xwn1bpu" path="res://Scenes/Game/interaction_handler.gd" id="25_pmm7v"]
 [ext_resource type="Script" uid="uid://dumnb4u7obxu7" path="res://Scenes/Game/infectionResearchHandler.gd" id="26_7icik"]
 [ext_resource type="Script" uid="uid://cbot80qesiu5f" path="res://Scripts/office_door.gd" id="26_odoor"]
@@ -46,6 +47,8 @@
 [ext_resource type="Script" uid="uid://bjeakoi3pj6xd" path="res://Scripts/containment_crank.gd" id="28_crank"]
 [ext_resource type="Texture2D" uid="uid://dljb7beowr4cs" path="res://Sprites/Game/Office/Warning.png" id="29_jebrn"]
 [ext_resource type="Script" uid="uid://bp6p2xi0l1tan" path="res://Scripts/music_box.gd" id="29_mbox"]
+[ext_resource type="Texture2D" uid="uid://6xkhq2iuebog" path="res://Sprites/Game/Office/RCureSprite1.png" id="29_ntkbw"]
+[ext_resource type="Texture2D" uid="uid://fpde8e6gc45w" path="res://Sprites/Game/Office/YourBrain.png" id="33_d4puy"]
 [ext_resource type="Script" uid="uid://dgmi3rdsiu3dc" path="res://Scenes/Game/lures.gd" id="33_j8rd5"]
 [ext_resource type="Texture2D" uid="uid://cn4oj4qsjvf6n" path="res://Sprites/Game/General Decor/ArakGayMonster.png" id="35_rht7h"]
 [ext_resource type="AudioStream" uid="uid://bmwq4vakbyso5" path="res://SOUNDS/pcselect1.wav" id="41_26aa6"]
@@ -72,6 +75,9 @@
 [ext_resource type="AudioStream" uid="uid://dskjinh6mj1k3" path="res://SOUNDS/Plague/PlagueLaugh4.mp3" id="62_jcrx1"]
 [ext_resource type="AudioStream" uid="uid://b7s818e3gqjoq" path="res://SOUNDS/Gopher/GopherLaugh4.mp3" id="63_qqdjj"]
 [ext_resource type="AudioStream" uid="uid://chf64ytmhjcfr" path="res://SOUNDS/Office/Sipping.mp3" id="64_l5fxq"]
+[ext_resource type="AudioStream" uid="uid://n3j1nw15qwo1" path="res://SOUNDS/Atmosphere/DeadSpaceAtmos1.mp3" id="76_yuvyg"]
+[ext_resource type="Texture2D" uid="uid://hll5o4pj5qhx" path="res://Sprites/Game/Office/GhostMouse.png" id="77_hb4p8"]
+[ext_resource type="Texture2D" uid="uid://djv6gri2newbr" path="res://Sprites/Game/Office/GMHold.png" id="78_h1l72"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -422,13 +428,13 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("PaperBg:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-539, 352), Vector2(-539, 174)]
+"values": [Vector2(-539, 372), Vector2(-539, 174)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7icik"]
@@ -452,6 +458,40 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26aa6"]
+atlas = ExtResource("23_p6run")
+region = Rect2(0, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gqoa"]
+atlas = ExtResource("23_p6run")
+region = Rect2(130, 0, 130, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7icik"]
+atlas = ExtResource("23_p6run")
+region = Rect2(260, 0, 130, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lcvqc"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26aa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gqoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7icik")
+}],
+"loop": 1,
+"name": &"panic",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p6run"]
 atlas = ExtResource("22_lcvqc")
@@ -503,39 +543,118 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_26aa6"]
-atlas = ExtResource("23_p6run")
-region = Rect2(0, 0, 130, 96)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gqoa"]
-atlas = ExtResource("23_p6run")
-region = Rect2(130, 0, 130, 96)
+[sub_resource type="Animation" id="Animation_d4puy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(55, 93)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../Kitchen/ColorMix:offset_transform_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../PurityLabel2:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [" spread"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../InfectionBar:indeterminate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7icik"]
-atlas = ExtResource("23_p6run")
-region = Rect2(260, 0, 130, 96)
+[sub_resource type="Animation" id="Animation_xft3b"]
+resource_name = "tweaking"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.18, 0.26, 0.32, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(55, 93), Vector2(54, 94), Vector2(54, 91), Vector2(55, 91), Vector2(53, 93), Vector2(56, 93), Vector2(58, 92)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../Kitchen/ColorMix:offset_transform_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.27, 0.41),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.06981317, 0.0, -0.06981317007977318]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../PurityLabel2:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.31, 0.33333334, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [" spread", " s%r@a!", " 5P#E?D", " spread"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../InfectionBar:indeterminate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lcvqc"]
-animations = [{
-"frames": [],
-"loop": 1,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_26aa6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4gqoa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7icik")
-}],
-"loop": 1,
-"name": &"panic",
-"speed": 5.0
-}]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yuvyg"]
+_data = {
+&"RESET": SubResource("Animation_d4puy"),
+&"tweaking": SubResource("Animation_xft3b")
+}
 
 [sub_resource type="Gradient" id="Gradient_p6run"]
 colors = PackedColorArray(0.58972603, 2.23808e-06, 0.13158423, 1, 0.5882353, 0, 0.13333334, 1)
@@ -726,6 +845,172 @@ stream_0/stream = ExtResource("59_lis5c")
 stream_1/stream = ExtResource("60_858on")
 stream_2/stream = ExtResource("61_l5fxq")
 stream_3/stream = ExtResource("62_jcrx1")
+
+[sub_resource type="Animation" id="Animation_h1l72"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostMouse:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-580, 933)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GhostMouse:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GhostMouse:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GmHold:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(926, 960)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GmHold:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GmHold:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_hb4p8"]
+resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostMouse:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GhostMouse:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_cjj5m"]
+resource_name = "disappearHold"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GmHold:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GmHold:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_scdd5"]
+resource_name = "hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostMouse:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36048034, 0.48374134, 0.9512029),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-580, 933), Vector2(-556, 915), Vector2(-583, 927), Vector2(-586, 930)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GmHold:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35117763, 0.4814157, 0.9558543),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(926, 960), Vector2(921, 997), Vector2(895, 1003), Vector2(916, 970)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjj5m"]
+_data = {
+&"RESET": SubResource("Animation_h1l72"),
+&"disappear": SubResource("Animation_hb4p8"),
+&"disappearHold": SubResource("Animation_cjj5m"),
+&"hover": SubResource("Animation_scdd5")
+}
 
 [node name="Game" type="Node2D" unique_id=1249205629]
 script = ExtResource("1_4ti5a")
@@ -1018,9 +1303,10 @@ offset_left = -539.0
 offset_top = 343.0
 offset_right = -285.0
 offset_bottom = 534.99976
-color = Color(0.4, 0, 0.05490196, 1)
+color = Color(0, 0, 0, 0)
 
 [node name="Manual1Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=1254497241]
+z_index = 1
 layout_mode = 0
 offset_left = 10.0
 offset_top = 4.0
@@ -1031,6 +1317,7 @@ theme_override_fonts/font = ExtResource("2_qikps")
 text = "Manual 1: Awaiting print"
 
 [node name="Manual2Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=1274016660]
+z_index = 1
 layout_mode = 0
 offset_left = 10.0
 offset_top = 34.0
@@ -1041,6 +1328,7 @@ theme_override_fonts/font = ExtResource("2_qikps")
 text = "Manual 2: Awaiting print"
 
 [node name="Manual3Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=918476379]
+z_index = 1
 layout_mode = 0
 offset_left = 10.0
 offset_top = 64.0
@@ -1049,6 +1337,15 @@ offset_bottom = 87.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_qikps")
 text = "Manual 3: Awaiting print"
+
+[node name="TextureRect" type="TextureRect" parent="OfficeRoom/BaseElements/PaperBg" unique_id=2101521492]
+self_modulate = Color(0.4, 0, 0.05490196, 1)
+layout_mode = 0
+offset_left = -23.0
+offset_top = -34.0
+offset_right = 292.0
+offset_bottom = 328.0
+texture = ExtResource("24_xft3b")
 
 [node name="PaperAppearance" type="AnimationPlayer" parent="OfficeRoom/BaseElements" unique_id=380319260]
 libraries/ = SubResource("AnimationLibrary_7icik")
@@ -1374,6 +1671,7 @@ horizontal_alignment = 1
 [node name="Research" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel" unique_id=2093172065]
 visible = false
 self_modulate = Color(0, 0, 0, 1)
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1574,12 +1872,15 @@ theme_override_fonts/font = ExtResource("24_jebrn")
 text = "-"
 flat = true
 
-[node name="ColorMix" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=848643149]
+[node name="ColorMix" type="TextureRect" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=149998901]
 layout_mode = 0
 offset_left = 214.0
-offset_top = 74.0
+offset_top = 51.0
 offset_right = 254.0
-offset_bottom = 114.0
+offset_bottom = 91.0
+offset_transform_enabled = true
+texture = ExtResource("29_ntkbw")
+expand_mode = 2
 
 [node name="RLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=1704057938]
 layout_mode = 0
@@ -1614,19 +1915,19 @@ text = "B"
 [node name="SumLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=1624212254]
 layout_mode = 0
 offset_left = 214.0
-offset_top = 57.0
+offset_top = 34.0
 offset_right = 254.0
-offset_bottom = 80.0
-theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
-theme_override_fonts/font = ExtResource("20_fl2fe")
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
 text = "SUM:"
 
 [node name="SumLabel2" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Kitchen" unique_id=9433554]
 layout_mode = 0
 offset_left = 214.0
-offset_top = 38.0
+offset_top = 15.0
 offset_right = 254.0
-offset_bottom = 61.0
+offset_bottom = 38.0
 theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
 theme_override_fonts/font = ExtResource("20_fl2fe")
 text = "SUM:"
@@ -1666,8 +1967,9 @@ text = "0"
 
 [node name="Infection" type="Control" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=995576608]
 anchors_preset = 0
+offset_top = 2.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 42.0
 script = ExtResource("26_7icik")
 
 [node name="InfectionBar" type="ProgressBar" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=1316630024]
@@ -1677,13 +1979,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -21.0
-offset_top = 56.0
-offset_right = 186.0
-offset_bottom = 77.0
+offset_left = 10.0
+offset_top = -33.0
+offset_right = 94.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_fonts/font = ExtResource("20_fl2fe")
 theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d0u6y")
@@ -1694,50 +1996,99 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 4.5
-offset_top = 78.0
-offset_right = 157.5
-offset_bottom = 101.0
+offset_left = 10.0
+offset_top = 27.0
+offset_right = 163.0
+offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
 theme_override_fonts/font = ExtResource("20_fl2fe")
 text = "INFECTION SPREAD"
 horizontal_alignment = 1
 
-[node name="BrainSprite" type="AnimatedSprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=419965108]
-position = Vector2(102, 43)
-scale = Vector2(0.7, 0.7)
-sprite_frames = SubResource("SpriteFrames_fcnqv")
-animation = &"brainStages"
-
 [node name="Panic" type="Control" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=603282731]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PanicLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=934332834]
+z_index = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 65.0
-offset_top = 57.0
-offset_right = 218.0
-offset_bottom = 80.0
+offset_left = 50.0
+offset_top = 17.0
+offset_right = 420.0
+offset_bottom = 76.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_colors/font_color = Color(0.49411765, 0.05490196, 0, 1)
 theme_override_fonts/font = ExtResource("20_fl2fe")
-text = "PANIC"
+theme_override_font_sizes/font_size = 34
+text = "PANIC DETECTED"
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic/PanicLabel" unique_id=1065083]
+z_index = 2
+layout_mode = 0
+offset_left = 50.0
+offset_top = 41.0
+offset_right = 421.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 16
+text = "YOU ARE ADVISED TO CALM DOWN
+before proceeding with your 
+research."
+
 [node name="PanicSprites" type="AnimatedSprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=1334885043]
-position = Vector2(104, 45)
+z_index = 2
+position = Vector2(64, 45)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_lcvqc")
 animation = &"panic"
 autoplay = "panic"
 frame_progress = 0.67451566
 speed_scale = 0.6
+
+[node name="BrainSprite" type="AnimatedSprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=419965108]
+z_index = 2
+position = Vector2(61, 43)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_fcnqv")
+animation = &"brainStages"
+
+[node name="PanicBg" type="Panel" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=1105765301]
+z_index = 1
+layout_mode = 0
+offset_right = 403.0
+offset_bottom = 117.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yf5fn")
+
+[node name="YourBrain" type="Sprite2D" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=270854504]
+self_modulate = Color(0.49411765, 0.05490196, 0, 1)
+z_index = 4
+position = Vector2(55, 93)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("33_d4puy")
+
+[node name="YBAnim" type="AnimationPlayer" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection/Panic" unique_id=1407065838]
+root_node = NodePath("../YourBrain")
+libraries/ = SubResource("AnimationLibrary_yuvyg")
+autoplay = &"tweaking"
+speed_scale = 0.2
+
+[node name="PurityLabel2" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research/Infection" unique_id=495227799]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 8.0
+offset_right = 233.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("2_qikps")
+text = " spread"
 
 [node name="ResearchFeedLabel" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Research" unique_id=229480706]
 layout_mode = 0
@@ -2133,6 +2484,13 @@ script = ExtResource("44_4qu01")
 [node name="laughTimer" type="Timer" parent="CommsRoom/Interactables" unique_id=421018753]
 wait_time = 3.0
 
+[node name="StartNight" type="Button" parent="CommsRoom/Interactables" unique_id=1197277115]
+offset_left = 41.0
+offset_top = -226.0
+offset_right = 219.0
+offset_bottom = -195.0
+text = "Start Night"
+
 [node name="Decorations" type="Node2D" parent="CommsRoom" unique_id=239005365]
 position = Vector2(-671, -779)
 
@@ -2305,6 +2663,37 @@ stream = ExtResource("64_l5fxq")
 volume_db = -2.06
 bus = &"SFX"
 
+[node name="DeadSpace1" type="AudioStreamPlayer" parent="AUDIO" unique_id=513063284]
+stream = ExtResource("76_yuvyg")
+bus = &"Music"
+parameters/looping = true
+
+[node name="GhostMouse2" type="AnimationPlayer" parent="." unique_id=468173281]
+libraries/ = SubResource("AnimationLibrary_cjj5m")
+autoplay = &"hover"
+speed_scale = 0.6
+
+[node name="GhostMouse" type="Sprite2D" parent="." unique_id=2128765527]
+z_index = 6
+position = Vector2(-580, 933)
+texture = ExtResource("77_hb4p8")
+
+[node name="GhostButton" type="Button" parent="GhostMouse" unique_id=1946020642]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -30.0
+offset_right = -32.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="GmHold" type="Sprite2D" parent="." unique_id=507358985]
+position = Vector2(926, 960)
+texture = ExtResource("78_h1l72")
+
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/O2RebootBSprite/O2Reboot" to="InteractionHandler" method="_on_o_2_reboot_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/HRebootBSprite/HeatReboot" to="InteractionHandler" method="_on_heat_reboot_pressed"]
@@ -2328,4 +2717,8 @@ bus = &"SFX"
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureO" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_o_pressed"]
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureC" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_c_pressed"]
 [connection signal="timeout" from="OfficeRoom/Timer" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_timer_timeout"]
+[connection signal="pressed" from="CommsRoom/Interactables/CrankButton" to="." method="_on_crank_button_pressed"]
 [connection signal="timeout" from="CommsRoom/Interactables/laughTimer" to="CommsRoom/Interactables/ContainmentCrank" method="_on_laugh_timer_timeout"]
+[connection signal="pressed" from="CommsRoom/Interactables/StartNight" to="." method="_on_start_night_pressed"]
+[connection signal="animation_finished" from="GhostMouse2" to="." method="_on_ghost_mouse_2_animation_finished"]
+[connection signal="mouse_entered" from="GhostMouse/GhostButton" to="." method="_on_ghost_button_mouse_entered"]

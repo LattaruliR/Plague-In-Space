@@ -130,7 +130,7 @@ func try_restore_power() -> bool:
 		AudioManager.play_sfx(ALERT_SOUND, -4.0, 0.3)
 		#restore_refused.emit("IT IS IN HERE WITH YOU")
 		return false
-
+	
 	if not power_online:
 		var remaining := int(ceil(POWER_REBOOT_TIME - reboot_elapsed))
 		AudioManager.play_sfx(ALERT_SOUND, -6.0, 0.4)

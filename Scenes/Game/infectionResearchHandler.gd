@@ -1,7 +1,7 @@
 extends Control
 @onready var infection_bar: ProgressBar = $InfectionBar
 @onready var infection_label: Label = $InfectionLabel
-@onready var brain_sprite: AnimatedSprite2D = $BrainSprite
+@onready var brain_sprite: AnimatedSprite2D = $Panic/BrainSprite
 @onready var panic: Control = $Panic
 @onready var panic_label: Label = $Panic/PanicLabel
 @onready var panic_sprites: AnimatedSprite2D = $Panic/PanicSprites

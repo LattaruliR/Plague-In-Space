@@ -86,7 +86,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_alxvg"]
 resource_name = "text"
-length = 1.5999999999999999
+length = 1.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -274,7 +274,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_duh1u")
 theme_override_font_sizes/font_size = 24
-text = "contacting earth alpha"
+text = "Attempting connection"
 vertical_alignment = 1
 
 [node name="SFTMT" type="Label" parent="ColorRect/Panel" unique_id=18601791]
@@ -284,16 +284,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 426.0
+offset_left = 361.0
 offset_top = 402.0
-offset_right = 815.0
-offset_bottom = 425.0
+offset_right = 880.0
+offset_bottom = 451.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_duh1u")
 theme_override_font_sizes/font_size = 24
-text = "FAILURE TO MEET TRANSMITTER"
+text = "Err: FAILURE TO MEET TRANSMITTER
+"
 
 [node name="Scanlines" type="Sprite2D" parent="." unique_id=674093003]
 z_index = 99
