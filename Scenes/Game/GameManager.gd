@@ -12,21 +12,20 @@ func _ready() -> void:
 
 
 func _on_start_night_pressed() -> void:
+	_on_crank_button_pressed()
 	_on_ghost_button_mouse_entered()
 	Global.hasnt_started_night = false
 	AudioManager.stop_music(1.0)
 	AudioManager.play_music(CALM_OFFICE, 2.0)
 
+func fade_info(sprite: Sprite2D):
+	var tween := create_tween()
+	tween.tween_property(sprite, "self_modulate", Color(0.0, 0.0, 0.0, 0.0), 3.0)
 
 func _on_ghost_button_mouse_entered() -> void:
 	$GhostMouse/GhostButton.hide()
-	$GhostMouse2.play("disappear")
+	fade_info($GhostMouse)
 
 
 func _on_crank_button_pressed() -> void:
-	$GhostMouse2.play("disappearHold")
-
-
-func _on_ghost_mouse_2_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "disappearHold":
-		$GmHold.hide()
+	fade_info($GmHold)

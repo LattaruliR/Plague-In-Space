@@ -266,7 +266,7 @@ func _build_broadcast_panel() -> Control:
 	box.add_theme_constant_override("separation", 6)
 	TerminalStyle.wrap_in_margin(panel, box, 14)
 
-	var title := TerminalStyle.label(TerminalStyle.spaced("COMMUNICATION ATLAS V2"), 34)
+	var title := TerminalStyle.label(TerminalStyle.spaced("CMV2 INPUT RIGHT ARRAY"), 34)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(title)
 

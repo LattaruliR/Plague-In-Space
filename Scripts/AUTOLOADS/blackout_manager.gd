@@ -11,7 +11,7 @@ const PLAGUE_WALK = preload("uid://b1d5cfp71sxoa")
 
 
 ## seconds the grid needs in the dark before it can be brought back online
-var POWER_REBOOT_TIME := 25.0
+var POWER_REBOOT_TIME := 20.0
 ## how often the plagues current room announces itself
 const CLUE_INTERVAL := 2.6
 ## how often the plague relocates while the lights are off

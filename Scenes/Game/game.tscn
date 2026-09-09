@@ -418,7 +418,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-539, 343)]
+"values": [Vector2(-539, 359.24)]
 }
 
 [sub_resource type="Animation" id="Animation_4gqoa"]
@@ -1300,9 +1300,9 @@ speed_scale = 1.23
 
 [node name="PaperBg" type="ColorRect" parent="OfficeRoom/BaseElements" unique_id=1354086244]
 offset_left = -539.0
-offset_top = 343.0
+offset_top = 359.24
 offset_right = -285.0
-offset_bottom = 534.99976
+offset_bottom = 551.23987
 color = Color(0, 0, 0, 0)
 
 [node name="Manual1Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=1254497241]
@@ -2693,6 +2693,8 @@ flat = true
 [node name="GmHold" type="Sprite2D" parent="." unique_id=507358985]
 position = Vector2(926, 960)
 texture = ExtResource("78_h1l72")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=602171410]
 
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/O2RebootBSprite/O2Reboot" to="InteractionHandler" method="_on_o_2_reboot_pressed"]
