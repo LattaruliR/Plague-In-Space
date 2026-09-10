@@ -12,4 +12,3 @@ func _on_button_pressed() -> void:
 
 func _on_timer_timeout() -> void:
 	Achievements.unlock("lorekeeper")
-	print("Unlock!")

@@ -28,4 +28,5 @@ func _on_ghost_button_mouse_entered() -> void:
 
 
 func _on_crank_button_pressed() -> void:
+	Archivist.winded += 1
 	fade_info($GmHold)

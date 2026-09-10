@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://0kjjx8de2ghd" path="res://SOUNDS/MenuThemeSong.mp3" id="16_wxa3f"]
 [ext_resource type="AudioStream" uid="uid://rcoe7u0qb5d6" path="res://SOUNDS/selecting.wav" id="17_0401g"]
 [ext_resource type="AudioStream" uid="uid://v1coedd33f1w" path="res://SOUNDS/barTone2.wav" id="18_lnqkc"]
-[ext_resource type="Texture2D" uid="uid://cufpc7p8erwga" path="res://Sprites/Game/GameBeatPrize.png" id="19_wv7rd"]
+[ext_resource type="Texture2D" uid="uid://cufpc7p8erwga" path="res://Sprites/Game/Ship1/GameBeatPrize.png" id="19_wv7rd"]
 [ext_resource type="Script" uid="uid://du8squbox0wjy" path="res://Scenes/Menu/cure.gd" id="20_k0qon"]
 [ext_resource type="Script" uid="uid://8r7srm53irh0" path="res://Scripts/profile_panel.gd" id="99_prof"]
 

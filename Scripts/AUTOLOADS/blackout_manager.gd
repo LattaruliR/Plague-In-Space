@@ -69,7 +69,7 @@ func get_plague() -> Node:
 
 
 func _process(delta: float) -> void:
-	POWER_REBOOT_TIME = 15.0 if Global.hard_mode == true else 25.0
+	POWER_REBOOT_TIME = 15.0 if Global.hard_mode == true else 20.0
 	if Global.blackout != _active:
 		if Global.blackout:
 			_start_blackout_state()

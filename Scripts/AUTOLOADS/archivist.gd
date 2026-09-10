@@ -16,6 +16,7 @@ signal survived_escape
 
 var hm_multiplier = 1
 
+var winded = 0
 var containment := 100.0
 var loose := false
 var escape_left := 0.0
@@ -53,6 +54,7 @@ func reset() -> void:
 	containment = 100.0
 	escape_left = 0.0
 	visible = false
+	winded = 0
 
 func set_winding(active: bool) -> void:
 	winding = active and Global.player_room == Global.Room.COMMS_SYS
@@ -136,7 +138,7 @@ func _catch() -> void:
 	_armed = false
 	Global.hiding = false
 	Global.hide_side = -1
-	GameOver.record_cause("THE ARCHIVE OPENED")
+	GameOver.record_cause("THE ARCHIVE WINDED DOWN")
 	Global.infection_value = 100.0
 	Global.panic = true
 	AudioManager.play_sfx(ALERT_SOUND, 2.0, 0.15)

@@ -10,8 +10,14 @@ const DEFS: Array[Dictionary] = [
 	{
 		"id": "lorekeeper",
 		"name": "Lorekeeper",
-		"description": "Spend 5 seconds in a cutscene."
+		"description": "Spend 15 seconds in a cutscene."
+	},
+	{
+		"id": "cranky",
+		"name": "Cranky",
+		"description": "Win a run without winding the Archive more than twice."
 	}
+	
 	
 ]
 

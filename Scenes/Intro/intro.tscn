@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="1_duh1u"]
 [ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="2_alxvg"]
-[ext_resource type="Texture2D" uid="uid://bl717h8e0odnu" path="res://Sprites/Game/DocumentFile.png" id="2_geirw"]
+[ext_resource type="Texture2D" uid="uid://bl717h8e0odnu" path="res://Sprites/Game/Ship1/DocumentFile.png" id="2_geirw"]
 [ext_resource type="AudioStream" uid="uid://8cajtyxcjxg7" path="res://SOUNDS/Blackout.mp3" id="3_alxvg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_alxvg"]

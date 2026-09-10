@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://llj0vvw4lb01"]
 
 [ext_resource type="Script" uid="uid://blg0vplxovnta" path="res://Scenes/Cutscenes/cutscene.gd" id="1_pmh5m"]
-[ext_resource type="Texture2D" uid="uid://ipct8ampfvgq" path="res://Sprites/Game/Office/Sprite-0037.png" id="2_cok4t"]
+[ext_resource type="Texture2D" uid="uid://ipct8ampfvgq" path="res://Sprites/Game/Ship1/Office/Sprite-0037.png" id="2_cok4t"]
 [ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="3_q2igu"]
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="4_mgn0m"]
 [ext_resource type="FontFile" uid="uid://cqhdwfqbp38m3" path="res://Fonts/home-video/HomeVideo-Bold.ttf" id="5_81e7l"]
@@ -70,6 +70,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Timer" type="Timer" parent="." unique_id=127780366]
+wait_time = 15.0
 one_shot = true
 autostart = true
 
