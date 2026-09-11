@@ -16,6 +16,11 @@ const DEFS: Array[Dictionary] = [
 		"id": "cranky",
 		"name": "Cranky",
 		"description": "Win a run without winding the Archive more than twice."
+	},
+	{
+		"id": "quickdeath",
+		"name": "Giving Up",
+		"description": "Die in less than 16 seconds due to... natural causes."
 	}
 	
 	

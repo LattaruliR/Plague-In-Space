@@ -4,6 +4,9 @@ extends Control
 @onready var volume_slider: HSlider = $BasePanel/HBoxContainer/MUSIC/VolumeSlider
 @onready var percentage_label_volume: Label = $BasePanel/HBoxContainer/MUSIC/percentageLabelVolume
 @onready var percentage_label_sfx: Label = $BasePanel/HBoxContainer/SFX/percentageLabelSfx
+@export var camera: Camera2D
+const BAR_TONE = preload("uid://cmabygqmehtnw")
+const PCSELECT_2 = preload("uid://sb4jso5acwm2")
 
 
 func _ready() -> void:
@@ -12,15 +15,20 @@ func _ready() -> void:
 	percentage_label_sfx.text = str(sfx_slider.value) + "%"
 	percentage_label_volume.text = str(volume_slider.value) + "%"
 
+func _process(delta: float) -> void:
+	_bound_to_camera()
 
+func _bound_to_camera() -> void:
+	if camera != null:
+		position = camera.get_screen_center_position()
 
 func _on_exit_button_pressed() -> void:
-	$"../Selecting".play()
+	AudioManager.play_sfx(PCSELECT_2)
 	hide()
 
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
-	$"../Selecting".play()
+	AudioManager.play_sfx(PCSELECT_2)
 	if toggled_on == false:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
@@ -30,18 +38,18 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 func _on_sfx_slider_value_changed(value: float) -> void:
 	percentage_label_sfx.text = str(value) + "%"
 	AudioManager.set_sfx_volume(value)
-	$"../BarTone".play()
+	AudioManager.play_sfx(BAR_TONE)
 	
 
 
 func _on_volume_slider_value_changed(value: float) -> void:
 	percentage_label_volume.text = str(value) + "%"
 	AudioManager.set_music_volume(value)
-	$"../BarTone".play()
+	AudioManager.play_sfx(BAR_TONE)
 
 
 func _on_scan_button_toggled(toggled_on: bool) -> void:
-	$"../Selecting".play()
+	AudioManager.play_sfx(PCSELECT_2)
 	if toggled_on == false:
 		Global.scanlines = false
 	else:

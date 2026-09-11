@@ -14,8 +14,7 @@
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="10_7qvly"]
 [ext_resource type="Texture2D" uid="uid://dqu6jfclrgong" path="res://Sprites/Menu/EarthSpin1.png" id="12_hgg7c"]
 [ext_resource type="Texture2D" uid="uid://dkh4th770t4q2" path="res://Sprites/Menu/EarthSpin2.png" id="13_3fcxt"]
-[ext_resource type="Texture2D" uid="uid://dgd7b8m4p5ln8" path="res://Sprites/Menu/NineSliceMenu.png" id="14_3fcxt"]
-[ext_resource type="Script" uid="uid://dvvend5fngf1x" path="res://Scenes/Menu/options_manager.gd" id="14_u2ioa"]
+[ext_resource type="PackedScene" uid="uid://ga1dq4c2b6qq" path="res://Scenes/Menu/options_ui.tscn" id="16_jqvb7"]
 [ext_resource type="AudioStream" uid="uid://0kjjx8de2ghd" path="res://SOUNDS/MenuThemeSong.mp3" id="16_wxa3f"]
 [ext_resource type="AudioStream" uid="uid://rcoe7u0qb5d6" path="res://SOUNDS/selecting.wav" id="17_0401g"]
 [ext_resource type="AudioStream" uid="uid://v1coedd33f1w" path="res://SOUNDS/barTone2.wav" id="18_lnqkc"]
@@ -416,176 +415,8 @@ theme_override_fonts/font = ExtResource("10_7qvly")
 theme_override_font_sizes/font_size = 22
 text = "DELETE SAVE"
 
-[node name="OptionsUI" type="Control" parent="." unique_id=1928797231]
+[node name="OptionsUI" parent="." unique_id=1217801659 instance=ExtResource("16_jqvb7")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("14_u2ioa")
-
-[node name="BasePanel" type="Panel" parent="OptionsUI" unique_id=1589146816]
-z_index = 3
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -448.5
-offset_top = -210.0
-offset_right = 448.5
-offset_bottom = 210.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="OptionsUI/BasePanel" unique_id=1321235059]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("14_3fcxt")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-
-[node name="HBoxContainer" type="BoxContainer" parent="OptionsUI/BasePanel" unique_id=1725098795]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -400.0
-offset_top = 24.0
-offset_right = 400.0
-offset_bottom = 376.0
-grow_horizontal = 2
-theme_override_constants/separation = 131
-alignment = 1
-vertical = true
-
-[node name="SFX" type="Label" parent="OptionsUI/BasePanel/HBoxContainer" unique_id=1329364503]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_7qvly")
-theme_override_font_sizes/font_size = 32
-text = "SFX"
-horizontal_alignment = 1
-
-[node name="SfxSlider" type="HSlider" parent="OptionsUI/BasePanel/HBoxContainer/SFX" unique_id=587414059]
-self_modulate = Color(0.7031943, 2.1731033e-05, 0.1281414, 1)
-z_index = 2
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = 30.0
-offset_bottom = 46.0
-grow_horizontal = 2
-grow_vertical = 2
-value = 50.0
-rounded = true
-
-[node name="percentageLabelSfx" type="Label" parent="OptionsUI/BasePanel/HBoxContainer/SFX" unique_id=860634298]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 39.0
-offset_right = 20.0
-offset_bottom = 62.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
-theme_override_fonts/font = ExtResource("10_7qvly")
-theme_override_font_sizes/font_size = 24
-text = "50%"
-
-[node name="MUSIC" type="Label" parent="OptionsUI/BasePanel/HBoxContainer" unique_id=934158750]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_7qvly")
-theme_override_font_sizes/font_size = 32
-text = "MUSIC"
-horizontal_alignment = 1
-
-[node name="VolumeSlider" type="HSlider" parent="OptionsUI/BasePanel/HBoxContainer/MUSIC" unique_id=280965235]
-self_modulate = Color(0.7031943, 2.1731033e-05, 0.1281414, 1)
-z_index = 2
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = 30.0
-offset_bottom = 46.0
-grow_horizontal = 2
-grow_vertical = 2
-value = 50.0
-rounded = true
-
-[node name="percentageLabelVolume" type="Label" parent="OptionsUI/BasePanel/HBoxContainer/MUSIC" unique_id=1888376453]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 39.0
-offset_right = 20.0
-offset_bottom = 62.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
-theme_override_fonts/font = ExtResource("10_7qvly")
-theme_override_font_sizes/font_size = 24
-text = "50%"
-
-[node name="FULLSCREEN" type="Label" parent="OptionsUI/BasePanel/HBoxContainer" unique_id=1571236488]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_7qvly")
-theme_override_font_sizes/font_size = 32
-text = "FULLSCREEN"
-horizontal_alignment = 1
-
-[node name="CheckButton" type="CheckButton" parent="OptionsUI/BasePanel/HBoxContainer/FULLSCREEN" unique_id=353862299]
-self_modulate = Color(0.8557188, 0.00020094588, 0.16501597, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -22.0
-offset_top = 21.0
-offset_right = 22.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
-button_pressed = true
-
-[node name="ExitButton" type="Button" parent="OptionsUI/BasePanel" unique_id=36526700]
-self_modulate = Color(0.6871066, 1.634039e-05, 0.124254085, 1)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -78.5
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = 72.0
-grow_horizontal = 0
-theme_override_fonts/font = ExtResource("10_7qvly")
-theme_override_font_sizes/font_size = 64
-text = "X"
-flat = true
 
 [node name="MainMenuSong" type="AudioStreamPlayer" parent="." unique_id=1531399060]
 stream = ExtResource("16_wxa3f")
@@ -620,7 +451,3 @@ script = ExtResource("20_k0qon")
 [connection signal="mouse_entered" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_mouse_entered"]
 [connection signal="mouse_exited" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_mouse_exited"]
 [connection signal="pressed" from="Parallaxes/EarthParallax/Earth/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="value_changed" from="OptionsUI/BasePanel/HBoxContainer/SFX/SfxSlider" to="OptionsUI" method="_on_sfx_slider_value_changed"]
-[connection signal="value_changed" from="OptionsUI/BasePanel/HBoxContainer/MUSIC/VolumeSlider" to="OptionsUI" method="_on_volume_slider_value_changed"]
-[connection signal="toggled" from="OptionsUI/BasePanel/HBoxContainer/FULLSCREEN/CheckButton" to="OptionsUI" method="_on_check_button_toggled"]
-[connection signal="pressed" from="OptionsUI/BasePanel/ExitButton" to="OptionsUI" method="_on_exit_button_pressed"]

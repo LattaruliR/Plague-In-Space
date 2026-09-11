@@ -104,6 +104,8 @@ func _end(did_win: bool) -> void:
 			Achievements.unlock("cranky")
 	else:
 		_cause_label.text = _infection_cause()
+		if _elapsed <= 21:
+			Achievements.unlock("quickdeath")
 	_cause_label.add_theme_color_override("font_color", accent)
 
 	var new_record := SaveData.record_run(did_win, _elapsed, Global.hard_mode)

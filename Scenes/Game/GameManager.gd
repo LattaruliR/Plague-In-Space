@@ -30,3 +30,7 @@ func _on_ghost_button_mouse_entered() -> void:
 func _on_crank_button_pressed() -> void:
 	Archivist.winded += 1
 	fade_info($GmHold)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("settings"):
+		$OptionsUI.visible = !$OptionsUI.visible

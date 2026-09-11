@@ -1,0 +1,247 @@
+[gd_scene format=3 uid="uid://ga1dq4c2b6qq"]
+
+[ext_resource type="Script" uid="uid://dvvend5fngf1x" path="res://Scenes/Menu/options_manager.gd" id="1_ivwtb"]
+[ext_resource type="Texture2D" uid="uid://dgd7b8m4p5ln8" path="res://Sprites/Menu/NineSliceMenu.png" id="2_oxdgt"]
+[ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="3_3iich"]
+
+[node name="OptionsUI" type="Control" unique_id=1217801659]
+z_index = 7
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ivwtb")
+
+[node name="BasePanel" type="Panel" parent="." unique_id=1078079767]
+z_index = 7
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.5
+offset_top = -210.0
+offset_right = 448.5
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BasePanel" unique_id=1730152810]
+z_index = 7
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_oxdgt")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="HBoxContainer" type="BoxContainer" parent="BasePanel" unique_id=412343087]
+z_index = 7
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 24.0
+offset_right = 400.0
+offset_bottom = 376.0
+grow_horizontal = 2
+theme_override_constants/separation = 80
+alignment = 1
+vertical = true
+
+[node name="SFX" type="Label" parent="BasePanel/HBoxContainer" unique_id=1973926048]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 32
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="BasePanel/HBoxContainer/SFX" unique_id=844439045]
+self_modulate = Color(0.7031943, 2.1731033e-05, 0.1281414, 1)
+z_index = 2
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+rounded = true
+
+[node name="percentageLabelSfx" type="Label" parent="BasePanel/HBoxContainer/SFX" unique_id=1225778740]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 39.0
+offset_right = 20.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 24
+text = "50%"
+
+[node name="MUSIC" type="Label" parent="BasePanel/HBoxContainer" unique_id=1149045661]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 32
+text = "MUSIC"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="BasePanel/HBoxContainer/MUSIC" unique_id=980543266]
+self_modulate = Color(0.7031943, 2.1731033e-05, 0.1281414, 1)
+z_index = 2
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+rounded = true
+
+[node name="percentageLabelVolume" type="Label" parent="BasePanel/HBoxContainer/MUSIC" unique_id=676971028]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 39.0
+offset_right = 20.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 24
+text = "50%"
+
+[node name="GAMMA" type="Label" parent="BasePanel/HBoxContainer" unique_id=1705888969]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 32
+text = "GAMMA"
+horizontal_alignment = 1
+
+[node name="GammaSlider" type="HSlider" parent="BasePanel/HBoxContainer/GAMMA" unique_id=1898190942]
+self_modulate = Color(0.7031943, 2.1731033e-05, 0.1281414, 1)
+z_index = 2
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 30.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+rounded = true
+
+[node name="percentageLabelGamma" type="Label" parent="BasePanel/HBoxContainer/GAMMA" unique_id=1479814332]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 39.0
+offset_right = 20.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 24
+text = "50%"
+
+[node name="FULLSCREEN" type="Label" parent="BasePanel/HBoxContainer" unique_id=261349963]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 32
+text = "FULLSCREEN"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="BasePanel/HBoxContainer/FULLSCREEN" unique_id=960467498]
+self_modulate = Color(0.8557188, 0.00020094588, 0.16501597, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = 21.0
+offset_right = 22.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+button_pressed = true
+
+[node name="ExitButton" type="Button" parent="BasePanel" unique_id=1380181233]
+self_modulate = Color(0.6871066, 1.634039e-05, 0.124254085, 1)
+z_index = 7
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.5
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 72.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_3iich")
+theme_override_font_sizes/font_size = 64
+text = "X"
+flat = true
+
+[node name="Panel" type="Panel" parent="BasePanel" unique_id=1034713505]
+visible = false
+z_index = 6
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -149.5
+offset_top = -128.0
+offset_right = 154.5
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BasePanel/Panel" unique_id=683248843]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5372549)
+
+[connection signal="value_changed" from="BasePanel/HBoxContainer/SFX/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="BasePanel/HBoxContainer/MUSIC/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="BasePanel/HBoxContainer/FULLSCREEN/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="BasePanel/ExitButton" to="." method="_on_exit_button_pressed"]

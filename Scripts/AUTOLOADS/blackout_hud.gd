@@ -26,7 +26,7 @@ func _ready() -> void:
 	_build_ui()
 
 	Blackout.restore_refused.connect(_on_refused)
-	Blackout.power_came_online.connect(func(): _flash("GRID ONLINE - THROW THE SWITCH", 3.0))
+	#Blackout.power_came_online.connect(func(): _flash("GRID ONLINE - THROW THE SWITCH", 3.0))
 	Blackout.hunt_started.connect(_on_hunt_started)
 	Blackout.hunt_survived.connect(func(): _flash("IT MOVED ON", 2.5))
 	Blackout.threat_warning.connect(_on_threat_warning)
@@ -74,12 +74,12 @@ func _update_labels() -> void:
 	if not Global.blackout:
 		_status.text = _message
 		_status.add_theme_color_override("font_color", GREEN)
-	elif Blackout.power_online:
-		_status.text = "POWER RESTORED - THROW THE SWITCH IN THE OFFICE"
-		_status.add_theme_color_override("font_color", GREEN)
-	else:
-		_status.text = "BLACKOUT - GRID REBOOTING %ds" % int(ceil(Blackout.reboot_remaining()))
-		_status.add_theme_color_override("font_color", AMBER)
+	#elif Blackout.power_online:
+		#_status.text = "POWER RESTORED - THROW THE SWITCH IN THE OFFICE"
+		#_status.add_theme_color_override("font_color", GREEN)
+	#else:
+		#_status.text = "BLACKOUT - GRID REBOOTING %ds" % int(ceil(Blackout.reboot_remaining()))
+		#_status.add_theme_color_override("font_color", AMBER)
 
 func play_laugh(volume: int):
 	plague_laughs.volume_db = volume
