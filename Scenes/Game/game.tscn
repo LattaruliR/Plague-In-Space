@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://cvo6j581mu4p2" path="res://Sprites/Game/Ship1/PanicOverlayShet.png" id="23_p6run"]
 [ext_resource type="FontFile" uid="uid://ckxwo1esfu618" path="res://Fonts/home-video/HomeVideo-Regular.otf" id="24_jebrn"]
 [ext_resource type="Texture2D" uid="uid://bikm87vqe50s0" path="res://Sprites/Game/Ship1/PaperBack.png" id="24_xft3b"]
+[ext_resource type="Script" uid="uid://bavwes7m53w5r" path="res://Scenes/Game/fan_decor.gd" id="25_cjj5m"]
 [ext_resource type="Script" uid="uid://ddkx24xwn1bpu" path="res://Scenes/Game/interaction_handler.gd" id="25_pmm7v"]
 [ext_resource type="Script" uid="uid://dumnb4u7obxu7" path="res://Scenes/Game/infectionResearchHandler.gd" id="26_7icik"]
 [ext_resource type="Script" uid="uid://cbot80qesiu5f" path="res://Scripts/office_door.gd" id="26_odoor"]
@@ -1505,8 +1506,10 @@ position = Vector2(-512, 7)
 sprite_frames = SubResource("SpriteFrames_d0u6y")
 animation = &"spinning"
 autoplay = "spinning"
-frame_progress = 0.028109312
+frame = 1
+frame_progress = 0.19953246
 speed_scale = 1.23
+script = ExtResource("25_cjj5m")
 
 [node name="PaperBg" type="ColorRect" parent="OfficeRoom/BaseElements" unique_id=1354086244]
 offset_left = -539.0

@@ -11,6 +11,10 @@ var textTip = " "
 @onready var door_handle_button: Button = $"../OfficeRoom/Interactables/DoorHandle/DoorHandleButton"
 @onready var arak_energy: Button = $"../OfficeRoom/Interactables/MusicBoxButton"
 #@onready var computer_button: Button = $"../OfficeRoom/BaseElements/Computer/ComputerButton"
+@onready var o_2_reboot_b_sprite: AnimatedSprite2D = $"../OfficeRoom/Interactables/O2RebootBSprite"
+
+
+
 
 const BAR_TONE = preload("uid://cmabygqmehtnw")
 
@@ -52,6 +56,10 @@ func _on_hide_pressed() -> void:
 
 func _on_o_2_reboot_pressed() -> void:
 	CoreResources.reboot_room(Global.Room.OXYGEN_SYS)
+	var tween = create_tween()
+	tween.tween_property(o_2_reboot_b_sprite, "scale", Vector2(1, 0.7), 0.1)
+	tween.tween_interval(0.1)
+	tween.tween_property(o_2_reboot_b_sprite, "scale", Vector2(1, 1), 0.1)
 
 
 func _on_heat_reboot_pressed() -> void:

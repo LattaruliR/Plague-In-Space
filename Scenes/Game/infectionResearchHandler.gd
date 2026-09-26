@@ -35,8 +35,8 @@ func _process(delta: float) -> void:
 	elif (infection_bar.value < 80.0):
 		brain_sprite.frame = 5
 	
-	
-	if Global.panic == true:
+
+	if Global.panic == true && Global.blackout == false:
 		panic.show()
 	else:
 		panic.hide()
