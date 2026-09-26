@@ -100,11 +100,13 @@ func _end(did_win: bool) -> void:
 	if did_win:
 		Global.cure_found = true
 		_cause_label.text = "All %d doses produced. The ship is clean." % CoreResources.MANUAL_COUNT
-		if Archivist.winded < 3:
+		if Archivist.winded < 4:
 			Achievements.unlock("cranky")
+		if Global.hard_mode == true:
+			Achievements.unlock("hardmode")
 	else:
 		_cause_label.text = _infection_cause()
-		if _elapsed <= 21:
+		if _elapsed <= 20:
 			Achievements.unlock("quickdeath")
 	_cause_label.add_theme_color_override("font_color", accent)
 

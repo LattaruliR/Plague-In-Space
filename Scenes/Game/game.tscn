@@ -1221,6 +1221,7 @@ _data = {
 script = ExtResource("1_4ti5a")
 
 [node name="OptionsUI" parent="." unique_id=1217801659 node_paths=PackedStringArray("camera") instance=ExtResource("2_scdd5")]
+visible = false
 z_index = 6
 camera = NodePath("../Camera")
 

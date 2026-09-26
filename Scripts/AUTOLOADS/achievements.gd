@@ -10,17 +10,26 @@ const DEFS: Array[Dictionary] = [
 	{
 		"id": "lorekeeper",
 		"name": "Lorekeeper",
-		"description": "Spend 15 seconds in a cutscene."
+		"description": "Spend 15 seconds in a cutscene.",
+		"icon": "res://Sprites/AchievementIcons/LorekeeperAchievementIcon.png"
 	},
 	{
 		"id": "cranky",
 		"name": "Cranky",
-		"description": "Win a run without winding the Archive more than twice."
+		"description": "Win a run without winding the Archive more than three times.",
+		"icon": "res://Sprites/AchievementIcons/CrankyAchievementIcon.png"
 	},
 	{
 		"id": "quickdeath",
 		"name": "Giving Up",
-		"description": "Die in less than 16 seconds due to... natural causes."
+		"description": "Die in less than 19 seconds due to... natural causes.",
+		"icon": "res://Sprites/AchievementIcons/QuickdeathAchievementIcon.png"
+	},
+	{
+		"id": "hardmode",
+		"name": "Hard Mode",
+		"description": "Beat Hard Mode.",
+		"icon": "res://Sprites/AchievementIcons/HardmodeAchievementIcon.png"
 	}
 	
 	
@@ -31,7 +40,7 @@ signal unlocked(id: String)
 var _queue: Array[Dictionary] = []
 var _showing := false
 var _toast: PanelContainer
-var _icon: Panel
+var _icon: TextureRect
 var _name_label: Label
 var _desc_label: Label
 var _tween: Tween
@@ -94,6 +103,14 @@ func _show_next() -> void:
 	_showing = true
 	_name_label.text = str(def.get("name", "???"))
 	_desc_label.text = str(def.get("description", ""))
+	var icon_path := str(def.get("icon", ""))
+	
+	if icon_path != "":
+		_icon.texture = load(icon_path)
+		_icon.visible = true
+	else:
+		_icon.texture = null
+		_icon.visible = false
 
 	visible = true
 	_fade_root.modulate.a = 0.0

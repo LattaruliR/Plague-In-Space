@@ -24,10 +24,12 @@ static func build(font: FontFile) -> PanelContainer:
 	row.add_theme_constant_override("separation", 12)
 	margin.add_child(row)
 
-	var icon := Panel.new()
+	var icon := TextureRect.new()
 	icon.name = "Icon"
 	icon.custom_minimum_size = ICON_SIZE
-	icon.add_theme_stylebox_override("panel", _outline(2))
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(icon)
 
 	var text := VBoxContainer.new()
@@ -56,27 +58,44 @@ static func build(font: FontFile) -> PanelContainer:
 
 	return card
 
+
 static func apply(card: PanelContainer, def: Dictionary, is_unlocked: bool) -> void:
 	var secret: bool = def.get("secret", false)
 	var title := name_of(card)
 	var desc := desc_of(card)
+	var icon := icon_of(card)
 
 	if is_unlocked:
 		title.text = str(def.get("name", "???"))
 		desc.text = str(def.get("description", ""))
+
+		var icon_path := str(def.get("icon", ""))
+
+		if icon_path != "":
+			icon.texture = load(icon_path)
+			icon.visible = true
+		else:
+			icon.texture = null
+			icon.visible = false
+
 	elif secret:
 		title.text = "???"
 		desc.text = "Secret"
+		icon.texture = null
+		icon.visible = false
+
 	else:
 		title.text = "???"
 		desc.text = "???"
+		icon.texture = null
+		icon.visible = false
 
 	var alpha := 1.0 if is_unlocked else 0.55
 	card.modulate = Color(1, 1, 1, alpha)
 
 
-static func icon_of(card: PanelContainer) -> Panel:
-	return card.find_child("Icon", true, false) as Panel
+static func icon_of(card: PanelContainer) -> TextureRect:
+	return card.find_child("Icon", true, false) as TextureRect
 
 
 static func name_of(card: PanelContainer) -> Label:
