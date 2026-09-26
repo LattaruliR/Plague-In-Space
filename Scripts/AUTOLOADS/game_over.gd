@@ -7,6 +7,9 @@ const TONE_SOUND := preload("res://SOUNDS/barTone2.wav")
 const GAME_SCENE := "res://Scenes/Game/game.tscn"
 const MENU_SCENE := "res://Scenes/Menu/menu.tscn"
 
+const JUMPSCARE = preload("uid://cl862q76kmhoc")
+
+
 signal game_ended(won: bool)
 
 var is_over := false
@@ -64,6 +67,7 @@ func _process(delta: float) -> void:
 func _on_player_caught() -> void:
 	_cause = "IT FOUND YOU"
 
+
 func record_cause(text: String) -> void:
 	_cause = text
 
@@ -92,24 +96,40 @@ func _end(did_win: bool) -> void:
 	_armed = false
 
 	var accent := TerminalStyle.GREEN if did_win else TerminalStyle.RED
+
 	_title.text = "CURE SYNTHESISED" if did_win else "RUN LOST"
 	_title.add_theme_color_override("font_color", accent)
 	_panel.add_theme_stylebox_override("panel",
-			TerminalStyle.outline_style(Color(0, 0, 0, 0.96), accent))
+		TerminalStyle.outline_style(Color(0, 0, 0, 0.96), accent))
 
 	if did_win:
 		Global.cure_found = true
 		_cause_label.text = "All %d doses produced. The ship is clean." % CoreResources.MANUAL_COUNT
+
 		if Archivist.winded < 4:
 			Achievements.unlock("cranky")
+
 		if Global.hard_mode == true:
 			Achievements.unlock("hardmode")
+
+		_cause_label.add_theme_color_override("font_color", accent)
+
+		_finish_death_screen()
 	else:
 		_cause_label.text = _infection_cause()
+
 		if _elapsed <= 20:
 			Achievements.unlock("quickdeath")
-	_cause_label.add_theme_color_override("font_color", accent)
 
+		_cause_label.add_theme_color_override("font_color", accent)
+
+		# Don't show the death screen yet
+		visible = false
+
+		# Play jumpscare first
+		_play_jumpscare()
+
+	# Save the run regardless of win/loss
 	var new_record := SaveData.record_run(did_win, _elapsed, Global.hard_mode)
 
 	_stats.text = "MANUALS %d/%d      DOSES %d/%d      TIME %s" % [
@@ -117,14 +137,14 @@ func _end(did_win: bool) -> void:
 		CoreResources.produced_recipes.size(), CoreResources.MANUAL_COUNT,
 		_format_time(_elapsed),
 	]
+
 	if did_win:
 		var best := SaveData.best_time(Global.hard_mode)
+
 		if new_record:
-			_stats.text += "
-NEW BEST TIME"
+			_stats.text += "\nNEW BEST TIME"
 		else:
-			_stats.text += "
-BEST %s" % SaveData.format_time(best)
+			_stats.text += "\nBEST %s" % SaveData.format_time(best)
 
 	BlackoutHUD.visible = false
 	Archivist.visible = false
@@ -132,11 +152,17 @@ BEST %s" % SaveData.format_time(best)
 	Monitor.close()
 
 	AudioManager.stop_music(0.5)
-	AudioManager.play_sfx(TONE_SOUND if did_win else ALERT_SOUND, 0.0, 1.6 if did_win else 0.25)
 
-	visible = true
-	get_tree().paused = true
-	game_ended.emit(did_win)
+	AudioManager.play_sfx(
+		TONE_SOUND if did_win else ALERT_SOUND,
+		0.0,
+		1.6 if did_win else 0.25
+	)
+
+	if did_win:
+		visible = true
+		get_tree().paused = true
+		game_ended.emit(true)
 
 
 func _format_time(seconds: float) -> String:
@@ -219,3 +245,50 @@ func _label(text: String, size: int) -> Label:
 	node.add_theme_font_size_override("font_size", size)
 	node.add_theme_color_override("font_color", TerminalStyle.GREEN)
 	return node
+
+func _play_jumpscare() -> void:
+	var camera: Camera2D = get_tree().get_first_node_in_group("game_camera")
+	camera.enabled = false
+	var jumpscare = JUMPSCARE.instantiate()
+	get_tree().current_scene.add_child(jumpscare)
+
+	# Start the jumpscare animation
+	var animation_player: AnimationPlayer = jumpscare.get_node("AnimationPlayer")
+	animation_player.play("zoomin")
+
+	# Wait until jumpscare.gd tells us it is finished
+	await jumpscare.jumpscare_finished
+
+	# Remove the jumpscare
+	jumpscare.queue_free()
+
+	# Now show the death screen
+	_show_death_screen()
+
+
+func _finish_death_screen() -> void:
+	BlackoutHUD.visible = false
+	Archivist.visible = false
+	Rooms.close_travel_menu()
+	Monitor.close()
+
+	if is_instance_valid(JUMPSCARE):
+		JUMPSCARE.queue_free()
+
+	visible = true
+
+	get_tree().paused = true
+
+	game_ended.emit(false)
+
+func _show_death_screen() -> void:
+	BlackoutHUD.visible = false
+	Archivist.visible = false
+	Rooms.close_travel_menu()
+	Monitor.close()
+
+	visible = true
+
+	get_tree().paused = true
+
+	game_ended.emit(false)

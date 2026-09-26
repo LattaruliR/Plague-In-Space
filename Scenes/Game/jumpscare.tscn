@@ -1,0 +1,209 @@
+[gd_scene format=3 uid="uid://cl862q76kmhoc"]
+
+[ext_resource type="Texture2D" uid="uid://nrcus63shqwq" path="res://Sprites/Game/Jumpscares/PlagueJumpscaresheet.png" id="1_5jplb"]
+[ext_resource type="Script" uid="uid://1cwc64bfurq8" path="res://Scenes/Game/jumpscare.gd" id="1_h8cx3"]
+[ext_resource type="AudioStream" uid="uid://b2l86sbpurpo3" path="res://SOUNDS/Plague/PlagueLaugh1.mp3" id="2_p3onm"]
+[ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="3_i8yb3"]
+[ext_resource type="Script" uid="uid://dbodhsg7duwfc" path="res://Scripts/check_scanlines.gd" id="4_h8cx3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3onm"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(0, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n46sh"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(957, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8yb3"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(1914, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8cx3"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(2871, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_an4sf"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(3828, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksksa"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(4785, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k01dr"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(5742, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7fjc"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(6699, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7b0t"]
+atlas = ExtResource("1_5jplb")
+region = Rect2(7656, 0, 957, 498)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3onm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n46sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8yb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8cx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_an4sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksksa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k01dr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7fjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7b0t")
+}],
+"loop": 1,
+"name": &"jumpscaring",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_n46sh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JumpscareSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.1865203, 1.2389559)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("JumpscareAudio:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("JumpscareSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5jplb"]
+resource_name = "zoomin"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JumpscareSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9666667),
+"transitions": PackedFloat32Array(6.4980173, 0.064704016),
+"update": 0,
+"values": [Vector2(1.1865203, 1.2389559), Vector2(1.762, 1.83)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("JumpscareAudio:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1.0717732),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("JumpscareSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(2.3784153, 3.2273693),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p3onm"]
+_data = {
+&"RESET": SubResource("Animation_n46sh"),
+&"zoomin": SubResource("Animation_5jplb")
+}
+
+[node name="Jumpscare" type="Node2D" unique_id=1293081230]
+script = ExtResource("1_h8cx3")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1920757180]
+process_priority = -47
+
+[node name="JumpscareSprite" type="AnimatedSprite2D" parent="." unique_id=1820614869]
+z_index = 71
+position = Vector2(7.6293945e-06, 12.5)
+scale = Vector2(1.1865203, 1.2389559)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"jumpscaring"
+autoplay = "jumpscaring"
+frame_progress = 0.084972166
+speed_scale = 0.225
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=32760397]
+libraries/ = SubResource("AnimationLibrary_p3onm")
+autoplay = &"zoomin"
+
+[node name="JumpscareAudio" type="AudioStreamPlayer" parent="." unique_id=88465640]
+stream = ExtResource("2_p3onm")
+pitch_scale = 0.49
+bus = &"SFX"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1357377289]
+z_index = 70
+offset_left = -597.0
+offset_top = -352.0
+offset_right = 606.0
+offset_bottom = 348.0
+color = Color(0, 0, 0, 1)
+
+[node name="Scanlines" type="Sprite2D" parent="." unique_id=657566298]
+z_index = 99
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-25.000061, -11.500046)
+scale = Vector2(0.2973913, 0.7035714)
+texture = ExtResource("3_i8yb3")
+region_enabled = true
+region_rect = Rect2(0, 0, 4600, 1400)
+script = ExtResource("4_h8cx3")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

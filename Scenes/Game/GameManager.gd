@@ -5,6 +5,7 @@ const CALM_OFFICE = preload("uid://s40st63lm2ws")
 const PRELUDE = preload("uid://n3j1nw15qwo1")
 
 func _ready() -> void:
+	$Camera.enabled = true
 	Global.hasnt_started_night = true
 	AudioManager.play_music(PRELUDE, 1.0)
 	GameOver.arm()

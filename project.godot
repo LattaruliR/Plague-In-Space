@@ -59,6 +59,10 @@ folder_colors={
 "res://Sprites/": "red"
 }
 
+[global_group]
+
+game_camera=""
+
 [input]
 
 settings={

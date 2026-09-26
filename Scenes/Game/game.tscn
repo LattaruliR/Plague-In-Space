@@ -2799,7 +2799,7 @@ script = ExtResource("21_ktter")
 script = ExtResource("8_xfil1")
 camera_2d = NodePath("../Camera")
 
-[node name="Camera" type="Camera2D" parent="." unique_id=362172172]
+[node name="Camera" type="Camera2D" parent="." unique_id=362172172 groups=["game_camera"]]
 position = Vector2(-706, 778)
 zoom = Vector2(0.985, 0.985)
 limit_left = -1298
