@@ -7,15 +7,21 @@ extends Control
 @export var camera: Camera2D
 const BAR_TONE = preload("uid://cmabygqmehtnw")
 const PCSELECT_2 = preload("uid://sb4jso5acwm2")
+@onready var percentage_label_gamma: Label = $BasePanel/HBoxContainer/GAMMA/percentageLabelGamma
+@export var gamma: CanvasModulate
+@onready var gamma_slider: HSlider = $BasePanel/HBoxContainer/GAMMA/GammaSlider
 
 
 func _ready() -> void:
+	gamma.color = Global.gammaValue
+	percentage_label_gamma.text = str(Global.gammaTextValue)
+	gamma_slider.value = Global.gammaTextValue
 	sfx_slider.value = Global.sfx_volume
 	volume_slider.value = Global.music_volume
 	percentage_label_sfx.text = str(sfx_slider.value) + "%"
 	percentage_label_volume.text = str(volume_slider.value) + "%"
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_bound_to_camera()
 
 func _bound_to_camera() -> void:
@@ -54,3 +60,19 @@ func _on_scan_button_toggled(toggled_on: bool) -> void:
 		Global.scanlines = false
 	else:
 		Global.scanlines = true
+
+
+
+#Color(0.298, 0.243, 0.243)
+#Color(2.417, 2.183, 2.183, 1.0)
+
+func _on_gamma_slider_value_changed(value: float) -> void:
+	var gammaColor = Color(clamp(value / 50, 0.2, 2.5), clamp(value / 100, 0.3, 1.2), clamp(value / 100, 0.3, 1.2))
+	gamma.color = Global.gammaValue
+	percentage_label_gamma.text = str(value)
+	Global.gammaValue = gammaColor
+	Global.gammaTextValue = value
+
+
+func _on_gamma_slider_drag_ended(value_changed: bool) -> void:
+	gamma.color = Global.gammaValue

@@ -2,7 +2,7 @@ extends Node
 
 const ALERT_SOUND := preload("res://SOUNDS/barTone.wav")
 const TONE_SOUND := preload("res://SOUNDS/barTone2.wav")
-const CLICK_SOUND := preload("res://SOUNDS/shutoutBlackout.wav")
+const CLICK_SOUND := preload("uid://bym0y15t73k4y")
 const BLACKOUT = preload("uid://8cajtyxcjxg7")
 const CALM_OFFICE = preload("uid://s40st63lm2ws")
 const LURE_BROADCAST = preload("uid://cqneqee1ttis6")
@@ -20,7 +20,7 @@ const PLAGUE_MOVE_INTERVAL := 3.2
 const INTRUSION_CHANCE := 0.2
 const INTRUSION_CHANCE_PANIC := 0.55
 ## how long the player has to be hidden on the right side once a hunt starts
-const HUNT_DURATION := 6.5
+const HUNT_DURATION := 4.5
 const HUNT_CUE_INTERVAL := 1.6
 
 ## one sound clue per room, keyed by Global.Room - and toasted dont forget to swap these for dedicated sfx
@@ -69,7 +69,7 @@ func get_plague() -> Node:
 
 
 func _process(delta: float) -> void:
-	POWER_REBOOT_TIME = 15.0 if Global.hard_mode == true else 20.0
+	POWER_REBOOT_TIME = 12.0 if Global.hard_mode == true else 15.0
 	if Global.blackout != _active:
 		if Global.blackout:
 			_start_blackout_state()

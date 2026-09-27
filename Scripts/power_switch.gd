@@ -43,7 +43,7 @@ func _on_restore_refused(reason: String) -> void:
 	_flash(reason)
 
 func _on_power_online() -> void:
-	_flash("FLIP\n SWITCH")
+	_refresh()
 
 func _flash(text: String) -> void:
 	_message = text

@@ -293,8 +293,8 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_duh1u")
 theme_override_font_sizes/font_size = 24
-text = "Err: FAILURE TO MEET TRANSMITTER
-"
+text = "Connection failed"
+horizontal_alignment = 1
 
 [node name="Scanlines" type="Sprite2D" parent="." unique_id=674093003]
 z_index = 99

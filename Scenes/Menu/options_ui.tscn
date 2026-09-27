@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dgd7b8m4p5ln8" path="res://Sprites/Menu/NineSliceMenu.png" id="2_oxdgt"]
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="3_3iich"]
 
-[node name="OptionsUI" type="Control" unique_id=1217801659]
+[node name="OptionsUI" type="Control" unique_id=1217801659 node_paths=PackedStringArray("gamma")]
 z_index = 7
 layout_mode = 3
 anchors_preset = 15
@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ivwtb")
+gamma = NodePath("CanvasModulate")
 
 [node name="BasePanel" type="Panel" parent="." unique_id=1078079767]
 z_index = 7
@@ -176,7 +177,7 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0.4, 0, 0.05490196, 1)
 theme_override_fonts/font = ExtResource("3_3iich")
 theme_override_font_sizes/font_size = 24
-text = "50%"
+text = "50.0%"
 
 [node name="FULLSCREEN" type="Label" parent="BasePanel/HBoxContainer" unique_id=261349963]
 layout_mode = 2
@@ -241,7 +242,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5372549)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=732994543]
+
 [connection signal="value_changed" from="BasePanel/HBoxContainer/SFX/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="BasePanel/HBoxContainer/MUSIC/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="drag_ended" from="BasePanel/HBoxContainer/GAMMA/GammaSlider" to="." method="_on_gamma_slider_drag_ended"]
+[connection signal="value_changed" from="BasePanel/HBoxContainer/GAMMA/GammaSlider" to="." method="_on_gamma_slider_value_changed"]
 [connection signal="toggled" from="BasePanel/HBoxContainer/FULLSCREEN/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="BasePanel/ExitButton" to="." method="_on_exit_button_pressed"]

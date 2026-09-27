@@ -45,6 +45,9 @@ signal player_caught
 
 var infection_value: float = 0.0 # max: 100, min: 0
 
+var gammaTextValue := 50.0
+var gammaValue = Color(0.9, 0.756, 0.756, 1.0)
+
 const INF_OXYGEN_DRY := 0.4
 const INF_OXYGEN_DANGER := 0.9
 const INF_HEAT_CHILLY := 0.1

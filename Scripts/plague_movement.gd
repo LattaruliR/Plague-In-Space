@@ -8,6 +8,7 @@ extends Node2D
 @export var move_interval_base: float = 16.0
 @export_range(0.0, 0.9, 0.05) var move_interval_jitter: float = 0.3
 const MIN_MOVE_INTERVAL := 3.0
+@onready var plague_door_sprites: AnimatedSprite2D = $"../../../../../PlagueDoorSprites"
 
 const AGGRO_PER_CURE := 0.35 # each dose brewed
 const AGGRO_HEAT := 0.5 # heat sitting in the danger/death zone
@@ -154,7 +155,14 @@ func _on_arrived() -> void:
 		Blackout._begin_hunt()
 	else:
 		_roll_sabotage()
-
+	
+	if cur_position == Global.Room.PLAYER_ROOM:
+		plague_door_sprites.show()
+		plague_door_sprites.play("appearing")
+	else:
+		plague_door_sprites.hide()
+		
+	
 	if cur_position == Global.Room.COMMS_SYS:
 		Blackout.threat_warning.emit(Global.Room.COMMS_SYS)
 
@@ -268,3 +276,7 @@ func move():
 
 	if _can_enter(wanted):
 		cur_position = wanted
+
+
+func _on_plague_door_sprites_animation_finished() -> void:
+	Blackout._catch_player()

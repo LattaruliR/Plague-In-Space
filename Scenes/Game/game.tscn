@@ -53,11 +53,9 @@
 [ext_resource type="Texture2D" uid="uid://fpde8e6gc45w" path="res://Sprites/Game/Ship1/Office/YourBrain.png" id="33_d4puy"]
 [ext_resource type="Script" uid="uid://dgmi3rdsiu3dc" path="res://Scenes/Game/lures.gd" id="33_j8rd5"]
 [ext_resource type="Texture2D" uid="uid://cn4oj4qsjvf6n" path="res://Sprites/Game/Ship1/General Decor/ArakGayMonster.png" id="35_rht7h"]
-[ext_resource type="AudioStream" uid="uid://bmwq4vakbyso5" path="res://SOUNDS/pcselect1.wav" id="41_26aa6"]
 [ext_resource type="Texture2D" uid="uid://ca5dxfs6qkwks" path="res://Sprites/Game/Ship1/General Decor/PostIt.png" id="41_caws5"]
-[ext_resource type="AudioStream" uid="uid://sb4jso5acwm2" path="res://SOUNDS/pcselect2.wav" id="42_4gqoa"]
+[ext_resource type="Texture2D" uid="uid://c5spf6746f2aw" path="res://Sprites/Game/Ship1/Office/PlagueAtDoorSheet.png" id="41_qspya"]
 [ext_resource type="Texture2D" uid="uid://d02k4u566lh25" path="res://Sprites/Game/Ship1/GopherMadnessSheet.png" id="42_53spd"]
-[ext_resource type="AudioStream" uid="uid://c3a675ifebp8n" path="res://SOUNDS/pcselect3.wav" id="43_7icik"]
 [ext_resource type="Script" uid="uid://b00klwmm0cnen" path="res://Scenes/Game/gopher_sprite.gd" id="44_4qu01"]
 [ext_resource type="AudioStream" uid="uid://dklfhy3v605a8" path="res://SOUNDS/AmbientPanic.mp3" id="46_kllvy"]
 [ext_resource type="AudioStream" uid="uid://s40st63lm2ws" path="res://SOUNDS/CalmOffice.mp3" id="47_h5vdi"]
@@ -73,13 +71,17 @@
 [ext_resource type="AudioStream" uid="uid://p4eotdtq0tw" path="res://SOUNDS/Gopher/GopherLaugh1.mp3" id="60_d85t2"]
 [ext_resource type="AudioStream" uid="uid://pdnvceclldhp" path="res://SOUNDS/Gopher/GopherLaugh2.mp3" id="61_53spd"]
 [ext_resource type="AudioStream" uid="uid://bym0y15t73k4y" path="res://SOUNDS/Plague/PlagueLaugh3.mp3" id="61_l5fxq"]
+[ext_resource type="AudioStream" uid="uid://bvmqsc8abimy3" path="res://SOUNDS/playerMoves1.wav" id="61_qspya"]
 [ext_resource type="AudioStream" uid="uid://ntb6fehvf7hl" path="res://SOUNDS/Gopher/GopherLaugh3.mp3" id="62_4qu01"]
 [ext_resource type="AudioStream" uid="uid://dskjinh6mj1k3" path="res://SOUNDS/Plague/PlagueLaugh4.mp3" id="62_jcrx1"]
+[ext_resource type="AudioStream" uid="uid://mucekp1iew31" path="res://SOUNDS/playerMoves2.wav" id="62_tgfhl"]
+[ext_resource type="AudioStream" uid="uid://7f27ex4n2855" path="res://SOUNDS/playerMoves3.wav" id="63_254l5"]
 [ext_resource type="AudioStream" uid="uid://b7s818e3gqjoq" path="res://SOUNDS/Gopher/GopherLaugh4.mp3" id="63_qqdjj"]
 [ext_resource type="AudioStream" uid="uid://chf64ytmhjcfr" path="res://SOUNDS/Office/Sipping.mp3" id="64_l5fxq"]
 [ext_resource type="AudioStream" uid="uid://n3j1nw15qwo1" path="res://SOUNDS/Atmosphere/DeadSpaceAtmos1.mp3" id="76_yuvyg"]
 [ext_resource type="Texture2D" uid="uid://hll5o4pj5qhx" path="res://Sprites/Game/Ship1/Office/GhostMouse.png" id="77_hb4p8"]
 [ext_resource type="Texture2D" uid="uid://djv6gri2newbr" path="res://Sprites/Game/Ship1/Office/GMHold.png" id="78_h1l72"]
+[ext_resource type="AudioStream" uid="uid://6bmp6v5cib7i" path="res://SOUNDS/u_hm3ohsiik6-breath-in-242641.mp3" id="79_fhxkh"]
 
 [sub_resource type="Gradient" id="Gradient_g4v7s"]
 offsets = PackedFloat32Array(0, 0.53601694, 1)
@@ -244,6 +246,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, -44)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../AUDIO/MaskBreathing:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_qqdjj"]
 resource_name = "idle"
@@ -260,6 +274,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 0.27739218, 0.45062566, 1, 0.2253126),
 "update": 0,
 "values": [Vector2(0, -44), Vector2(0, -53.68), Vector2(0, -44), Vector2(0, -29.725), Vector2(0, -44)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../AUDIO/MaskBreathing:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x8opw"]
@@ -879,6 +905,126 @@ frame_0/duration = 0.9
 frame_1/texture = SubResource("GradientTexture2D_qjf7v")
 frame_1/duration = 0.2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgfhl"]
+atlas = ExtResource("41_qspya")
+region = Rect2(0, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_254l5"]
+atlas = ExtResource("41_qspya")
+region = Rect2(219, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5waul"]
+atlas = ExtResource("41_qspya")
+region = Rect2(438, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytvwr"]
+atlas = ExtResource("41_qspya")
+region = Rect2(657, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxakk"]
+atlas = ExtResource("41_qspya")
+region = Rect2(876, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lqcr"]
+atlas = ExtResource("41_qspya")
+region = Rect2(1095, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5stw6"]
+atlas = ExtResource("41_qspya")
+region = Rect2(1314, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1pxr"]
+atlas = ExtResource("41_qspya")
+region = Rect2(1533, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s3bd"]
+atlas = ExtResource("41_qspya")
+region = Rect2(1752, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ughv"]
+atlas = ExtResource("41_qspya")
+region = Rect2(1971, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6kei"]
+atlas = ExtResource("41_qspya")
+region = Rect2(2190, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqd0x"]
+atlas = ExtResource("41_qspya")
+region = Rect2(2409, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2yya"]
+atlas = ExtResource("41_qspya")
+region = Rect2(2628, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuuq1"]
+atlas = ExtResource("41_qspya")
+region = Rect2(2847, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uur6h"]
+atlas = ExtResource("41_qspya")
+region = Rect2(3066, 0, 219, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osbsx"]
+atlas = ExtResource("41_qspya")
+region = Rect2(3285, 0, 219, 411)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p1u0y"]
+animations = [{
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_tgfhl")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_254l5")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_5waul")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_ytvwr")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_pxakk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lqcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5stw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1pxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s3bd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ughv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6kei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqd0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2yya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuuq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uur6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osbsx")
+}],
+"loop": 0,
+"name": &"appearing",
+"speed": 5.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qu01"]
 atlas = ExtResource("42_53spd")
 region = Rect2(0, 0, 170, 159)
@@ -984,9 +1130,9 @@ _data = {
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g4v7s"]
 random_pitch = 1.1124573
 streams_count = 3
-stream_0/stream = ExtResource("41_26aa6")
-stream_1/stream = ExtResource("42_4gqoa")
-stream_2/stream = ExtResource("43_7icik")
+stream_0/stream = ExtResource("61_qspya")
+stream_1/stream = ExtResource("62_tgfhl")
+stream_2/stream = ExtResource("63_254l5")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_caws5"]
 playback_mode = 1
@@ -1012,6 +1158,11 @@ stream_0/stream = ExtResource("59_lis5c")
 stream_1/stream = ExtResource("60_858on")
 stream_2/stream = ExtResource("61_l5fxq")
 stream_3/stream = ExtResource("62_jcrx1")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yf5fn"]
+random_pitch = 1.0936618
+streams_count = 1
+stream_0/stream = ExtResource("79_fhxkh")
 
 [sub_resource type="Animation" id="Animation_h1l72"]
 length = 0.001
@@ -1184,10 +1335,11 @@ _data = {
 [node name="Game" type="Node2D" unique_id=1249205629]
 script = ExtResource("1_4ti5a")
 
-[node name="OptionsUI" parent="." unique_id=1217801659 node_paths=PackedStringArray("camera") instance=ExtResource("2_scdd5")]
+[node name="OptionsUI" parent="." unique_id=1217801659 node_paths=PackedStringArray("camera", "gamma") instance=ExtResource("2_scdd5")]
 visible = false
-z_index = 6
+z_index = 11
 camera = NodePath("../Camera")
+gamma = NodePath("../Gamma")
 
 [node name="RToRestart" type="Label" parent="OptionsUI" unique_id=1737875982]
 z_index = 24
@@ -1221,6 +1373,26 @@ text = "office room"
 [node name="Dust" type="Parallax2D" parent="OfficeRoom" unique_id=686415069]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="OfficeRoom/Dust" unique_id=948428823]
+amount = 20
+texture = ExtResource("4_qtymf")
+lifetime = 3.05
+preprocess = 2.51
+explosiveness = 0.54
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(700, 300)
+spread = 180.0
+gravity = Vector2(0, 1.55)
+initial_velocity_min = 8.6
+initial_velocity_max = 8.65
+linear_accel_min = 3.0
+linear_accel_max = 3.0
+color_ramp = SubResource("Gradient_g4v7s")
+
+[node name="Dust2" type="Parallax2D" parent="OfficeRoom" unique_id=2042768178]
+scroll_offset = Vector2(1378, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="OfficeRoom/Dust2" unique_id=989958977]
 amount = 20
 texture = ExtResource("4_qtymf")
 lifetime = 3.05
@@ -1355,6 +1527,7 @@ button = NodePath("../MaskHide/Hide")
 sprite = NodePath("../MaskHide")
 
 [node name="Door" type="Button" parent="OfficeRoom/Interactables" unique_id=684698899]
+z_index = 10
 offset_left = 220.0
 offset_top = -170.0
 offset_right = 416.0
@@ -1394,6 +1567,7 @@ theme_override_font_sizes/font_size = 24
 flat = true
 
 [node name="MusicBoxLabel" type="Label" parent="OfficeRoom/Interactables" unique_id=845729069]
+z_index = 8
 offset_left = -506.0
 offset_top = 77.0
 offset_right = -316.0
@@ -2390,7 +2564,6 @@ texture = SubResource("AnimatedTexture_d0u6y")
 [node name="MovechanceTimer" type="Timer" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague" unique_id=717435922]
 
 [node name="Player" type="Node2D" parent="OfficeRoom/InformationFeed/BasePanel/Cameras/Map" unique_id=750469057 node_paths=PackedStringArray("pos_positions")]
-visible = false
 script = ExtResource("6_vifcx")
 pos_positions = [NodePath("../1"), NodePath("../2"), NodePath("../3"), NodePath("../4"), NodePath("../5"), NodePath("../6")]
 
@@ -2601,6 +2774,14 @@ texture = ExtResource("35_rht7h")
 
 [node name="Timer" type="Timer" parent="OfficeRoom" unique_id=1041760982]
 wait_time = 7.0
+
+[node name="PlagueDoorSprites" type="AnimatedSprite2D" parent="OfficeRoom" unique_id=520433048]
+visible = false
+position = Vector2(311, 33)
+sprite_frames = SubResource("SpriteFrames_p1u0y")
+animation = &"appearing"
+frame = 15
+frame_progress = 1.0
 
 [node name="CommsRoom" type="Node2D" parent="." unique_id=114717402]
 position = Vector2(671, 779)
@@ -2822,7 +3003,7 @@ script = ExtResource("50_858on")
 
 [node name="PcSelect" type="AudioStreamPlayer" parent="AUDIO" unique_id=1933069955]
 stream = SubResource("AudioStreamRandomizer_g4v7s")
-volume_db = -15.638
+volume_db = -8.638
 pitch_scale = 0.89
 bus = &"SFX"
 
@@ -2861,6 +3042,12 @@ stream = ExtResource("76_yuvyg")
 bus = &"Music"
 parameters/looping = true
 
+[node name="MaskBreathing" type="AudioStreamPlayer" parent="AUDIO" unique_id=481571016]
+stream = SubResource("AudioStreamRandomizer_yf5fn")
+volume_db = -18.959
+pitch_scale = 1.55
+bus = &"SFX"
+
 [node name="GhostMouse2" type="AnimationPlayer" parent="." unique_id=468173281]
 libraries/ = SubResource("AnimationLibrary_cjj5m")
 autoplay = &"hover"
@@ -2887,12 +3074,12 @@ flat = true
 position = Vector2(926, 960)
 texture = ExtResource("78_h1l72")
 
-[node name="PlagueSpritesHandler" type="Node2D" parent="." unique_id=36563062]
-
 [node name="Panel" type="Panel" parent="." unique_id=509835929]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_g4v7s")
+
+[node name="Gamma" type="CanvasModulate" parent="." unique_id=2023426038]
 
 [connection signal="pressed" from="OfficeRoom/Interactables/MaskHide/Hide" to="InteractionHandler" method="_on_hide_pressed"]
 [connection signal="pressed" from="OfficeRoom/Interactables/O2RebootBSprite/O2Reboot" to="InteractionHandler" method="_on_o_2_reboot_pressed"]
@@ -2917,6 +3104,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_g4v7s")
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureO" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_o_pressed"]
 [connection signal="pressed" from="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures/Lures/LureC" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_lure_c_pressed"]
 [connection signal="timeout" from="OfficeRoom/Timer" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Lures" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="OfficeRoom/PlagueDoorSprites" to="OfficeRoom/InformationFeed/BasePanel/Cameras/Map/Plague" method="_on_plague_door_sprites_animation_finished"]
 [connection signal="pressed" from="CommsRoom/Interactables/CrankButton" to="." method="_on_crank_button_pressed"]
 [connection signal="timeout" from="CommsRoom/Interactables/laughTimer" to="CommsRoom/Interactables/ContainmentCrank" method="_on_laugh_timer_timeout"]
 [connection signal="pressed" from="CommsRoom/Interactables/StartNight" to="." method="_on_start_night_pressed"]
