@@ -408,43 +408,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_7icik"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PaperBg:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-539, 359.24)]
-}
-
-[sub_resource type="Animation" id="Animation_4gqoa"]
-resource_name = "coming"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PaperBg:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-539, 372), Vector2(-539, 174)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7icik"]
-_data = {
-&"RESET": SubResource("Animation_7icik"),
-&"coming": SubResource("Animation_4gqoa")
-}
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 bg_color = Color(0.15686275, 0, 0, 1)
 border_width_left = 1
@@ -1226,6 +1189,17 @@ visible = false
 z_index = 6
 camera = NodePath("../Camera")
 
+[node name="RToRestart" type="Label" parent="OptionsUI" unique_id=1737875982]
+z_index = 24
+layout_mode = 0
+offset_left = 135.0
+offset_top = 172.0
+offset_right = 437.0
+offset_bottom = 198.0
+theme_override_fonts/font = ExtResource("20_fl2fe")
+theme_override_font_sizes/font_size = 28
+text = "Press R to restart"
+
 [node name="OfficeRoom" type="Node2D" parent="." unique_id=1355706927]
 position = Vector2(-706, 778)
 
@@ -1426,7 +1400,6 @@ offset_right = -316.0
 offset_bottom = 105.0
 theme_override_fonts/font = ExtResource("2_qikps")
 theme_override_font_sizes/font_size = 20
-text = "CALM"
 horizontal_alignment = 1
 
 [node name="MusicBox" type="Node2D" parent="OfficeRoom/Interactables" unique_id=1299406611 node_paths=PackedStringArray("button", "label")]
@@ -1513,9 +1486,9 @@ script = ExtResource("25_cjj5m")
 
 [node name="PaperBg" type="ColorRect" parent="OfficeRoom/BaseElements" unique_id=1354086244]
 offset_left = -539.0
-offset_top = 359.24
+offset_top = 372.0
 offset_right = -285.0
-offset_bottom = 551.23987
+offset_bottom = 563.9999
 color = Color(0, 0, 0, 0)
 
 [node name="Manual1Label" type="Label" parent="OfficeRoom/BaseElements/PaperBg" unique_id=1254497241]
@@ -1559,10 +1532,6 @@ offset_top = -34.0
 offset_right = 292.0
 offset_bottom = 328.0
 texture = ExtResource("24_xft3b")
-
-[node name="PaperAppearance" type="AnimationPlayer" parent="OfficeRoom/BaseElements" unique_id=380319260]
-libraries/ = SubResource("AnimationLibrary_7icik")
-autoplay = &"RESET"
 
 [node name="ButtonSpread" type="Control" parent="OfficeRoom" unique_id=1575171991]
 layout_mode = 3
@@ -2325,8 +2294,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="OfficeRoom/InformationFeed/BasePanel/Offline" unique_id=613546071]
-z_index = 2
-z_as_relative = false
+z_index = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2345,7 +2313,7 @@ theme_override_font_sizes/font_size = 32
 text = "SYSTEMS OFFLINE"
 
 [node name="ColorRect" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Offline" unique_id=1483296582]
-z_index = -1
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2355,6 +2323,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="TvShader" type="ColorRect" parent="OfficeRoom/InformationFeed/BasePanel/Offline" unique_id=2085082842]
+visible = false
 z_index = 2
 material = SubResource("ShaderMaterial_fhxkh")
 layout_mode = 1
@@ -2820,7 +2789,6 @@ offset_top = 44.0
 offset_right = 216.0
 offset_bottom = 77.0
 theme_override_fonts/font = ExtResource("2_qikps")
-text = "TOOLTIP"
 
 [node name="Scanlines" type="Sprite2D" parent="." unique_id=711067060]
 z_index = 99
@@ -2954,3 +2922,5 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_g4v7s")
 [connection signal="pressed" from="CommsRoom/Interactables/StartNight" to="." method="_on_start_night_pressed"]
 [connection signal="animation_finished" from="GhostMouse2" to="." method="_on_ghost_mouse_2_animation_finished"]
 [connection signal="mouse_entered" from="GhostMouse/GhostButton" to="." method="_on_ghost_button_mouse_entered"]
+
+[editable path="OptionsUI"]

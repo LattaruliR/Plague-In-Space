@@ -312,8 +312,10 @@ func _on_button_down_b_pressed() -> void:
 
 
 func _on_check_recipe_mouse_entered() -> void:
-	$"../../OfficeRoom/BaseElements/PaperAppearance".play("coming")
+	var tween = create_tween()
+	tween.tween_property($"../../OfficeRoom/BaseElements/PaperBg", "position", Vector2(-539, 174), 0.5)
 
 
 func _on_check_recipe_mouse_exited() -> void:
-	$"../../OfficeRoom/BaseElements/PaperAppearance".play_backwards("coming")
+	var tween = create_tween()
+	tween.tween_property($"../../OfficeRoom/BaseElements/PaperBg", "position", Vector2(-539, 372), 0.5)

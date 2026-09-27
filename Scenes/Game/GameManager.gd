@@ -14,6 +14,7 @@ func _ready() -> void:
 	has_started = false
 
 
+
 func _on_start_night_pressed() -> void:
 	if has_started == true:
 		return
@@ -41,3 +42,5 @@ func _on_crank_button_pressed() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("settings"):
 		$OptionsUI.visible = !$OptionsUI.visible
+	if event.is_action_pressed("Restart"):
+		get_tree().reload_current_scene()

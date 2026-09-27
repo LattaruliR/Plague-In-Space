@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://nrcus63shqwq" path="res://Sprites/Game/Jumpscares/PlagueJumpscaresheet.png" id="1_5jplb"]
 [ext_resource type="Script" uid="uid://1cwc64bfurq8" path="res://Scenes/Game/jumpscare.gd" id="1_h8cx3"]
-[ext_resource type="AudioStream" uid="uid://b2l86sbpurpo3" path="res://SOUNDS/Plague/PlagueLaugh1.mp3" id="2_p3onm"]
 [ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="3_i8yb3"]
+[ext_resource type="Texture2D" uid="uid://ch70qji263x8e" path="res://Sprites/Game/Jumpscares/PlagueJumpscarealternateSheet.png" id="3_ksksa"]
 [ext_resource type="Script" uid="uid://dbodhsg7duwfc" path="res://Scripts/check_scanlines.gd" id="4_h8cx3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3onm"]
@@ -42,6 +42,14 @@ region = Rect2(6699, 0, 957, 498)
 atlas = ExtResource("1_5jplb")
 region = Rect2(7656, 0, 957, 498)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_y23j7"]
+atlas = ExtResource("3_ksksa")
+region = Rect2(0, 0, 957, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0eej"]
+atlas = ExtResource("3_ksksa")
+region = Rect2(957, 0, 957, 498)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
 "frames": [{
@@ -73,8 +81,19 @@ animations = [{
 "texture": SubResource("AtlasTexture_i7b0t")
 }],
 "loop": 1,
-"name": &"jumpscaring",
+"name": &"Plague1",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 0.08,
+"texture": SubResource("AtlasTexture_y23j7")
+}, {
+"duration": 0.06,
+"texture": SubResource("AtlasTexture_s0eej")
+}],
+"loop": 1,
+"name": &"Plague2",
+"speed": 5.0
 }]
 
 [sub_resource type="Animation" id="Animation_n46sh"]
@@ -94,22 +113,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("JumpscareAudio:playing")
+tracks/1/path = NodePath("JumpscareSprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("JumpscareSprite:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -134,22 +141,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("JumpscareAudio:playing")
+tracks/1/path = NodePath("JumpscareSprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1.0717732),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("JumpscareSprite:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(2.3784153, 3.2273693),
 "update": 0,
@@ -170,12 +165,11 @@ process_priority = -47
 
 [node name="JumpscareSprite" type="AnimatedSprite2D" parent="." unique_id=1820614869]
 z_index = 71
-position = Vector2(7.6293945e-06, 12.5)
+position = Vector2(2.0000002, 26)
 scale = Vector2(1.1865203, 1.2389559)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"jumpscaring"
-autoplay = "jumpscaring"
-frame_progress = 0.084972166
+animation = &"Plague1"
+frame_progress = 0.52444446
 speed_scale = 0.225
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=32760397]
@@ -183,8 +177,8 @@ libraries/ = SubResource("AnimationLibrary_p3onm")
 autoplay = &"zoomin"
 
 [node name="JumpscareAudio" type="AudioStreamPlayer" parent="." unique_id=88465640]
-stream = ExtResource("2_p3onm")
 pitch_scale = 0.49
+autoplay = true
 bus = &"SFX"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1357377289]
