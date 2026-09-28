@@ -30,6 +30,14 @@ const DEFS: Array[Dictionary] = [
 		"name": "Hard Mode",
 		"description": "Beat Hard Mode.",
 		"icon": "res://Sprites/AchievementIcons/HardmodeAchievementIcon.png"
+	},
+	{
+		"id": "egg",
+		"name": "You Got An Egg",
+		"description": "Not too important. Not too unimportant.",
+		"icon": "res://Sprites/AchievementIcons/WeirdEggAchievementIcon.png"
+		
+		
 	}
 	
 	
