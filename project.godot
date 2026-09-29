@@ -53,6 +53,7 @@ mouse_cursor/custom_image="uid://cfwaqg3f85ken"
 [file_customization]
 
 folder_colors={
+"res://Dialogues/": "gray",
 "res://Fonts/": "gray",
 "res://SOUNDS/": "teal",
 "res://Scenes/": "yellow",

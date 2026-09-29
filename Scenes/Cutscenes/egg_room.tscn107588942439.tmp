@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://5uil4m1e267p" path="res://SOUNDS/MysterySounds/MysterySong_Unused.mp3" id="4_qh0at"]
 [ext_resource type="Script" uid="uid://cmmdtf8fsg0u2" path="res://Scripts/camera_movement.gd" id="6_00cev"]
 [ext_resource type="Script" uid="uid://b1eeq4dde7fc7" path="res://Scenes/Cutscenes/DialogueReader.gd" id="7_qh0at"]
-[ext_resource type="Texture2D" uid="uid://jbqej5m6xsog" path="res://Sprites/WeirdSprites/FloorWerd.png" id="8_qeljt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qh0at"]
 atlas = ExtResource("1_4ado3")
@@ -172,7 +171,7 @@ position = Vector2(0, -137)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.1196419
+frame_progress = 0.6081253
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1183784355]
 z_index = -1
@@ -209,6 +208,14 @@ offset_right = 264.0
 offset_bottom = 267.0
 theme_override_fonts/font = ExtResource("4_00cev")
 text = "* Well, there is a man here."
+
+[node name="SpeakerLabel" type="Label" parent="." unique_id=401517345]
+offset_left = -260.0
+offset_top = -33.0
+offset_right = 238.0
+offset_bottom = -18.0
+theme_override_fonts/font = ExtResource("4_00cev")
+horizontal_alignment = 1
 
 [node name="CameraMovement" type="Node2D" parent="." unique_id=17004767 node_paths=PackedStringArray("camera_2d")]
 script = ExtResource("6_00cev")
@@ -251,32 +258,7 @@ script = ExtResource("7_qh0at")
 dialogue_file = "res://Dialogues/weird_tree_dialogue.json"
 dialogue_label = NodePath("../DialogueLabel")
 next_button = NodePath("../TreeButton")
-achiev_name = "egg"
-achiev_id = "egg"
 characters_per_second = 8.0
-
-[node name="Floordecor" type="Sprite2D" parent="." unique_id=923450671]
-z_index = -1
-position = Vector2(-10, -45)
-texture = ExtResource("8_qeljt")
-
-[node name="TreeStump2" type="AnimatedSprite2D" parent="." unique_id=1225731803]
-position = Vector2(0, -137)
-sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.20176163
-
-[node name="Floordecor3" type="Sprite2D" parent="." unique_id=1152589182]
-z_index = -1
-position = Vector2(-10, -45)
-texture = ExtResource("8_qeljt")
-
-[node name="Floordecor2" type="Sprite2D" parent="." unique_id=1038348576]
-z_index = -1
-position = Vector2(1.9999847, 343)
-scale = Vector2(4.379311, 4.37931)
-texture = ExtResource("8_qeljt")
 
 [connection signal="mouse_entered" from="TreeButton" to="." method="_on_tree_button_mouse_entered"]
 [connection signal="mouse_exited" from="TreeButton" to="." method="_on_tree_button_mouse_exited"]

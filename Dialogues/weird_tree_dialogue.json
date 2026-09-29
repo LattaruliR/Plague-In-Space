@@ -1,0 +1,23 @@
+[
+	{
+	"speaker": "MAN",
+	"text": "* Well, there is a man here."
+	},
+	{
+	"speaker": "MAN",
+	"text": "* He offers you something."
+	},
+	{
+	"speaker": "MAN",
+	"text": "* Without hesitation, you pick it up."
+	},
+	{
+	"speaker": "MAN",
+	"text": "* ",
+	"id": "egg"
+	},
+	{
+	"speaker": "MAN",
+	"text": "* Well, there is not a man here.",
+	}
+]
