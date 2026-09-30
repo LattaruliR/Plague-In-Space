@@ -6,8 +6,9 @@
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="4_00cev"]
 [ext_resource type="AudioStream" uid="uid://5uil4m1e267p" path="res://SOUNDS/MysterySounds/MysterySong_Unused.mp3" id="4_qh0at"]
 [ext_resource type="Script" uid="uid://cmmdtf8fsg0u2" path="res://Scripts/camera_movement.gd" id="6_00cev"]
-[ext_resource type="Script" uid="uid://b1eeq4dde7fc7" path="res://Scenes/Cutscenes/DialogueReader.gd" id="7_qh0at"]
+[ext_resource type="PackedScene" uid="uid://4u0xsfx0l033" path="res://Scenes/Cutscenes/dialogue_reader.tscn" id="7_qeljt"]
 [ext_resource type="Texture2D" uid="uid://jbqej5m6xsog" path="res://Sprites/WeirdSprites/FloorWerd.png" id="8_qeljt"]
+[ext_resource type="Texture2D" uid="uid://b6yofpvm053j5" path="res://Sprites/WeirdSprites/Weird_petal.png" id="9_fqx17"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qh0at"]
 atlas = ExtResource("1_4ado3")
@@ -164,6 +165,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_qtvat"]
+offsets = PackedFloat32Array(0, 0.53601694, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1)
+
 [node name="EggRoom" type="Node2D" unique_id=77475851]
 script = ExtResource("1_x2866")
 
@@ -172,7 +177,7 @@ position = Vector2(0, -137)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.1196419
+frame_progress = 0.7734149
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1183784355]
 z_index = -1
@@ -199,9 +204,8 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="Timer" type="Timer" parent="." unique_id=620865850]
-wait_time = 15.0
+wait_time = 6.0
 one_shot = true
-autostart = true
 
 [node name="DialogueLabel" type="Label" parent="." unique_id=84643903]
 offset_left = -286.0
@@ -246,14 +250,10 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="DialogueReader" type="Node2D" parent="." unique_id=528454811 node_paths=PackedStringArray("dialogue_label", "next_button")]
-script = ExtResource("7_qh0at")
-dialogue_file = "res://Dialogues/weird_tree_dialogue.json"
+[node name="DialogueReader" parent="." unique_id=1048702292 node_paths=PackedStringArray("dialogue_label", "next_button") instance=ExtResource("7_qeljt")]
 dialogue_label = NodePath("../DialogueLabel")
 next_button = NodePath("../TreeButton")
-achiev_name = "egg"
-achiev_id = "egg"
-characters_per_second = 8.0
+characters_per_second = 12.0
 
 [node name="Floordecor" type="Sprite2D" parent="." unique_id=923450671]
 z_index = -1
@@ -278,5 +278,26 @@ position = Vector2(1.9999847, 343)
 scale = Vector2(4.379311, 4.37931)
 texture = ExtResource("8_qeljt")
 
+[node name="Petals" type="Parallax2D" parent="." unique_id=1441930625]
+scroll_offset = Vector2(0, -125)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Petals" unique_id=374066140]
+texture = ExtResource("9_fqx17")
+lifetime = 3.9
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.99
+emission_shape = 3
+emission_rect_extents = Vector2(700, 229.77)
+spread = 180.0
+gravity = Vector2(24.655, 1.55)
+initial_velocity_min = 8.6
+initial_velocity_max = 8.65
+linear_accel_min = 3.0
+linear_accel_max = 3.0
+color_ramp = SubResource("Gradient_qtvat")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="mouse_entered" from="TreeButton" to="." method="_on_tree_button_mouse_entered"]
 [connection signal="mouse_exited" from="TreeButton" to="." method="_on_tree_button_mouse_exited"]
+[connection signal="dialogue_ended" from="DialogueReader" to="." method="_on_dialogue_reader_dialogue_ended"]

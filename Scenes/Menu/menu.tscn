@@ -15,8 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://dqu6jfclrgong" path="res://Sprites/Menu/EarthSpin1.png" id="12_hgg7c"]
 [ext_resource type="Texture2D" uid="uid://dkh4th770t4q2" path="res://Sprites/Menu/EarthSpin2.png" id="13_3fcxt"]
 [ext_resource type="PackedScene" uid="uid://ga1dq4c2b6qq" path="res://Scenes/Menu/options_ui.tscn" id="16_jqvb7"]
-[ext_resource type="AudioStream" uid="uid://0kjjx8de2ghd" path="res://SOUNDS/MenuThemeSong.mp3" id="16_wxa3f"]
 [ext_resource type="AudioStream" uid="uid://rcoe7u0qb5d6" path="res://SOUNDS/selecting.wav" id="17_0401g"]
+[ext_resource type="AudioStream" uid="uid://cwcj5wcod04xf" path="res://SOUNDS/Cutscenes/Intro/AttemptingTransmission.mp3" id="17_jqvb7"]
 [ext_resource type="AudioStream" uid="uid://v1coedd33f1w" path="res://SOUNDS/barTone2.wav" id="18_lnqkc"]
 [ext_resource type="Texture2D" uid="uid://cufpc7p8erwga" path="res://Sprites/Game/Ship1/GameBeatPrize.png" id="19_wv7rd"]
 [ext_resource type="Script" uid="uid://du8squbox0wjy" path="res://Scenes/Menu/cure.gd" id="20_k0qon"]
@@ -420,7 +420,7 @@ visible = false
 gamma = NodePath("../Gamma")
 
 [node name="MainMenuSong" type="AudioStreamPlayer" parent="." unique_id=1531399060]
-stream = ExtResource("16_wxa3f")
+stream = ExtResource("17_jqvb7")
 autoplay = true
 bus = &"Music"
 parameters/looping = true

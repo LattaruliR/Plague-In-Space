@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://c1b24ka7aw36v"]
 
 [ext_resource type="FontFile" uid="uid://bq57cgxgff1wb" path="res://Fonts/home-video/HomeVideo-Regular.ttf" id="1_duh1u"]
+[ext_resource type="Texture2D" uid="uid://cvqifds7jr7bm" path="res://Sprites/Game/Cutscenes/Intro/UIBox9slice.png" id="2_2p2mj"]
 [ext_resource type="Texture2D" uid="uid://dlhjqsa82gtyh" path="res://Sprites/Menu/screenLines.png" id="2_alxvg"]
-[ext_resource type="Texture2D" uid="uid://bl717h8e0odnu" path="res://Sprites/Game/Ship1/DocumentFile.png" id="2_geirw"]
 [ext_resource type="AudioStream" uid="uid://8cajtyxcjxg7" path="res://SOUNDS/Blackout.mp3" id="3_alxvg"]
+[ext_resource type="AudioStream" uid="uid://cwcj5wcod04xf" path="res://SOUNDS/Cutscenes/Intro/AttemptingTransmission.mp3" id="5_r8sbw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_alxvg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kloxg"]
+load_path = "res://.godot/imported/EarthTape.png-32b7f2a4d5a199844bb14b6ef9b1583e.ctex"
 
 [sub_resource type="Animation" id="Animation_geirw"]
 length = 0.001
@@ -241,13 +245,22 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -99.5
-offset_top = 387.5
-offset_right = 9.5
-offset_bottom = 532.5
+offset_left = -57.5
+offset_top = 418.5
+offset_right = 57.5
+offset_bottom = 513.5
 grow_horizontal = 2
-scale = Vector2(2, 2)
-texture = ExtResource("2_geirw")
+texture = SubResource("CompressedTexture2D_kloxg")
+stretch_mode = 2
+
+[node name="TapeButton" type="Button" parent="ColorRect/Panel/AT/TextureRect" unique_id=2022710256]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
 
 [node name="ColorRect2" type="ColorRect" parent="ColorRect/Panel" unique_id=1291857172]
 self_modulate = Color(1, 1, 1, 0)
@@ -296,6 +309,54 @@ theme_override_font_sizes/font_size = 24
 text = "Connection failed"
 horizontal_alignment = 1
 
+[node name="DialogueBox" type="NinePatchRect" parent="ColorRect" unique_id=1452747565]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.5
+offset_top = 91.5
+offset_right = 291.5
+offset_bottom = 236.97778
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2p2mj")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="DialogueLabel" type="Label" parent="ColorRect/DialogueBox" unique_id=1659491467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = -10.0
+offset_bottom = -49.477783
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_duh1u")
+text = "This is your captain speaking."
+
+[node name="SpeakerLabel" type="Label" parent="ColorRect/DialogueBox" unique_id=1289870612]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -20.0
+offset_right = -10.0
+offset_bottom = -76.47778
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_duh1u")
+text = "captain mark"
+
 [node name="Scanlines" type="Sprite2D" parent="." unique_id=674093003]
 z_index = 99
 texture_filter = 1
@@ -312,8 +373,7 @@ autoplay = true
 parameters/looping = true
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=869517046]
-stream = ExtResource("3_alxvg")
-pitch_scale = 0.65
+stream = ExtResource("5_r8sbw")
 autoplay = true
 parameters/looping = true
 

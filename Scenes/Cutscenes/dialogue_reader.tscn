@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://4u0xsfx0l033"]
+
+[ext_resource type="Script" uid="uid://b1eeq4dde7fc7" path="res://Scenes/Cutscenes/DialogueReader.gd" id="1_62l2r"]
+
+[node name="DialogueReader" type="Node2D" unique_id=1048702292 node_paths=PackedStringArray("dialogue_label", "next_button")]
+script = ExtResource("1_62l2r")
+dialogue_file = "res://Dialogues/weird_tree_dialogue.json"
+dialogue_label = NodePath("")
+next_button = NodePath("")
+achiev_name = "egg"
+achiev_id = "egg"
+characters_per_second = 8.0

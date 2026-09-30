@@ -3,6 +3,8 @@ extends Node
 
 @export_file("*.json") var dialogue_file: String
 
+signal dialogue_ended
+
 @export_category("UI")
 @export var dialogue_label: Label
 @export var speaker_label: Label
@@ -145,6 +147,7 @@ func check_achievements():
 
 
 func end_dialogue() -> void:
+	dialogue_ended.emit()
 	is_typing = false
 
 	if typing_tween and typing_tween.is_valid():

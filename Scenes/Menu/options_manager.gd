@@ -5,7 +5,7 @@ extends Control
 @onready var percentage_label_volume: Label = $BasePanel/HBoxContainer/MUSIC/percentageLabelVolume
 @onready var percentage_label_sfx: Label = $BasePanel/HBoxContainer/SFX/percentageLabelSfx
 @export var camera: Camera2D
-const BAR_TONE = preload("uid://cmabygqmehtnw")
+const BAR_TONE = preload("uid://bvmqsc8abimy3")
 const PCSELECT_2 = preload("uid://sb4jso5acwm2")
 @onready var percentage_label_gamma: Label = $BasePanel/HBoxContainer/GAMMA/percentageLabelGamma
 @export var gamma: CanvasModulate

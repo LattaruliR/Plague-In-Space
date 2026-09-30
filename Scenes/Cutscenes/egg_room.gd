@@ -17,3 +17,11 @@ func _on_tree_button_mouse_entered() -> void:
 
 func _on_tree_button_mouse_exited() -> void:
 	mouse_tooltip.text = ""
+
+
+func _on_dialogue_reader_dialogue_ended() -> void:
+	$Timer.start()
+
+
+func _on_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Menu/menu.tscn")
